@@ -28,6 +28,8 @@
 package gui;
 
 import datos.AkariFile;
+import java.awt.Color;
+import java.awt.Label;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -55,6 +57,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelgraphicalview = new javax.swing.JLabel();
         jScrollPaneTextView = new javax.swing.JScrollPane();
         jTextArea = new javax.swing.JTextArea();
+        jScrollPanelGraphView = new javax.swing.JScrollPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
@@ -110,11 +113,14 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelgraphicalview.setBounds(400, 120, 400, 30);
 
         jTextArea.setColumns(20);
+        jTextArea.setEditable(false);
         jTextArea.setRows(5);
         jScrollPaneTextView.setViewportView(jTextArea);
 
         jPanel1.add(jScrollPaneTextView);
-        jScrollPaneTextView.setBounds(10, 160, 380, 400);
+        jScrollPaneTextView.setBounds(10, 160, 380, 380);
+        jPanel1.add(jScrollPanelGraphView);
+        jScrollPanelGraphView.setBounds(415, 160, 380, 380);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 800, 600);
@@ -154,7 +160,7 @@ public class MainFrame extends javax.swing.JFrame {
         setJMenuBar(jMenuBar1);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-810)/2, (screenSize.height-630)/2, 810, 630);
+        setBounds((screenSize.width-810)/2, (screenSize.height-580)/2, 810, 580);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMISalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISalirActionPerformed
@@ -206,10 +212,64 @@ public class MainFrame extends javax.swing.JFrame {
             File selectedFile = selectorArchivo.getSelectedFile();
             archivoEntrada.loadFromFile(selectedFile);
             jTextArea.setText(archivoEntrada.getFileContents());
+            Graficar();
         }
-
     }//GEN-LAST:event_jMICargarTableroActionPerformed
 
+    
+    private void Graficar() {
+        int[][] MTablero = archivoEntrada.getTablero();
+        Label[][] Labels = new Label[archivoEntrada.getNumeoFilas()][archivoEntrada.getNumeroColumnas()];
+   
+                for (int i = 0; i < MTablero.length; i++) {//for para las filas
+            for (int j = 0; j < MTablero[i].length; j++) {//for para las columas
+                Labels[j][i] = new Label();
+                if (MTablero[j][i] == 0)//cuando el valor es 0 la casilla es blanca vacia
+                {
+                    Labels[j][i].setBackground(Color.white);
+                }
+                if (MTablero[j][i] == 1) {//cuando el valor es 1 la casilla es blanca y con bombilla
+                    Labels[j][i].setBackground(Color.white);
+                    Labels[j][i].setText("  B");
+                }
+                if (MTablero[j][i] == 2)//cuando el valor es 2 la casilla es negra sin numero
+                {
+                    Labels[j][i].setBackground(Color.black);
+                }
+                if (MTablero[j][i] == 3) {//cuando el valor es 3 la casilla es negra y con el numero 0
+                    Labels[j][i].setBackground(Color.black);
+                    Labels[j][i].setForeground(Color.white);
+                    Labels[j][i].setText("  0");
+                }
+                if (MTablero[j][i] == 4) {//cuando el valor es 4 la casilla es negra y con el numero 1
+                    Labels[j][i].setBackground(Color.black);
+                    Labels[j][i].setForeground(Color.white);
+                    Labels[j][i].setText("  1");
+                }
+                if (MTablero[j][i] == 5) {//cuando el valor es 5 la casilla es negra y con el numero 2
+                    Labels[j][i].setBackground(Color.black);
+                    Labels[j][i].setForeground(Color.white);
+                    Labels[j][i].setText("  2");
+                }
+                if (MTablero[j][i] == 6) {//cuando el valor es 6 la casilla es negra y con el numero 3
+                    Labels[j][i].setBackground(Color.black);
+                    Labels[j][i].setForeground(Color.white);
+                    Labels[j][i].setText("  3");
+                }
+                if (MTablero[j][i] == 7) {//cuando el valor es 7 la casilla es negra y con el numero 4
+                    Labels[j][i].setBackground(Color.black);
+                    Labels[j][i].setForeground(Color.white);
+                    Labels[j][i].setText("  4");
+                }
+                Labels[j][i].setBounds(100 + (21 * i), 159 + (21 * j), 20, 20);//ubica los labels en forma de cuadricula
+                jScrollPanelGraphView.add(Labels[j][i]);//adiciona los labels al contenedor
+            }
+        }
+   
+    }
+
+
+    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -253,6 +313,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPaneTextView;
+    private javax.swing.JScrollPane jScrollPanelGraphView;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextArea;
