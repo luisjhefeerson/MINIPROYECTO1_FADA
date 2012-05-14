@@ -41,6 +41,11 @@ public class Main extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabelTitulo = new javax.swing.JLabel();
+        jLabelSubtitulo = new javax.swing.JLabel();
+        jLabelSubtitulo1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -48,16 +53,42 @@ public class Main extends javax.swing.JFrame {
         jMIAcercaDe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MINIPROYECTO 1 - FADA");
         getContentPane().setLayout(null);
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
         jPanel1.setLayout(null);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UNIVALLE.jpg"))); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 0, 90, 120);
+        jLabel1.setBounds(20, 5, 72, 100);
+        jPanel1.add(jSeparator1);
+        jSeparator1.setBounds(0, 110, 800, 5);
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator2);
+        jSeparator2.setBounds(400, 115, 5, 480);
+
+        jLabelTitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTitulo.setText("FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS");
+        jPanel1.add(jLabelTitulo);
+        jLabelTitulo.setBounds(92, 10, 708, 30);
+
+        jLabelSubtitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabelSubtitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSubtitulo.setText("MINIPROYECTO 1");
+        jPanel1.add(jLabelSubtitulo);
+        jLabelSubtitulo.setBounds(92, 40, 708, 30);
+
+        jLabelSubtitulo1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabelSubtitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSubtitulo1.setText("SOLUCIÓN PARA UN JUEGO DE LÓGICA: AKARI");
+        jPanel1.add(jLabelSubtitulo1);
+        jLabelSubtitulo1.setBounds(92, 70, 708, 30);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 800, 130);
+        jPanel1.setBounds(0, 0, 800, 600);
 
         jMenuArchivo.setText("Archivo");
 
@@ -95,33 +126,31 @@ public class Main extends javax.swing.JFrame {
 
     private void jMIAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAcercaDeActionPerformed
         //<editor-fold defaultstate="collapsed" desc="jMIAcercaDeActionPerformed()">
-        String acercaDe = "//**********************************************************\n"
-                + "// FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS\n"
-                + "// MINIPROYECTO 1: SOLUCIÓN PARA UN JUEGO DE LÓGICA: AKARI\n"
-                + "//\n"
-                + "// ARCHIVO: MainFrame.java\n"
-                + "//\n"
-                + "// FECHA:\n"
-                + "//\n"
-                + "// AUTORES:\n"
-                + "//     Marx Arturo Arias - 0840247-3743\n"
-                + "//     marxarturoariasescobar@gmail.com\n"
-                + "//\n"
-                + "//     Luis Jeferson Gallardo - \n"
-                + "//     luisjhefeerson@gmail.com\n"
-                + "//\n"
-                + "//     Fidel Herney Palacios - 0832691-3743\n"
-                + "//     herney400@gmail.com\n"
-                + "//\n"
-                + "//     James Andrés Payan - 0957150-2711\n"
-                + "//     jamespayan@gmail.com\n"
-                + "//\n"
-                + "//     Gustavo Adolfo Rodriguez - 0932979-3743\n"
-                + "//     gustalibreros@gmail.com\n"
-                + "//\n"
-                + "// ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION\n"
-                + "// UNIVERSIDAD DEL VALLE\n"
-                + "//**********************************************************";
+        String acercaDe = "FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS\n"
+                + "MINIPROYECTO 1: SOLUCIÓN PARA UN JUEGO DE LÓGICA: AKARI\n"
+                + "\n"
+                + "ARCHIVO: MainFrame.java\n"
+                + "\n"
+                + "FECHA:\n"
+                + "\n"
+                + "AUTORES:\n"
+                + "    Marx Arturo Arias - 0840247-3743\n"
+                + "    marxarturoariasescobar@gmail.com\n"
+                + "\n"
+                + "    Luis Jeferson Gallardo - \n"
+                + "    luisjhefeerson@gmail.com\n"
+                + "\n"
+                + "    Fidel Herney Palacios - 0832691-3743\n"
+                + "    herney400@gmail.com\n"
+                + "\n"
+                + "    James Andrés Payan - 0957150-2711\n"
+                + "    jamespayan@gmail.com\n"
+                + "\n"
+                + "    Gustavo Adolfo Rodriguez - 0932979-3743\n"
+                + "    gustalibreros@gmail.com\n"
+                + "\n"
+                + "ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION\n"
+                + "UNIVERSIDAD DEL VALLE";
 
 
         JOptionPane.showMessageDialog(this, acercaDe, "Acerda de", JOptionPane.INFORMATION_MESSAGE);
@@ -166,11 +195,16 @@ public class Main extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelSubtitulo;
+    private javax.swing.JLabel jLabelSubtitulo1;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JMenuItem jMIAcercaDe;
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }
