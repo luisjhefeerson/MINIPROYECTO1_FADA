@@ -48,6 +48,7 @@ public class Main extends javax.swing.JFrame {
         jLabelSubtitulo1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuAyuda = new javax.swing.JMenu();
         jMIAcercaDe = new javax.swing.JMenuItem();
@@ -91,6 +92,14 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setBounds(0, 0, 800, 600);
 
         jMenuArchivo.setText("Archivo");
+
+        jMenuItem2.setText("Cargar Tablero");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuArchivo.add(jMenuItem2);
 
         jMenuItem1.setText("Salir");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +166,12 @@ public class Main extends javax.swing.JFrame {
         //</editor-fold>
     }//GEN-LAST:event_jMIAcercaDeActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       
+        
+                
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -203,6 +218,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
