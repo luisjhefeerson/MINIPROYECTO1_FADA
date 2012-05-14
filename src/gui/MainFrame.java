@@ -27,11 +27,16 @@
 //**********************************************************
 package gui;
 
+import datos.AkariFile;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-public class Main extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame {
 
-    public Main() {
+    AkariFile archivoEntrada;
+    
+    public MainFrame() {
         initComponents();
     }
 
@@ -46,10 +51,14 @@ public class Main extends javax.swing.JFrame {
         jLabelTitulo = new javax.swing.JLabel();
         jLabelSubtitulo = new javax.swing.JLabel();
         jLabelSubtitulo1 = new javax.swing.JLabel();
+        jLabelTextView = new javax.swing.JLabel();
+        jLabelgraphicalview = new javax.swing.JLabel();
+        jScrollPaneTextView = new javax.swing.JScrollPane();
+        jTextArea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMICargarTablero = new javax.swing.JMenuItem();
+        jMISalir = new javax.swing.JMenuItem();
         jMenuAyuda = new javax.swing.JMenu();
         jMIAcercaDe = new javax.swing.JMenuItem();
 
@@ -88,26 +97,45 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(jLabelSubtitulo1);
         jLabelSubtitulo1.setBounds(92, 70, 708, 30);
 
+        jLabelTextView.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabelTextView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTextView.setText("TEXT VIEW");
+        jPanel1.add(jLabelTextView);
+        jLabelTextView.setBounds(0, 120, 400, 30);
+
+        jLabelgraphicalview.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabelgraphicalview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelgraphicalview.setText("GRAPHICAL VIEW");
+        jPanel1.add(jLabelgraphicalview);
+        jLabelgraphicalview.setBounds(400, 120, 400, 30);
+
+        jTextArea.setColumns(20);
+        jTextArea.setRows(5);
+        jScrollPaneTextView.setViewportView(jTextArea);
+
+        jPanel1.add(jScrollPaneTextView);
+        jScrollPaneTextView.setBounds(10, 160, 380, 400);
+
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 800, 600);
 
         jMenuArchivo.setText("Archivo");
 
-        jMenuItem2.setText("Cargar Tablero");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMICargarTablero.setText("Cargar Tablero");
+        jMICargarTablero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMICargarTableroActionPerformed(evt);
             }
         });
-        jMenuArchivo.add(jMenuItem2);
+        jMenuArchivo.add(jMICargarTablero);
 
-        jMenuItem1.setText("Salir");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMISalir.setText("Salir");
+        jMISalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMISalirActionPerformed(evt);
             }
         });
-        jMenuArchivo.add(jMenuItem1);
+        jMenuArchivo.add(jMISalir);
 
         jMenuBar1.add(jMenuArchivo);
 
@@ -129,9 +157,9 @@ public class Main extends javax.swing.JFrame {
         setBounds((screenSize.width-810)/2, (screenSize.height-630)/2, 810, 630);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMISalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISalirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMISalirActionPerformed
 
     private void jMIAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAcercaDeActionPerformed
         //<editor-fold defaultstate="collapsed" desc="jMIAcercaDeActionPerformed()">
@@ -166,19 +194,24 @@ public class Main extends javax.swing.JFrame {
         //</editor-fold>
     }//GEN-LAST:event_jMIAcercaDeActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       
-        
-                
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void jMICargarTableroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICargarTableroActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+        JFileChooser selectorArchivo = new JFileChooser();//escogedor de archivo
+        selectorArchivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int resultado = selectorArchivo.showOpenDialog(this);
+      
+        
+        if (resultado != JFileChooser.CANCEL_OPTION) {
+            archivoEntrada = new AkariFile();
+            File selectedFile = selectorArchivo.getSelectedFile();
+            archivoEntrada.loadFromFile(selectedFile);
+            jTextArea.setText(archivoEntrada.getFileContents());
+        }
+
+    }//GEN-LAST:event_jMICargarTableroActionPerformed
+
     public static void main(String args[]) {
-        /*
-         * Set the Nimbus look and feel
-         */
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /*
          * If Nimbus (introduced in Java SE 6) is not available, stay with the
@@ -188,23 +221,20 @@ public class Main extends javax.swing.JFrame {
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /*
-         * Create and display the form
-         */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new Main().setVisible(true);
+                new MainFrame().setVisible(true);
             }
         });
     }
@@ -212,15 +242,19 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelSubtitulo;
     private javax.swing.JLabel jLabelSubtitulo1;
+    private javax.swing.JLabel jLabelTextView;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelgraphicalview;
     private javax.swing.JMenuItem jMIAcercaDe;
+    private javax.swing.JMenuItem jMICargarTablero;
+    private javax.swing.JMenuItem jMISalir;
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPaneTextView;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextArea jTextArea;
     // End of variables declaration//GEN-END:variables
 }
