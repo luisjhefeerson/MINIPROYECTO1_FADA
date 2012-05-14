@@ -19,7 +19,7 @@
 //     James Andrés Payan - 0957150-2711
 //     jamespayan@gmail.com
 //
-//     Gustavo Adolfo Rodriguez - 0932979-3743    
+//     Gustavo Adolfo Rodriguez - 0932979-3743
 //     gustalibreros@gmail.com
 //
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
@@ -28,14 +28,11 @@
 package gui;
 
 import javax.swing.JOptionPane;
-import javax.swing.UnsupportedLookAndFeelException;
 
-public class MainFrame extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame {
 
-
-
-    public MainFrame() {
-
+    public Main() {
+        initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -51,8 +48,6 @@ public class MainFrame extends javax.swing.JFrame {
         jMIAcercaDe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("PATRON-DAO");
-        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -89,54 +84,85 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuBar1.add(jMenuAyuda);
 
         setJMenuBar(jMenuBar1);
-    }// </editor-fold>//GEN-END:initComponents
 
-    private void jMIAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAcercaDeActionPerformed
-        //<editor-fold defaultstate="collapsed" desc="jMIAcercaDeActionPerformed()">
-        String acercaDe = "DESARROLLO DE SOFTWARE II\n"
-//                + "TALLER PATRON-DAO\n\n"
-//                + "AUTORES:\n\n"
-//                + "Gustavo Adolfo Rodriguez    0932979-3743\n"
-//                + "gustalibreros@hotmail.com\n\n"
-//                + "José Antonio Nobile Rendón  0747102-2711\n"
-//                + "jose.nobile@gmail.com\n\n"
-//                + "Roberto Ceballos            0441812-3743\n"
-//                + "robertrock2000@gmail.com\n\n"
-//                + "Abril 2012\n\n"
-                + "ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION\n"
-                + "UNIVERSIDAD DEL VALLE\n";
-        
-        JOptionPane.showMessageDialog(this, acercaDe, "Acerda de", JOptionPane.INFORMATION_MESSAGE);
-        //</editor-fold>
-    }//GEN-LAST:event_jMIAcercaDeActionPerformed
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-810)/2, (screenSize.height-630)/2, 810, 630);
+    }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMIAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAcercaDeActionPerformed
+        //<editor-fold defaultstate="collapsed" desc="jMIAcercaDeActionPerformed()">
+        String acercaDe = "//**********************************************************\n"
+                + "// FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS\n"
+                + "// MINIPROYECTO 1: SOLUCIÓN PARA UN JUEGO DE LÓGICA: AKARI\n"
+                + "//\n"
+                + "// ARCHIVO: MainFrame.java\n"
+                + "//\n"
+                + "// FECHA:\n"
+                + "//\n"
+                + "// AUTORES:\n"
+                + "//     Marx Arturo Arias - 0840247-3743\n"
+                + "//     marxarturoariasescobar@gmail.com\n"
+                + "//\n"
+                + "//     Luis Jeferson Gallardo - \n"
+                + "//     luisjhefeerson@gmail.com\n"
+                + "//\n"
+                + "//     Fidel Herney Palacios - 0832691-3743\n"
+                + "//     herney400@gmail.com\n"
+                + "//\n"
+                + "//     James Andrés Payan - 0957150-2711\n"
+                + "//     jamespayan@gmail.com\n"
+                + "//\n"
+                + "//     Gustavo Adolfo Rodriguez - 0932979-3743\n"
+                + "//     gustalibreros@gmail.com\n"
+                + "//\n"
+                + "// ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION\n"
+                + "// UNIVERSIDAD DEL VALLE\n"
+                + "//**********************************************************";
+
+
+        JOptionPane.showMessageDialog(this, acercaDe, "Acerda de", JOptionPane.INFORMATION_MESSAGE);
+        //</editor-fold>
+    }//GEN-LAST:event_jMIAcercaDeActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc="main()">
+        /*
+         * Set the Nimbus look and feel
+         */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
         try {
-            try {
-                javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-            } catch (InstantiationException ex) {
-                ex.printStackTrace();
-            } catch (IllegalAccessException ex) {
-                ex.printStackTrace();
-            } catch (UnsupportedLookAndFeelException ex) {
-                ex.printStackTrace();
-            }
-        } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+        //</editor-fold>
+
+        /*
+         * Create and display the form
+         */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
-                new MainFrame().setVisible(true);
+                new Main().setVisible(true);
             }
         });
-        //</editor-fold>
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
