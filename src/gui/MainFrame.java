@@ -1,25 +1,31 @@
 //**********************************************************
-// DESARROLLO DE SOFTWARE II
-// TALLER: PATRON-DAO
+// FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS
+// MINIPROYECTO 1: SOLUCIÓN PARA UN JUEGO DE LÓGICA: AKARI
 //
 // ARCHIVO: MainFrame.java
 //
-// FECHA:12/03/30
+// FECHA:
 //
 // AUTORES:
-// Gustavo Adolfo Rodriguez    0932979-3743
-// gustalibreros@hotmail.com
+//     Marx Arturo Arias - 0840247-3743
+//     marxarturoariasescobar@gmail.com
 //
-// José Antonio Nobile Rendón  0747102-2711
-// jose.nobile@gmail.com
+//     Luis Jeferson Gallardo - 
+//     luisjhefeerson@gmail.com
 //
-// Roberto Ceballos            0441812-3743
-// robertrock2000@gmail.com
+//     Fidel Herney Palacios - 0832691-3743
+//     herney400@gmail.com
+//
+//     James Andrés Payan - 0957150-2711
+//     jamespayan@gmail.com
+//
+//     Gustavo Adolfo Rodriguez - 0932979-3743    
+//     gustalibreros@gmail.com
 //
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
-//*********************************************************
-package GUI;
+//**********************************************************
+package gui;
 
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -37,11 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jSeparator3 = new javax.swing.JSeparator();
-        jButtonEstudiantes = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jLabelLogo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -54,31 +56,13 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
-        jPanel1.add(jSeparator3);
-        jSeparator3.setBounds(5, 116, 160, 10);
 
-        jButtonEstudiantes.setFont(new java.awt.Font("Ubuntu", 1, 17)); // NOI18N
-        jButtonEstudiantes.setText("Estudiantes");
-        jButtonEstudiantes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEstudiantesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonEstudiantes);
-        jButtonEstudiantes.setBounds(5, 130, 160, 35);
-        jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(5, 166, 160, 10);
-
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator2);
-        jSeparator2.setBounds(166, 0, 10, 500);
-
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/UNIVALLE.jpg"))); // NOI18N
-        jPanel1.add(jLabelLogo);
-        jLabelLogo.setBounds(50, 10, 72, 100);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UNIVALLE.jpg"))); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(30, 0, 90, 120);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 180, 500);
+        jPanel1.setBounds(0, 0, 800, 130);
 
         jMenuArchivo.setText("Archivo");
 
@@ -105,14 +89,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuBar1.add(jMenuAyuda);
 
         setJMenuBar(jMenuBar1);
-
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-810)/2, (screenSize.height-530)/2, 810, 530);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEstudiantesActionPerformed
-
-    }//GEN-LAST:event_jButtonEstudiantesActionPerformed
 
     private void jMIAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAcercaDeActionPerformed
         //<editor-fold defaultstate="collapsed" desc="jMIAcercaDeActionPerformed()">
@@ -162,16 +139,12 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEstudiantes;
-    private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMIAcercaDe;
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
 }
