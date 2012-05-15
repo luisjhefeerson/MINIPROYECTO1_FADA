@@ -37,7 +37,7 @@ import javax.swing.JOptionPane;
 public class MainFrame extends javax.swing.JFrame {
 
     AkariFile archivoEntrada;
-    
+
     public MainFrame() {
         initComponents();
     }
@@ -58,6 +58,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPaneTextView = new javax.swing.JScrollPane();
         jTextArea = new javax.swing.JTextArea();
         jScrollPanelGraphView = new javax.swing.JScrollPane();
+        jPanelGraphiclView = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
@@ -119,6 +120,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPaneTextView);
         jScrollPaneTextView.setBounds(10, 160, 380, 380);
+
+        jScrollPanelGraphView.setBackground(new java.awt.Color(242, 240, 240));
+        jScrollPanelGraphView.setViewportView(jPanelGraphiclView);
+
         jPanel1.add(jScrollPanelGraphView);
         jScrollPanelGraphView.setBounds(415, 160, 380, 380);
 
@@ -205,8 +210,8 @@ public class MainFrame extends javax.swing.JFrame {
         JFileChooser selectorArchivo = new JFileChooser();//escogedor de archivo
         selectorArchivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int resultado = selectorArchivo.showOpenDialog(this);
-      
-        
+
+
         if (resultado != JFileChooser.CANCEL_OPTION) {
             archivoEntrada = new AkariFile();
             File selectedFile = selectorArchivo.getSelectedFile();
@@ -216,12 +221,24 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMICargarTableroActionPerformed
 
-    
     private void Graficar() {
         int[][] MTablero = archivoEntrada.getTablero();
         Label[][] Labels = new Label[archivoEntrada.getNumeoFilas()][archivoEntrada.getNumeroColumnas()];
-   
-                for (int i = 0; i < MTablero.length; i++) {//for para las filas
+
+        int x = 0;
+        int anchoTablero = archivoEntrada.getNumeroColumnas() * (20 + 1);
+        int y = 0;
+        int altoTablero = archivoEntrada.getNumeoFilas() * (20 + 1);
+
+        if (anchoTablero < jPanelGraphiclView.getWidth()) {
+            x = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
+        }
+
+        if (altoTablero < jPanelGraphiclView.getHeight()) {
+            y = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
+        }
+
+        for (int i = 0; i < MTablero.length; i++) {//for para las filas
             for (int j = 0; j < MTablero[i].length; j++) {//for para las columas
                 Labels[j][i] = new Label();
                 if (MTablero[j][i] == 0)//cuando el valor es 0 la casilla es blanca vacia
@@ -261,15 +278,13 @@ public class MainFrame extends javax.swing.JFrame {
                     Labels[j][i].setForeground(Color.white);
                     Labels[j][i].setText("  4");
                 }
-                Labels[j][i].setBounds(100 + (21 * i), 159 + (21 * j), 20, 20);//ubica los labels en forma de cuadricula
-                jScrollPanelGraphView.add(Labels[j][i]);//adiciona los labels al contenedor
+                Labels[j][i].setBounds(x + (21 * i), y + (21 * j), 20, 20);//ubica los labels en forma de cuadricula
+                jPanelGraphiclView.add(Labels[j][i]);//adiciona los labels al contenedor
             }
         }
-   
+
     }
 
-
-    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -312,6 +327,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelGraphiclView;
     private javax.swing.JScrollPane jScrollPaneTextView;
     private javax.swing.JScrollPane jScrollPanelGraphView;
     private javax.swing.JSeparator jSeparator1;
