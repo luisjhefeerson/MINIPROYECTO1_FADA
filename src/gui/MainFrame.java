@@ -217,7 +217,13 @@ public class MainFrame extends javax.swing.JFrame {
             File selectedFile = selectorArchivo.getSelectedFile();
             archivoEntrada.loadFromFile(selectedFile);
             jTextArea.setText(archivoEntrada.getFileContents());
-            Graficar();
+
+//            if (archivoEntrada.validarEntrada().equals("")) {
+                Graficar();
+//            } else {
+//                JOptionPane.showMessageDialog(this, archivoEntrada.validarEntrada());
+//            }
+
         }
     }//GEN-LAST:event_jMICargarTableroActionPerformed
 
