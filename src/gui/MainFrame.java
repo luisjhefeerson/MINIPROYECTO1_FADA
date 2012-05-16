@@ -26,8 +26,7 @@
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
 package gui;
-///dfgdfg
-//dfgdfg
+
 import datos.AkariFile;
 import java.awt.Color;
 import java.awt.Label;
