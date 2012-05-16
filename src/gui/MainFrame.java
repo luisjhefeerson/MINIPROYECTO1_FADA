@@ -26,8 +26,8 @@
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
 package gui;
-// vos podes modificar algo! guardas  y si ves que cambia de color?? ahora tenes que confirmar los cambios
-//yo tambien trabje ya sobre esta linea. asi que como ambos trabajamos en linesa iguales el deberia generar un conflicto!!
+///dfgdfg
+//dfgdfg
 import datos.AkariFile;
 import java.awt.Color;
 import java.awt.Label;
