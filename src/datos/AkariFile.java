@@ -42,8 +42,9 @@ public class AkariFile {
     private String fileContents = null;
     private int numeoFilas = 0;
     private int numeroColumnas = 0;
-    private int[][] tablero = null;
-
+    private int[][] tablero = null,TableroRestrinciones=null;
+    private byte[][] TableroCasillas=null, TableroBombillos=null, TableroIluminacion=null;
+    
     public AkariFile() {
     }
 
