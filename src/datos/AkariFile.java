@@ -58,14 +58,16 @@ public class AkariFile {
     }
     public void  validation (int t[][] ,int b[][]){
         int validator=0;
+        int n=t.length;
+        int m=b.length;
         for (int i = 0; i < t.length; i++) {            
             for (int j = 0; j < b.length; j++) {
-                if(((t[i][j]==0)||(t[i][j]==1)) ||((b[i][j]==1)||(b[i][j]==0))){
+                if((t[i][j]+b[i][j])==1){
                   
                     validator++;
                   
                 }else{                
-                  i=t.length;
+                  i=b.length;
                 }
             }
             

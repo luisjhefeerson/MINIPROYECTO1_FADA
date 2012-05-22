@@ -217,9 +217,11 @@ public class MainFrame extends javax.swing.JFrame {
             File selectedFile = selectorArchivo.getSelectedFile();
             archivoEntrada.loadFromFile(selectedFile);
             jTextArea.setText(archivoEntrada.getFileContents());
-
+            
+            
 //            if (archivoEntrada.validarEntrada().equals("")) {
-                Graficar();
+            pasarPrueba();    
+            //Graficar();
 //            } else {
 //                JOptionPane.showMessageDialog(this, archivoEntrada.validarEntrada());
 //            }
@@ -227,6 +229,26 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMICargarTableroActionPerformed
 
+    public void pasarPrueba(){
+    AkariFile ak=new AkariFile();
+   int a[][] = {{0,0,1,1},
+                {1,1,1,1},
+                {1,1,1,1},
+                {1,1,1,1}};
+   
+   int B[][] = {
+                {0,0,1,1},
+                {1,1,1,1},
+                {1,1,1,1},
+                {1,1,1,1}};
+   ak.validation(a, B);
+    
+    
+    }
+    
+    
+    
+    
     private void Graficar() {
         byte[][] MTablero = archivoEntrada.getTablero();
         byte[][] MBombillos = archivoEntrada.getBombillos();
