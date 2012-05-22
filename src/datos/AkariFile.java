@@ -42,16 +42,19 @@ public class AkariFile {
     private String fileContents = null;
     private int numeoFilas = 0;
     private int numeroColumnas = 0;
-    private int[][] tablero = null,TableroRestrinciones=null;
-    private byte[][] TableroCasillas=null, TableroBombillos=null, TableroIluminacion=null;
+    private int[][] Restricciones=null;
+    private byte [][] Tablero=null, Bombillos=null, Iluminacion=null;
     
     public AkariFile() {
     }
 
-    public AkariFile(int numeoFilas, int numeroColumnas, int[][] tablero) {
+    public AkariFile(int numeoFilas, int numeroColumnas, int[][] restricciones, byte[][] Tablero, byte[][] Bombillos, byte[][] Iluminacion) {
         this.numeoFilas = numeoFilas;
         this.numeroColumnas = numeroColumnas;
-        this.tablero = tablero;
+        this.Restricciones = restricciones;
+        this.Bombillos=Bombillos;
+        this.Tablero=Tablero;
+        this.Iluminacion=Iluminacion;
     }
 
     public String getFileContents() {
@@ -66,14 +69,31 @@ public class AkariFile {
         return true;
     }
 
-    public int[][] getTablero() {
-        return tablero;
+    public byte[][] getTablero() {
+        return Tablero;
     }
-
-    public void setTablero(int[][] tablero) {
-        this.tablero = tablero;
+    
+    public void setTablero(byte[][] tablero) {
+        this.Tablero = tablero;
     }
-
+    public byte[][] getIluminaciion(){
+        return Iluminacion;
+    }
+    public void setIluminacion(byte[][] iluminacion) {
+        this.Iluminacion = iluminacion;
+    }
+    public int[][] getRestricciones(){
+        return Restricciones;
+    }
+    public void setRestricciones(int[][] restricciones) {
+        this.Restricciones = restricciones;
+    }
+    public byte[][] getBombillos(){
+        return Bombillos;
+    }
+    public void setBombillos(byte[][] bombillos) {
+        this.Bombillos = bombillos;
+    }
     public int getNumeroColumnas() {
         return numeroColumnas;
     }
@@ -104,7 +124,7 @@ public class AkariFile {
             }
 
             fileContents = bufer.toString();
-            procesarFileContents();
+            procesarFileContents();            
             return true;
         } catch (IOException ex) {
             System.out.println(ex.toString());
@@ -131,20 +151,67 @@ public class AkariFile {
             }
 
             if (contador == 3) {
-                tablero = new int[numeoFilas][numeroColumnas];
-            }
-
-            if (contador >= 3) {
-                for (int i = 0; i < tablero.length; i++) {
-                    for (int j = 0; j < tablero[i].length; j++) {
-                        String valor = (String) tokens.nextToken();
-                        tablero[i][j] = Integer.parseInt(valor);
+             //   tablero = new int[numeoFilas][numeroColumnas];
+                Restricciones=new int[numeoFilas][numeroColumnas];
+                Iluminacion=new byte[numeoFilas][numeroColumnas];
+                Tablero=new byte[numeoFilas][numeroColumnas];
+                Bombillos=new byte[numeoFilas][numeroColumnas];
+                for (int i = 0; i < Iluminacion.length; i++) {
+                    for (int j = 0; j < Iluminacion[i].length; j++) {
+                        Iluminacion[i][j]=0;
+                        Bombillos[i][j]=0;
+                        Tablero[i][j]=0;
+                        //System.out.print(Tablero[i][j]+"\t");
                     }
+                   // System.out.print("\n");
                 }
             }
 
+            if (contador >= 3) {
+                for (int i = 0; i < Restricciones.length; i++) {
+                    for (int j = 0; j < Restricciones[i].length; j++) {
+                        String valor = (String) tokens.nextToken();
+                        if(valor.equals("0")){
+                        Restricciones[i][j]=8;//para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
+                        Tablero[i][j]=0;
+                        }
+                        if(valor.equals("1")){
+                        Tablero[i][j]=0;
+                        //METODO PONER BOMBILLO
+                        }
+                        if(valor.equals("2")){
+                        Restricciones[i][j]=8;//PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
+                        Tablero[i][j]=1;
+                        }
+                        if(valor.equals("3")){
+                        Restricciones[i][j] = 0;
+                        Tablero[i][j]=1;
+                        }
+                        if(valor.equals("4")){
+                        Restricciones[i][j] = 1;
+                        Tablero[i][j]=1;
+                        }
+                        if(valor.equals("5")){
+                        Restricciones[i][j] = 2;
+                        Tablero[i][j]=1;
+                        }
+                        if(valor.equals("6")){
+                        Restricciones[i][j] = 3;
+                        Tablero[i][j]=1;
+                        }
+                        if(valor.equals("7")){
+                        Restricciones[i][j] = 4;
+                        Tablero[i][j]=1;
+                        }
+                        System.out.print(Tablero[i][j]+" ");
+                    }
+                    System.out.print("\n");
+                }
+            }
+        
+    }}
+        
         }
-    }
 
 //    public String validarEntrada() {  // Crei que funcionada pero no!! luego les cuento!! porfa no borrar 
 //
@@ -192,7 +259,7 @@ public class AkariFile {
 //
 //        return "";
 //    }
-}
+
 
 
 //~ Formatted by Jindent --- http://www.jindent.com
