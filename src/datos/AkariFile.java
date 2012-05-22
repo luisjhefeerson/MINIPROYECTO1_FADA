@@ -60,8 +60,10 @@ public class AkariFile {
         int validator=0;
         for (int i = 0; i < t.length; i++) {            
             for (int j = 0; j < b.length; j++) {
-                if((t[i][j]==b[i][j])){
-                  validator++;
+                if(((t[i][j]==0)||(t[i][j]==1)) ||((b[i][j]==1)||(b[i][j]==0))){
+                  
+                    validator++;
+                  
                 }else{                
                   i=t.length;
                 }
