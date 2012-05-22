@@ -272,7 +272,7 @@ public class MainFrame extends javax.swing.JFrame {
                 //TABLERO BOMBILLOS
                 if (MBombillos[j][i] == 1) {//cuando el valor es 1 la casilla tiene bombillo
                     Labels[j][i].setBackground(Color.YELLOW);
-                    Labels[j][i].setForeground(Color.BLACK);
+                    Labels[j][i].setBackground(Color.BLACK);
                     Labels[j][i].setText("  B");
                 }
                 if (MBombillos[j][i] == 0) //cuando el valor es 0 la casilla no tiene bombillos

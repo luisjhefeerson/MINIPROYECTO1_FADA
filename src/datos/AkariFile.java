@@ -56,6 +56,20 @@ public class AkariFile {
         this.Tablero=Tablero;
         this.Iluminacion=Iluminacion;
     }
+    public void  validation (int t[][] ,int b[][]){
+        int validator=0;
+        for (int i = 0; i < t.length; i++) {            
+            for (int j = 0; j < b.length; j++) {
+                if((t[i][j]==b[i][j])){
+                  validator++;
+                }else{                
+                  i=t.length;
+                }
+            }
+            
+        }
+    
+    }
 
     public String getFileContents() {
         return fileContents;
