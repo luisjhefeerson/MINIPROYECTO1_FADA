@@ -95,15 +95,22 @@ public class GeneradorIngenuo {
     }
     
     
-    public void solucionIngenua(){
+    public boolean solucionIngenua(){
         
         generarSiguiteCromosoma();
-        
-        while ((!applicarCromosoma()) && contador<Math.pow(2, casillasEnBlanco)-1) {            
-            System.out.println("Aplicar Cromosoma: "+contador+"Resultado: "+applicarCromosoma());
+        boolean b = applicarCromosoma(); 
+        while ((!b) && contador<Math.pow(2, casillasEnBlanco)-1) {            
+            System.out.println("Aplicar Cromosoma: "+contador+"Resultado: "+b );
+            
             generarSiguiteCromosoma();
+            akari.inicializarMatriz();
+            b = applicarCromosoma();
+//            if(contador == Math.pow(2, casillasEnBlanco)-1 && !b){
+//                return false;
+//            }
         }
         
+        return b;
         
     }
 }

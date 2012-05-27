@@ -256,9 +256,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        ingenuo.generarSiguiteCromosoma();
-        ingenuo.applicarCromosoma();
-        Iluminar();
+        if (ingenuo.solucionIngenua())
+            Iluminar();
+        else
+            JOptionPane.showMessageDialog(rootPane, "NO se pudo hallar soluciòn");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
