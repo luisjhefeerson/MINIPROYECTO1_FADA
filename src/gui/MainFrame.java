@@ -228,7 +228,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMICargarTableroActionPerformed
 
     private void Graficar() {
-        int[][] MTablero = archivoEntrada.getTablero();
+        byte[][] MTablero = archivoEntrada.getTablero();
+        byte[][] MBombillos = archivoEntrada.getBombillos();
+        byte[][] MIluminacion = archivoEntrada.getIluminaciion();
+        int[][] MRestricciones = archivoEntrada.getRestricciones();
         Label[][] Labels = new Label[archivoEntrada.getNumeoFilas()][archivoEntrada.getNumeroColumnas()];
 
         int x = 0;
@@ -243,47 +246,42 @@ public class MainFrame extends javax.swing.JFrame {
         if (altoTablero < jPanelGraphiclView.getHeight()) {
             y = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
         }
-
-        for (int i = 0; i < MTablero.length; i++) {//for para las filas
-            for (int j = 0; j < MTablero[i].length; j++) {//for para las columas
+        //IMPORTANTE: las j y las i estan trocadas por el orden en que pinta java los componentes en el contenedor
+        for (int i = 0; i < archivoEntrada.getNumeoFilas(); i++) {//for para las filas
+            for (int j = 0; j < archivoEntrada.getNumeroColumnas(); j++) {//for para las columas
                 Labels[j][i] = new Label();
+                //TABLERO CASILLAS BLANCAS Y NEGRAS
                 if (MTablero[j][i] == 0)//cuando el valor es 0 la casilla es blanca vacia
-                {
                     Labels[j][i].setBackground(Color.white);
+                if (MTablero[j][i] == 1){ //cuando el valor es 1 la casilla es negra
+                    Labels[j][i].setBackground(Color.black);
+                    Labels[j][i].setForeground(Color.white); 
                 }
-                if (MTablero[j][i] == 1) {//cuando el valor es 1 la casilla es blanca y con bombilla
-                    Labels[j][i].setBackground(Color.white);
+                //TABLERO DE RESTRICCIONES
+                if (MRestricciones[j][i] == 0)//la casilla tiene el numero 0
+                    Labels[j][i].setText("   0");
+                if (MRestricciones[j][i] == 1)//la casilla tiene el numero 1
+                    Labels[j][i].setText("   1");
+                if (MRestricciones[j][i] == 2)//la casilla tiene el numero 2
+                    Labels[j][i].setText("   2");
+                if (MRestricciones[j][i] == 3)//la casilla tiene el numero 3                {
+                    Labels[j][i].setText("   3");
+               if (MRestricciones[j][i] == 4)//la casilla tiene el numero 4                
+                    Labels[j][i].setText("   4");               
+                   
+                //TABLERO BOMBILLOS
+                if (MBombillos[j][i] == 1) {//cuando el valor es 1 la casilla tiene bombillo
+                    Labels[j][i].setBackground(Color.YELLOW);
+                    Labels[j][i].setForeground(Color.BLACK);
                     Labels[j][i].setText("  B");
                 }
-                if (MTablero[j][i] == 2)//cuando el valor es 2 la casilla es negra sin numero
-                {
-                    Labels[j][i].setBackground(Color.black);
-                }
-                if (MTablero[j][i] == 3) {//cuando el valor es 3 la casilla es negra y con el numero 0
-                    Labels[j][i].setBackground(Color.black);
-                    Labels[j][i].setForeground(Color.white);
-                    Labels[j][i].setText("  0");
-                }
-                if (MTablero[j][i] == 4) {//cuando el valor es 4 la casilla es negra y con el numero 1
-                    Labels[j][i].setBackground(Color.black);
-                    Labels[j][i].setForeground(Color.white);
-                    Labels[j][i].setText("  1");
-                }
-                if (MTablero[j][i] == 5) {//cuando el valor es 5 la casilla es negra y con el numero 2
-                    Labels[j][i].setBackground(Color.black);
-                    Labels[j][i].setForeground(Color.white);
-                    Labels[j][i].setText("  2");
-                }
-                if (MTablero[j][i] == 6) {//cuando el valor es 6 la casilla es negra y con el numero 3
-                    Labels[j][i].setBackground(Color.black);
-                    Labels[j][i].setForeground(Color.white);
-                    Labels[j][i].setText("  3");
-                }
-                if (MTablero[j][i] == 7) {//cuando el valor es 7 la casilla es negra y con el numero 4
-                    Labels[j][i].setBackground(Color.black);
-                    Labels[j][i].setForeground(Color.white);
-                    Labels[j][i].setText("  4");
-                }
+               // if (MBombillos[j][i] == 0) //cuando el valor es 0 la casilla no tiene bombillos
+                 //   Labels[j][i].setBackground(Color.WHITE);
+                //TABLERO ILUMINACION    
+                if (MIluminacion[j][i] == 1) //cuando el valor es 1 la casilla se ilumina
+                    Labels[j][i].setBackground(Color.YELLOW);                    
+                //if (MIluminacion[j][i] == 0) //cuando el valor es 0 la casilla no se ilumina
+                  //  Labels[j][i].setBackground(Color.WHITE);
                 Labels[j][i].setBounds(x + (21 * i), y + (21 * j), 20, 20);//ubica los labels en forma de cuadricula
                 jPanelGraphiclView.add(Labels[j][i]);//adiciona los labels al contenedor
             }
