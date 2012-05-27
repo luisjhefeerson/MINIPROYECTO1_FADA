@@ -210,6 +210,7 @@ public class AkariFile {
                         }
                         if(valor.equals("1")){
                         Tablero[i][j]=0;
+                        Bombillos[i][j]=1;
                         //METODO PONER BOMBILLO
                         }
                         if(valor.equals("2")){
