@@ -55,6 +55,22 @@ public class AkariFile {
         this.Bombillos=Bombillos;
         this.Tablero=Tablero;
         this.Iluminacion=Iluminacion;
+
+    }
+    public boolean  validation (int t[][] ,int b[][]){        
+       boolean valida=true;
+        for (int i = 0; i < t.length; i++) {            
+            for (int j = 0; j < b.length; j++) {
+                if((t[i][j]+b[i][j])==1){                  
+                    valida=true;                  
+                }else{                
+                  i=b.length;
+                  valida=false;
+                }
+            }            
+        }
+    return  valida;
+
     }
 
     public String getFileContents() {
