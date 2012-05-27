@@ -347,8 +347,7 @@ public class MainFrame extends javax.swing.JFrame {
         for (int i = 0; i < Labels.length; i++) {
             for (int j = 0; j < Labels[i].length; j++) {
                 if(MIluminacion[i][j]==1)
-                Labels[i][j].setBackground(Color.yellow);
-                Labels[i][j].setText("  B");
+                Labels[i][j].setBackground(Color.yellow);               
             }
         }
     }
@@ -360,6 +359,7 @@ public class MainFrame extends javax.swing.JFrame {
         int n=archivoEntrada.getNumeroColumnas();         
            if(MTablero[fila][columna]==0&&MIluminacion[0][2]==0){
                     MBombillos[fila][columna]=1;
+                    Labels[fila][columna].setText("  B");
                     iluminarFila(fila,columna,n,m);
                     iluminarColumna(fila,columna,m);  
                     Iluminar();          
