@@ -65,11 +65,13 @@ public class AkariFile {
             for (int j = 0; j < b.length; j++) {
                 if((t[i][j]+b[i][j])==1){                  
                     valida=true;                  
+                    System.out.print("validacion =" +valida);
                 }else{
                    
                   valida=false;
-                    i=b.length;
-                     j=b.length;
+                  i=b.length;
+                  j=b.length;
+                  System.out.print("validacion =" +valida);
                 }
             }            
         }
@@ -212,8 +214,7 @@ public class AkariFile {
                         }
                         if(valor.equals("1")){
                         Tablero[i][j]=0;
-                        Bombillos[i][j]=1;
-                        //METODO PONER BOMBILLO
+                        Bombillos[i][j]=1;                        
                         }
                         if(valor.equals("2")){
                         Restricciones[i][j]=8;//PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
@@ -254,6 +255,7 @@ public class AkariFile {
     }
         casillasBlancas = (numeoFilas*numeroColumnas)-casillasNegras;
     }
+    
         
         }
 

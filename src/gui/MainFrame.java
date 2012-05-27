@@ -39,6 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     AkariFile archivoEntrada;
     GeneradorIngenuo ingenuo;
+     private Label[][] Labels;
 
     public MainFrame() {
         initComponents();
@@ -232,8 +233,10 @@ public class MainFrame extends javax.swing.JFrame {
             ingenuo=new GeneradorIngenuo(archivoEntrada);
             
 //            if (archivoEntrada.validarEntrada().equals("")) {
-            pasarPrueba();    
-//            Graficar();
+            //pasarPrueba();    
+            Graficar();
+            ponerBombillo(0, 2); 
+            //Iluminar();
 //            } else {
 //                JOptionPane.showMessageDialog(this, archivoEntrada.validarEntrada());
 //            }
@@ -248,16 +251,27 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void pasarPrueba(){
     AkariFile ak=new AkariFile();
-   int a[][] = {{0,0,1,1},
-                {1,1,1,1},
-                {1,1,1,1},
-                {1,1,1,1}};
+   int a[][] = {{0,0,0,0,0,0,0,0},
+                {1,1,1,1,0,0,1,1},
+                {1,1,1,1,0,0,1,1},
+                {1,1,1,1,0,0,1,1},
+                {1,1,1,1,0,0,1,1},
+                {1,1,1,1,0,0,1,1},
+                {1,1,1,1,0,0,1,1},
+                {1,1,1,1,0,0,1,1},
+               };
+   
    
    int B[][] = {
-                {0,0,1,1},
-                {1,1,1,1},
-                {1,1,1,1},
-                {1,1,1,1}};
+                {1,0,1,1,1,0,1,1},
+                {1,1,1,1,1,0,1,1},
+                {1,1,1,1,1,0,1,1},
+                {1,1,1,1,1,0,1,1},
+                {1,1,1,1,1,0,1,1},
+                {1,1,1,1,1,0,1,1},
+                {1,1,1,1,1,0,1,1},
+                {1,1,1,1,1,0,1,1},
+               };
    ak.validation(a, B);
     
     
@@ -268,7 +282,7 @@ public class MainFrame extends javax.swing.JFrame {
         byte[][] MBombillos = archivoEntrada.getBombillos();
         byte[][] MIluminacion = archivoEntrada.getIluminaciion();
         int[][] MRestricciones = archivoEntrada.getRestricciones();
-        Label[][] Labels = new Label[archivoEntrada.getNumeoFilas()][archivoEntrada.getNumeroColumnas()];
+        Labels = new Label[archivoEntrada.getNumeoFilas()][archivoEntrada.getNumeroColumnas()];
 
         int x = 0;
         int anchoTablero = archivoEntrada.getNumeroColumnas() * (20 + 1);
@@ -324,7 +338,61 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
     }
-
+    public void Iluminar(){
+        byte[][] MIluminacion = archivoEntrada.getIluminaciion();        
+        for (int i = 0; i < Labels.length; i++) {
+            for (int j = 0; j < Labels[i].length; j++) {
+                if(MIluminacion[i][j]==1)
+                Labels[i][j].setBackground(Color.yellow);               
+            }
+        }
+    }
+     public void ponerBombillo(int fila, int columna){
+         byte[][] MTablero = archivoEntrada.getTablero();
+        byte[][] MBombillos = archivoEntrada.getBombillos();
+        byte[][] MIluminacion = archivoEntrada.getIluminaciion();
+        int m=archivoEntrada.getNumeoFilas();
+        int n=archivoEntrada.getNumeroColumnas();         
+           if(MTablero[fila][columna]==0&&MIluminacion[0][2]==0){
+                    MBombillos[fila][columna]=1;
+                    Labels[fila][columna].setText("  B");
+                    iluminarFila(fila,columna,n,m);
+                    iluminarColumna(fila,columna,m);  
+                    Iluminar();          
+         }        
+    }
+     public void iluminarFila(int i, int j, int n, int m){
+         byte[][] MTablero = archivoEntrada.getTablero();
+         byte[][] MIluminacion = archivoEntrada.getIluminaciion();
+        for(int x=j;x<n;x++){
+            if(MTablero[i][x]==0)
+                MIluminacion[i][x]=1;
+            else
+                break;
+        }
+        for(int x=j;x>=0;x--){
+            if(MTablero[i][x]==0)
+                MIluminacion[i][x]=1;
+            else
+                break;
+        }
+    }
+    public void iluminarColumna(int i, int j, int m){
+        byte[][] MTablero = archivoEntrada.getTablero();
+        byte[][] MIluminacion = archivoEntrada.getIluminaciion();
+        for(int y=i;y<m;y++){
+            if(MTablero[y][j]==0)
+                MIluminacion[y][j]=1;
+            else
+                break;
+        }
+        for(int y=i;y>=0;y--){
+            if(MTablero[y][j]==0)
+                MIluminacion[y][j]=1;
+            else
+                break;
+        }
+    }
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
