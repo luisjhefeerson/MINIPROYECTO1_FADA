@@ -348,6 +348,7 @@ public class MainFrame extends javax.swing.JFrame {
             for (int j = 0; j < Labels[i].length; j++) {
                 if(MIluminacion[i][j]==1)
                 Labels[i][j].setBackground(Color.yellow);
+                Labels[i][j].setText("  B");
             }
         }
     }
