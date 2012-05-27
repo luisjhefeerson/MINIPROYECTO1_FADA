@@ -308,7 +308,7 @@ public class AkariFile {
 
         int m = numeoFilas;
         int n = numeroColumnas;
-        if (Tablero[fila][columna] == 0 && Iluminacion[0][2] == 0) {
+        if (Tablero[fila][columna] == 0 && Iluminacion[fila][columna] == 0) {
             Bombillos[fila][columna] = 1;
             iluminarFila(fila, columna, n, m);
             iluminarColumna(fila, columna, m);
