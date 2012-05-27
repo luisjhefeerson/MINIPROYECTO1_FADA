@@ -242,8 +242,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMICargarTableroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       ingenuo.generarSiguite();
-       Graficar();
+       ingenuo.crearTodosLosCromosomas();
+//       Graficar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void pasarPrueba(){

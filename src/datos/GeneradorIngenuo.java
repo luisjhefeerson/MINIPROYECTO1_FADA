@@ -29,23 +29,57 @@ package datos;
 
 import datos.AkariFile;
 
+
 public class GeneradorIngenuo {
 
-    int representacionBinaria;
+    int contador;
     int casillasEnBlanco;
     AkariFile tablero;
 
     public GeneradorIngenuo(AkariFile tablero) {
 
-        representacionBinaria = 0;
+        contador = 0;
         this.tablero = tablero;
-        casillasEnBlanco=tablero.getCasillasBlancas();
+        casillasEnBlanco = tablero.getCasillasBlancas();
     }
 
+    public int[] generarSiguiteCromosoma() {
+
+        contador++;
+        String binario = Integer.toBinaryString(contador);
+
+//        System.out.println("Casillas en Blanco: "+casillasEnBlanco);
+        int[] cromosoma = new int[casillasEnBlanco];
+
+        for (int i = 0; i < cromosoma.length; i++) {
+            cromosoma[i] = 0;
+        }
+        
+//        System.out.println("String Binario: "+binario);
+
+        for (int i = 0; i < binario.length(); i++) {
+            cromosoma[cromosoma.length-1-i] = Integer.parseInt(binario.substring(binario.length()-1-i, binario.length()-i));
+        }
+
+//        System.out.println("Cromosoma: " + contador);
+        for (int i = 0; i < cromosoma.length; i++) {
+//            System.out.print(cromosoma[i] + " ");
+
+        }
+        
+//        System.out.println("");
+        
+
+        return cromosoma;
+    }
     
-    public void generarSiguite() {
-        representacionBinaria++;
+    
+    public void crearTodosLosCromosomas(){
         
+        for (int i = 0; i < Math.pow(2, casillasEnBlanco); i++) {
+            generarSiguiteCromosoma();
+        }
         
+                System.exit(0);
     }
 }
