@@ -258,6 +258,47 @@ public class AkariFile {
         casillasBlancas = (numeoFilas*numeroColumnas)-casillasNegras;
     }
     
+    public void ponerBombillo(int fila, int columna){
+         
+        int m=numeoFilas;
+        int n=numeroColumnas;
+           if(Tablero[fila][columna]==0&&Iluminacion[0][2]==0){
+                    Bombillos[fila][columna]=1;
+                    iluminarFila(fila,columna,n,m);
+                    iluminarColumna(fila,columna,m);                      
+         }        
+    }
+     public void iluminarFila(int i, int j, int n, int m){
+         
+        for(int x=j;x<n;x++){
+            if(Tablero[i][x]==0)
+                Iluminacion[i][x]=1;
+            else
+                break;
+        }
+        for(int x=j;x>=0;x--){
+            if(Tablero[i][x]==0)
+                Iluminacion[i][x]=1;
+            else
+                break;
+        }
+    }
+    public void iluminarColumna(int i, int j, int m){
+       
+        for(int y=i;y<m;y++){
+            if(Tablero[y][j]==0)
+                Iluminacion[y][j]=1;
+            else
+                break;
+        }
+        for(int y=i;y>=0;y--){
+            if(Tablero[y][j]==0)
+                Iluminacion[y][j]=1;
+            else
+                break;
+        }
+    }
+    
         
         }
 
