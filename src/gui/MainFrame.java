@@ -262,10 +262,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     
     }
-    
-    
-    
-    
+     
     private void Graficar() {
         byte[][] MTablero = archivoEntrada.getTablero();
         byte[][] MBombillos = archivoEntrada.getBombillos();
