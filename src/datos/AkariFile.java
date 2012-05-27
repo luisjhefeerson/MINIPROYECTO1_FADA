@@ -59,7 +59,9 @@ public class AkariFile {
         this.casillasNegras=CasillasNegras;
         
     }
-    public boolean  validation (int t[][] ,int b[][]){        
+    public boolean  validation (){     
+        byte t[][] = Tablero;
+        byte b[][] = Bombillos;
        boolean valida=true;
         for (int i = 0; i < t.length; i++) {            
             for (int j = 0; j < b.length; j++) {

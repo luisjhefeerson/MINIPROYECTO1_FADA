@@ -29,13 +29,12 @@ package datos;
 
 import datos.AkariFile;
 
-
 public class GeneradorIngenuo {
 
     int contador;
     int casillasEnBlanco;
     AkariFile akari;
-    int []cromosoma;
+    int[] cromosoma;
 
     public GeneradorIngenuo(AkariFile tablero) {
 
@@ -49,17 +48,17 @@ public class GeneradorIngenuo {
         contador++;
         String binario = Integer.toBinaryString(contador);
 
-        System.out.println("Casillas en Blanco: "+casillasEnBlanco);
+        System.out.println("Casillas en Blanco: " + casillasEnBlanco);
         cromosoma = new int[casillasEnBlanco];
 
         for (int i = 0; i < cromosoma.length; i++) {
             cromosoma[i] = 0;
         }
-        
-        System.out.println("String Binario: "+binario);
+
+        System.out.println("String Binario: " + binario);
 
         for (int i = 0; i < binario.length(); i++) {
-            cromosoma[cromosoma.length-1-i] = Integer.parseInt(binario.substring(binario.length()-1-i, binario.length()-i));
+            cromosoma[cromosoma.length - 1 - i] = Integer.parseInt(binario.substring(binario.length() - 1 - i, binario.length() - i));
         }
 
         System.out.println("Cromosoma: " + contador);
@@ -67,27 +66,44 @@ public class GeneradorIngenuo {
             System.out.print(cromosoma[i] + " ");
 
         }
-        
+
         System.out.println("");
-        
+
 
         return cromosoma;
     }
-    
-    public void applicarCromosoma(){
-        
-        int counter=0;
+
+    public boolean applicarCromosoma() {
+
+        int counter = 0;
         for (int i = 0; i < akari.getNumeoFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
-                
-                if(akari.getTablero()[i][j]==0){
-                    
+
+                if (akari.getTablero()[i][j] == 0) {
+                    if (cromosoma[counter] == 1) {
+                        if (/*
+                                 * !akari.ponerbombilla(i,j)
+                                 */true) {
+                            return false;
+                        }
+                    }
+                    counter++;
                 }
-                    
-                
             }
-            
         }
+
+        return akari.validation();
+    }
+    
+    
+    public void solucionIngenua(){
+        
+        generarSiguiteCromosoma();
+        
+        while ((!applicarCromosoma()) && contador<Math.pow(2, casillasEnBlanco)) {            
+            generarSiguiteCromosoma();
+        }
+        
         
     }
 }
