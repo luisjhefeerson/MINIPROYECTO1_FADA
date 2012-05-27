@@ -264,6 +264,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
       
       archivoEntrada.inicializarMatriz();
+      jPanelGraphiclView.removeAll();
       Graficar();
 //      Iluminar();
     }//GEN-LAST:event_botonLimpiarActionPerformed
@@ -364,7 +365,9 @@ public class MainFrame extends javax.swing.JFrame {
                 //if (MIluminacion[j][i] == 0) //cuando el valor es 0 la casilla no se ilumina
                 //  Labels[j][i].setBackground(Color.WHITE);
                 Labels[j][i].setBounds(x + (21 * i), y + (21 * j), 20, 20);//ubica los labels en forma de cuadricula
-                jPanelGraphiclView.add(Labels[j][i]);//adiciona los labels al contenedor               
+                
+                jPanelGraphiclView.add(Labels[j][i]);//adiciona los labels al contenedor
+                
             }
         }
 
