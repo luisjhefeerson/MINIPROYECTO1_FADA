@@ -34,12 +34,13 @@ public class GeneradorIngenuo {
 
     int contador;
     int casillasEnBlanco;
-    AkariFile tablero;
+    AkariFile akari;
+    int []cromosoma;
 
     public GeneradorIngenuo(AkariFile tablero) {
 
         contador = 0;
-        this.tablero = tablero;
+        this.akari = tablero;
         casillasEnBlanco = tablero.getCasillasBlancas();
     }
 
@@ -48,38 +49,45 @@ public class GeneradorIngenuo {
         contador++;
         String binario = Integer.toBinaryString(contador);
 
-//        System.out.println("Casillas en Blanco: "+casillasEnBlanco);
-        int[] cromosoma = new int[casillasEnBlanco];
+        System.out.println("Casillas en Blanco: "+casillasEnBlanco);
+        cromosoma = new int[casillasEnBlanco];
 
         for (int i = 0; i < cromosoma.length; i++) {
             cromosoma[i] = 0;
         }
         
-//        System.out.println("String Binario: "+binario);
+        System.out.println("String Binario: "+binario);
 
         for (int i = 0; i < binario.length(); i++) {
             cromosoma[cromosoma.length-1-i] = Integer.parseInt(binario.substring(binario.length()-1-i, binario.length()-i));
         }
 
-//        System.out.println("Cromosoma: " + contador);
+        System.out.println("Cromosoma: " + contador);
         for (int i = 0; i < cromosoma.length; i++) {
-//            System.out.print(cromosoma[i] + " ");
+            System.out.print(cromosoma[i] + " ");
 
         }
         
-//        System.out.println("");
+        System.out.println("");
         
 
         return cromosoma;
     }
     
-    
-    public void crearTodosLosCromosomas(){
+    public void applicarCromosoma(){
         
-        for (int i = 0; i < Math.pow(2, casillasEnBlanco); i++) {
-            generarSiguiteCromosoma();
+        int counter=0;
+        for (int i = 0; i < akari.getNumeoFilas(); i++) {
+            for (int j = 0; j < akari.getNumeroColumnas(); j++) {
+                
+                if(akari.getTablero()[i][j]==0){
+                    
+                }
+                    
+                
+            }
+            
         }
         
-                System.exit(0);
     }
 }

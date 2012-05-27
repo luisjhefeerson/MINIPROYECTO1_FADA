@@ -39,7 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     AkariFile archivoEntrada;
     GeneradorIngenuo ingenuo;
-     private Label[][] Labels;
+    private Label[][] Labels;
 
     public MainFrame() {
         initComponents();
@@ -230,12 +230,12 @@ public class MainFrame extends javax.swing.JFrame {
             File selectedFile = selectorArchivo.getSelectedFile();
             archivoEntrada.loadFromFile(selectedFile);
             jTextArea.setText(archivoEntrada.getFileContents());
-            ingenuo=new GeneradorIngenuo(archivoEntrada);
-            
+            ingenuo = new GeneradorIngenuo(archivoEntrada);
+
 //            if (archivoEntrada.validarEntrada().equals("")) {
             //pasarPrueba();    
             Graficar();
-            ponerBombillo(0, 2); 
+            ponerBombillo(0, 2);
             //Iluminar();
 //            } else {
 //                JOptionPane.showMessageDialog(this, archivoEntrada.validarEntrada());
@@ -245,38 +245,37 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMICargarTableroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       ingenuo.crearTodosLosCromosomas();
+        ingenuo.generarSiguiteCromosoma();
+        ingenuo.applicarCromosoma();
 //       Graficar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void pasarPrueba(){
-    AkariFile ak=new AkariFile();
-   int a[][] = {{0,0,0,0,0,0,0,0},
-                {1,1,1,1,0,0,1,1},
-                {1,1,1,1,0,0,1,1},
-                {1,1,1,1,0,0,1,1},
-                {1,1,1,1,0,0,1,1},
-                {1,1,1,1,0,0,1,1},
-                {1,1,1,1,0,0,1,1},
-                {1,1,1,1,0,0,1,1},
-               };
-   
-   
-   int B[][] = {
-                {1,0,1,1,1,0,1,1},
-                {1,1,1,1,1,0,1,1},
-                {1,1,1,1,1,0,1,1},
-                {1,1,1,1,1,0,1,1},
-                {1,1,1,1,1,0,1,1},
-                {1,1,1,1,1,0,1,1},
-                {1,1,1,1,1,0,1,1},
-                {1,1,1,1,1,0,1,1},
-               };
-   ak.validation(a, B);
-    
-    
+    public void pasarPrueba() {
+        AkariFile ak = new AkariFile();
+        int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0},
+            {1, 1, 1, 1, 0, 0, 1, 1},
+            {1, 1, 1, 1, 0, 0, 1, 1},
+            {1, 1, 1, 1, 0, 0, 1, 1},
+            {1, 1, 1, 1, 0, 0, 1, 1},
+            {1, 1, 1, 1, 0, 0, 1, 1},
+            {1, 1, 1, 1, 0, 0, 1, 1},
+            {1, 1, 1, 1, 0, 0, 1, 1},};
+
+
+        int B[][] = {
+            {1, 0, 1, 1, 1, 0, 1, 1},
+            {1, 1, 1, 1, 1, 0, 1, 1},
+            {1, 1, 1, 1, 1, 0, 1, 1},
+            {1, 1, 1, 1, 1, 0, 1, 1},
+            {1, 1, 1, 1, 1, 0, 1, 1},
+            {1, 1, 1, 1, 1, 0, 1, 1},
+            {1, 1, 1, 1, 1, 0, 1, 1},
+            {1, 1, 1, 1, 1, 0, 1, 1},};
+        ak.validation(a, B);
+
+
     }
-     
+
     private void Graficar() {
         byte[][] MTablero = archivoEntrada.getTablero();
         byte[][] MBombillos = archivoEntrada.getBombillos();
@@ -302,97 +301,121 @@ public class MainFrame extends javax.swing.JFrame {
                 Labels[j][i] = new Label();
                 //TABLERO CASILLAS BLANCAS Y NEGRAS
                 if (MTablero[j][i] == 0)//cuando el valor es 0 la casilla es blanca vacia
+                {
                     Labels[j][i].setBackground(Color.white);
-                if (MTablero[j][i] == 1){ //cuando el valor es 1 la casilla es negra
+                }
+                if (MTablero[j][i] == 1) { //cuando el valor es 1 la casilla es negra
                     Labels[j][i].setBackground(Color.black);
-                    Labels[j][i].setForeground(Color.white); 
+                    Labels[j][i].setForeground(Color.white);
                 }
                 //TABLERO DE RESTRICCIONES
                 if (MRestricciones[j][i] == 0)//la casilla tiene el numero 0
+                {
                     Labels[j][i].setText("   0");
+                }
                 if (MRestricciones[j][i] == 1)//la casilla tiene el numero 1
+                {
                     Labels[j][i].setText("   1");
+                }
                 if (MRestricciones[j][i] == 2)//la casilla tiene el numero 2
+                {
                     Labels[j][i].setText("   2");
+                }
                 if (MRestricciones[j][i] == 3)//la casilla tiene el numero 3                {
+                {
                     Labels[j][i].setText("   3");
-               if (MRestricciones[j][i] == 4)//la casilla tiene el numero 4                
-                    Labels[j][i].setText("   4");               
-                   
+                }
+                if (MRestricciones[j][i] == 4)//la casilla tiene el numero 4                
+                {
+                    Labels[j][i].setText("   4");
+                }
+
                 //TABLERO BOMBILLOS
                 if (MBombillos[j][i] == 1) {//cuando el valor es 1 la casilla tiene bombillo
                     Labels[j][i].setBackground(Color.YELLOW);
                     Labels[j][i].setForeground(Color.BLACK);
                     Labels[j][i].setText("  B");
                 }
-               // if (MBombillos[j][i] == 0) //cuando el valor es 0 la casilla no tiene bombillos
-                 //   Labels[j][i].setBackground(Color.WHITE);
+                // if (MBombillos[j][i] == 0) //cuando el valor es 0 la casilla no tiene bombillos
+                //   Labels[j][i].setBackground(Color.WHITE);
                 //TABLERO ILUMINACION    
                 if (MIluminacion[j][i] == 1) //cuando el valor es 1 la casilla se ilumina
-                    Labels[j][i].setBackground(Color.YELLOW);                    
+                {
+                    Labels[j][i].setBackground(Color.YELLOW);
+                }
                 //if (MIluminacion[j][i] == 0) //cuando el valor es 0 la casilla no se ilumina
-                  //  Labels[j][i].setBackground(Color.WHITE);
+                //  Labels[j][i].setBackground(Color.WHITE);
                 Labels[j][i].setBounds(x + (21 * i), y + (21 * j), 20, 20);//ubica los labels en forma de cuadricula
                 jPanelGraphiclView.add(Labels[j][i]);//adiciona los labels al contenedor
             }
         }
 
     }
-    public void Iluminar(){
-        byte[][] MIluminacion = archivoEntrada.getIluminaciion();        
+
+    public void Iluminar() {
+        byte[][] MIluminacion = archivoEntrada.getIluminaciion();
         for (int i = 0; i < Labels.length; i++) {
             for (int j = 0; j < Labels[i].length; j++) {
-                if(MIluminacion[i][j]==1)
-                Labels[i][j].setBackground(Color.yellow);               
+                if (MIluminacion[i][j] == 1) {
+                    Labels[i][j].setBackground(Color.yellow);
+                }
             }
         }
     }
-     public void ponerBombillo(int fila, int columna){
-         byte[][] MTablero = archivoEntrada.getTablero();
+
+    public void ponerBombillo(int fila, int columna) {
+        byte[][] MTablero = archivoEntrada.getTablero();
         byte[][] MBombillos = archivoEntrada.getBombillos();
         byte[][] MIluminacion = archivoEntrada.getIluminaciion();
-        int m=archivoEntrada.getNumeoFilas();
-        int n=archivoEntrada.getNumeroColumnas();         
-           if(MTablero[fila][columna]==0&&MIluminacion[0][2]==0){
-                    MBombillos[fila][columna]=1;
-                    Labels[fila][columna].setText("  B");
-                    iluminarFila(fila,columna,n,m);
-                    iluminarColumna(fila,columna,m);  
-                    Iluminar();          
-         }        
-    }
-     public void iluminarFila(int i, int j, int n, int m){
-         byte[][] MTablero = archivoEntrada.getTablero();
-         byte[][] MIluminacion = archivoEntrada.getIluminaciion();
-        for(int x=j;x<n;x++){
-            if(MTablero[i][x]==0)
-                MIluminacion[i][x]=1;
-            else
-                break;
-        }
-        for(int x=j;x>=0;x--){
-            if(MTablero[i][x]==0)
-                MIluminacion[i][x]=1;
-            else
-                break;
+        int m = archivoEntrada.getNumeoFilas();
+        int n = archivoEntrada.getNumeroColumnas();
+        if (MTablero[fila][columna] == 0 && MIluminacion[0][2] == 0) {
+            MBombillos[fila][columna] = 1;
+            Labels[fila][columna].setText("  B");
+            iluminarFila(fila, columna, n, m);
+            iluminarColumna(fila, columna, m);
+            Iluminar();
         }
     }
-    public void iluminarColumna(int i, int j, int m){
+
+    public void iluminarFila(int i, int j, int n, int m) {
         byte[][] MTablero = archivoEntrada.getTablero();
         byte[][] MIluminacion = archivoEntrada.getIluminaciion();
-        for(int y=i;y<m;y++){
-            if(MTablero[y][j]==0)
-                MIluminacion[y][j]=1;
-            else
+        for (int x = j; x < n; x++) {
+            if (MTablero[i][x] == 0) {
+                MIluminacion[i][x] = 1;
+            } else {
                 break;
+            }
         }
-        for(int y=i;y>=0;y--){
-            if(MTablero[y][j]==0)
-                MIluminacion[y][j]=1;
-            else
+        for (int x = j; x >= 0; x--) {
+            if (MTablero[i][x] == 0) {
+                MIluminacion[i][x] = 1;
+            } else {
                 break;
+            }
         }
     }
+
+    public void iluminarColumna(int i, int j, int m) {
+        byte[][] MTablero = archivoEntrada.getTablero();
+        byte[][] MIluminacion = archivoEntrada.getIluminaciion();
+        for (int y = i; y < m; y++) {
+            if (MTablero[y][j] == 0) {
+                MIluminacion[y][j] = 1;
+            } else {
+                break;
+            }
+        }
+        for (int y = i; y >= 0; y--) {
+            if (MTablero[y][j] == 0) {
+                MIluminacion[y][j] = 1;
+            } else {
+                break;
+            }
+        }
+    }
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
