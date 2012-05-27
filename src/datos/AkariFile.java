@@ -65,9 +65,11 @@ public class AkariFile {
             for (int j = 0; j < b.length; j++) {
                 if((t[i][j]+b[i][j])==1){                  
                     valida=true;                  
-                }else{                
-                  i=b.length;
+                }else{
+                   
                   valida=false;
+                    i=b.length;
+                     j=b.length;
                 }
             }            
         }
