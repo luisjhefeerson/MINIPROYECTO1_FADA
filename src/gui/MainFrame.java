@@ -59,6 +59,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea = new javax.swing.JTextArea();
         jScrollPanelGraphView = new javax.swing.JScrollPane();
         jPanelGraphiclView = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
@@ -111,7 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelgraphicalview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelgraphicalview.setText("GRAPHICAL VIEW");
         jPanel1.add(jLabelgraphicalview);
-        jLabelgraphicalview.setBounds(400, 120, 400, 30);
+        jLabelgraphicalview.setBounds(610, 120, 190, 30);
 
         jTextArea.setColumns(20);
         jTextArea.setEditable(false);
@@ -126,6 +127,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPanelGraphView);
         jScrollPanelGraphView.setBounds(415, 160, 380, 380);
+
+        jButton1.setText("Siguiente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(440, 120, 100, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 800, 600);
@@ -228,6 +238,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jMICargarTableroActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void pasarPrueba(){
     AkariFile ak=new AkariFile();
@@ -340,6 +357,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelSubtitulo;
     private javax.swing.JLabel jLabelSubtitulo1;
