@@ -81,9 +81,7 @@ public class GeneradorIngenuo {
 
                 if (akari.getTablero()[i][j] == 0) {
                     if (cromosoma[counter] == 1) {
-                        if (/*
-                                 * !akari.ponerbombilla(i,j)
-                                 */true) {
+                        if (akari.ponerBombillo(i, j)) {
                             return false;
                         }
                     }
