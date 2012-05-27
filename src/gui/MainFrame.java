@@ -220,8 +220,8 @@ public class MainFrame extends javax.swing.JFrame {
             
             
 //            if (archivoEntrada.validarEntrada().equals("")) {
-            pasarPrueba();    
-            //Graficar();
+            //pasarPrueba();    
+            Graficar();
 //            } else {
 //                JOptionPane.showMessageDialog(this, archivoEntrada.validarEntrada());
 //            }
@@ -241,7 +241,7 @@ public class MainFrame extends javax.swing.JFrame {
                 {1,1,1,1},
                 {1,1,1,1},
                 {1,1,1,1}};
-   ak.validation(a, B);
+   //ak.validation(a, B);
     
     
     }
