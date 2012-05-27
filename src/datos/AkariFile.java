@@ -44,17 +44,19 @@ public class AkariFile {
     private int numeroColumnas = 0;
     private int[][] Restricciones=null;
     private byte [][] Tablero=null, Bombillos=null, Iluminacion=null;
+    private int casillasNegras=0;
     
     public AkariFile() {
     }
 
-    public AkariFile(int numeoFilas, int numeroColumnas, int[][] restricciones, byte[][] Tablero, byte[][] Bombillos, byte[][] Iluminacion) {
+    public AkariFile(int numeoFilas, int numeroColumnas, int[][] restricciones, byte[][] Tablero, byte[][] Bombillos, byte[][] Iluminacion, int CasillasNegras) {
         this.numeoFilas = numeoFilas;
         this.numeroColumnas = numeroColumnas;
         this.Restricciones = restricciones;
         this.Bombillos=Bombillos;
         this.Tablero=Tablero;
         this.Iluminacion=Iluminacion;
+        this.casillasNegras=CasillasNegras;
         
     }
 //    public boolean  validation (int t[][] ,int b[][]){        
@@ -124,6 +126,13 @@ public class AkariFile {
 
     public void setNumeoFilas(int numeoFilas) {
         this.numeoFilas = numeoFilas;
+    }
+    public int getCasillasNegras() {
+        return casillasNegras;
+    }
+
+    public void setCasillasNegras(int casillasnegras) {
+        this.casillasNegras = casillasnegras;
     }
 
     public boolean loadFromFile(File selectedFile) {
@@ -198,26 +207,32 @@ public class AkariFile {
                         if(valor.equals("2")){
                         Restricciones[i][j]=8;//PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
                         Tablero[i][j]=1;
+                        casillasNegras++;
                         }
                         if(valor.equals("3")){
                         Restricciones[i][j] = 0;
                         Tablero[i][j]=1;
+                        casillasNegras++;
                         }
                         if(valor.equals("4")){
                         Restricciones[i][j] = 1;
                         Tablero[i][j]=1;
+                        casillasNegras++;
                         }
                         if(valor.equals("5")){
                         Restricciones[i][j] = 2;
                         Tablero[i][j]=1;
+                        casillasNegras++;
                         }
                         if(valor.equals("6")){
                         Restricciones[i][j] = 3;
                         Tablero[i][j]=1;
+                        casillasNegras++;
                         }
                         if(valor.equals("7")){
                         Restricciones[i][j] = 4;
                         Tablero[i][j]=1;
+                        casillasNegras++;
                         }
                         System.out.print(Tablero[i][j]+" ");
                     }

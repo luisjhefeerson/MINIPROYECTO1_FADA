@@ -26,7 +26,7 @@
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
 package datos;
-
+import datos.AkariFile;
 
 public class GeneradorIngenuo {
 
@@ -43,6 +43,7 @@ public class GeneradorIngenuo {
 
     
     void casillasEnBlanco(){
+        casillasEnBlanco = (tablero.getNumeoFilas()*tablero.getNumeroColumnas())-tablero.getCasillasNegras();
         
     }
     
