@@ -257,18 +257,7 @@ public class AkariFile {
     }
         casillasBlancas = (numeoFilas*numeroColumnas)-casillasNegras;
     }
-    
-    public void ponerBombillo(int fila, int columna){
-         
-        int m=numeoFilas;
-        int n=numeroColumnas;
-           if(Tablero[fila][columna]==0&&Iluminacion[0][2]==0){
-                    Bombillos[fila][columna]=1;
-                    iluminarFila(fila,columna,n,m);
-                    iluminarColumna(fila,columna,m);                      
-         }        
-    }
-     public void iluminarFila(int i, int j, int n, int m){
+    public void iluminarFila(int i, int j, int n, int m){
          
         for(int x=j;x<n;x++){
             if(Tablero[i][x]==0)
@@ -298,9 +287,23 @@ public class AkariFile {
                 break;
         }
     }
+    public boolean ponerBombillo(int fila, int columna){
+         
+        int m=numeoFilas;
+        int n=numeroColumnas;
+           if(Tablero[fila][columna]==0&&Iluminacion[0][2]==0){
+                    Bombillos[fila][columna]=1;
+                    iluminarFila(fila,columna,n,m);
+                    iluminarColumna(fila,columna,m);
+                    return true;
+        }else{
+            return false;}
+         }        
+    }
+     
     
         
-        }
+        
 
 
 //~ Formatted by Jindent --- http://www.jindent.com
