@@ -347,6 +347,7 @@ public class MainFrame extends javax.swing.JFrame {
                 //  Labels[j][i].setBackground(Color.WHITE);
                 Labels[j][i].setBounds(x + (21 * i), y + (21 * j), 20, 20);//ubica los labels en forma de cuadricula
                 jPanelGraphiclView.add(Labels[j][i]);//adiciona los labels al contenedor
+                repaint();
             }
         }
 
@@ -358,9 +359,9 @@ public class MainFrame extends javax.swing.JFrame {
         for (int i = 0; i < Labels.length; i++) {
             for (int j = 0; j < Labels[i].length; j++) {
                 if(MIluminacion[i][j]==1)
-                Labels[i][j].setBackground(Color.yellow);
+                    Labels[i][j].setBackground(Color.yellow);
                 if(MBombillos[i][j]==1){
-                  Labels[i][j].setText("  B");  
+                    Labels[i][j].setText("  B");  
                 }
             }
         }
