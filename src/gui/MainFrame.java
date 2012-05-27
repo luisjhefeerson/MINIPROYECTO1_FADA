@@ -63,6 +63,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPanelGraphView = new javax.swing.JScrollPane();
         jPanelGraphiclView = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        botonLimpiar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
@@ -138,7 +139,16 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(440, 120, 100, 30);
+        jButton1.setBounds(520, 120, 100, 30);
+
+        botonLimpiar.setText("borrar");
+        botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLimpiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonLimpiar);
+        botonLimpiar.setBounds(410, 120, 100, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 800, 600);
@@ -246,9 +256,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        ingenuo.solucionIngenua();
-        Graficar();
+        ingenuo.generarSiguiteCromosoma();
+        ingenuo.applicarCromosoma();
+        Iluminar();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
+      
+      archivoEntrada.inicializarMatriz();
+      Graficar();
+//      Iluminar();
+    }//GEN-LAST:event_botonLimpiarActionPerformed
 
     public void pasarPrueba() {
         AkariFile ak = new AkariFile();
@@ -395,6 +413,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonLimpiar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelSubtitulo;

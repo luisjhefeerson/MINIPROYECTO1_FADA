@@ -76,12 +76,14 @@ public class GeneradorIngenuo {
     public boolean applicarCromosoma() {
 
         int counter = 0;
+        
+        
         for (int i = 0; i < akari.getNumeoFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
 
                 if (akari.getTablero()[i][j] == 0) {
                     if (cromosoma[counter] == 1) {
-                        if (akari.ponerBombillo(i, j)) {
+                        if (!akari.ponerBombillo(i, j)) {
                             return false;
                         }
                     }
@@ -89,7 +91,6 @@ public class GeneradorIngenuo {
                 }
             }
         }
-
         return akari.validation();
     }
     
@@ -98,7 +99,8 @@ public class GeneradorIngenuo {
         
         generarSiguiteCromosoma();
         
-        while ((!applicarCromosoma()) && contador<Math.pow(2, casillasEnBlanco)) {            
+        while ((!applicarCromosoma()) && contador<Math.pow(2, casillasEnBlanco)-1) {            
+            System.out.println("Aplicar Cromosoma: "+contador+"Resultado: "+applicarCromosoma());
             generarSiguiteCromosoma();
         }
         
