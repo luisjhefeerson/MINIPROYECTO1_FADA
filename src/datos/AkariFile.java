@@ -210,8 +210,7 @@ public class AkariFile {
                         }
                         if(valor.equals("1")){
                         Tablero[i][j]=0;
-                        Bombillos[i][j]=1;
-                        //METODO PONER BOMBILLO
+                        Bombillos[i][j]=1;                        
                         }
                         if(valor.equals("2")){
                         Restricciones[i][j]=8;//PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
@@ -252,6 +251,7 @@ public class AkariFile {
     }
         casillasBlancas = (numeoFilas*numeroColumnas)-casillasNegras;
     }
+    
         
         }
 

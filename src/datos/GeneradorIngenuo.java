@@ -45,7 +45,7 @@ public class GeneradorIngenuo {
     
     public void generarSiguite() {
         representacionBinaria++;
-        String Binario = Integer.toBinaryString(representacionBinaria);
+        String Binario = Integer.toBinaryString(representacionBinaria);  
         
         Binario.charAt(casillasEnBlanco);
     }
