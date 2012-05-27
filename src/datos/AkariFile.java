@@ -45,7 +45,7 @@ public class AkariFile {
     private int[][] Restricciones=null;
     private byte [][] Tablero=null, Bombillos=null, Iluminacion=null;
     private int casillasNegras=0;
-    
+    private int casillasBlancas=0;
     public AkariFile() {
     }
 
@@ -75,6 +75,14 @@ public class AkariFile {
 //
 //    }
 
+    public int getCasillasBlancas() {
+        return casillasBlancas;
+    }
+
+    public void setCasillasBlancas(int casillasBlancas) {
+        this.casillasBlancas = casillasBlancas;
+    }
+    
     public String getFileContents() {
         return fileContents;
     }
@@ -240,57 +248,11 @@ public class AkariFile {
                 }
             }
         
-    }}
+    }
+        casillasBlancas = (numeoFilas*numeroColumnas)-casillasNegras;
+    }
         
         }
-
-//    public String validarEntrada() {  // Crei que funcionada pero no!! luego les cuento!! porfa no borrar 
-//
-//        for (int i = 0; i < tablero.length; i++) {
-//            for (int j = 0; j < tablero[i].length; j++) {
-//                if (!((tablero[i][j] < 8 || tablero[i][j] >= 0) && tablero[i][j] != 1)) {
-//                    return "Valor no valido para casilla de Tablero[" + i + "][" + j + "]";
-//                }
-//                int suma = 0;
-//
-//                if (tablero[i][j] >= 4) {
-//                    if (i == 0) {
-//                        suma = tablero[i + 1][j]
-//                                + tablero[i][j + 1]
-//                                + tablero[i][j - 1];
-//
-//                    } else if (i == tablero.length-1) {
-//                        suma = tablero[i - 1][j]
-//                                + tablero[i][j + 1]
-//                                + tablero[i][j - 1];
-//
-//                    } else if (j == 0) {
-//                        suma = tablero[i + 1][j]
-//                                + tablero[i - 1][j]
-//                                + tablero[i][j + 1];
-//
-//                    } else if (j == tablero[i].length-1) {
-//                        suma = tablero[i + 1][j]
-//                                + tablero[i - 1][j]
-//                                + tablero[i][j - 1];
-//
-//                    } else {
-//                        suma = tablero[i + 1][j]
-//                                + tablero[i - 1][j]
-//                                + tablero[i][j + 1]
-//                                + tablero[i][j - 1];
-//                    }
-//
-//                    if (!(suma <= (4 - (tablero[i][j] - 3)))) {
-//                        return "Valor no valido para casilla de Tablero[" + i + "][" + j + "]";
-//                    }
-//                }
-//            }
-//        }
-//
-//        return "";
-//    }
-
 
 
 //~ Formatted by Jindent --- http://www.jindent.com

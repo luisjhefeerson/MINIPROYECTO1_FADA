@@ -26,6 +26,7 @@
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
 package datos;
+
 import datos.AkariFile;
 
 public class GeneradorIngenuo {
@@ -35,19 +36,17 @@ public class GeneradorIngenuo {
     AkariFile tablero;
 
     public GeneradorIngenuo(AkariFile tablero) {
-        
+
         representacionBinaria = 0;
         this.tablero = tablero;
-        casillasEnBlanco();
+        casillasEnBlanco=tablero.getCasillasBlancas();
     }
 
     
-    void casillasEnBlanco(){
-        casillasEnBlanco = (tablero.getNumeoFilas()*tablero.getNumeroColumnas())-tablero.getCasillasNegras();
+    public void generarSiguite() {
+        representacionBinaria++;
+        String Binario = Integer.toBinaryString(representacionBinaria);
         
+        Binario.charAt(casillasEnBlanco);
     }
-    
-    
-    
 }
-

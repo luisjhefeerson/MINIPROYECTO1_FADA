@@ -28,6 +28,7 @@
 package gui;
 
 import datos.AkariFile;
+import datos.GeneradorIngenuo;
 import java.awt.Color;
 import java.awt.Label;
 import java.io.File;
@@ -37,6 +38,7 @@ import javax.swing.JOptionPane;
 public class MainFrame extends javax.swing.JFrame {
 
     AkariFile archivoEntrada;
+    GeneradorIngenuo ingenuo;
 
     public MainFrame() {
         initComponents();
@@ -227,7 +229,7 @@ public class MainFrame extends javax.swing.JFrame {
             File selectedFile = selectorArchivo.getSelectedFile();
             archivoEntrada.loadFromFile(selectedFile);
             jTextArea.setText(archivoEntrada.getFileContents());
-            
+            ingenuo=new GeneradorIngenuo(archivoEntrada);
             
 //            if (archivoEntrada.validarEntrada().equals("")) {
             //pasarPrueba();    
@@ -240,10 +242,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMICargarTableroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        
-        
-        
+       ingenuo.generarSiguite();
+       Graficar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void pasarPrueba(){
