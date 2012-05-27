@@ -76,7 +76,8 @@ public class GeneradorIngenuo {
     public boolean applicarCromosoma() {
 
         int counter = 0;
-      
+        
+        
         for (int i = 0; i < akari.getNumeoFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
 

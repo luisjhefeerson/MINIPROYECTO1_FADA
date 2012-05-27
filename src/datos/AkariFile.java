@@ -317,7 +317,33 @@ public class AkariFile {
             return false;
         }
     }
+
+    public void inicializarMatriz() {
+
+        for (int i = 0; i < numeoFilas; i++) {
+            for (int j = 0; j < numeroColumnas; j++) {
+                Bombillos[i][j] = 0;
+                Iluminacion[i][j] = 0;
+            }
+        }
+
+        for (int i = 0; i < numeoFilas; i++) {
+            for (int j = 0; j < numeroColumnas; j++) {
+                System.out.print(Bombillos[i][j]+" ");
+            }
+            System.out.println("");
+        }
+        
+        
+        for (int i = 0; i < numeoFilas; i++) {
+            for (int j = 0; j < numeroColumnas; j++) {
+                System.out.print(Iluminacion[i][j]+" ");
+            }
+            System.out.println("");
+        }
+    }
 }
+
      
     
         
