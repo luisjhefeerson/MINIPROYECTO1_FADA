@@ -80,102 +80,93 @@ public class AkariGame {
         return true;
     }
 
-    private void procesarFileContents() {
+    private boolean procesarFileContents() {
+
         StringTokenizer tokens = new StringTokenizer(fileContents);
-        int contador = 0;
 
-        while (tokens.hasMoreTokens()) {
-            contador++;
-
-            if (contador == 1) {
-                String f = (String) tokens.nextToken();
-
-                numeroFilas = Integer.parseInt(f);
+        try {
+            numeroFilas = Integer.parseInt(tokens.nextToken());
+            numeroColumnas = Integer.parseInt(tokens.nextToken());
+            
+            restricciones = new int[numeroFilas][numeroColumnas];
+            iluminacion = new byte[numeroFilas][numeroColumnas];
+            tablero = new byte[numeroFilas][numeroColumnas];
+            bombillos = new byte[numeroFilas][numeroColumnas];
+            
+            for (int i = 0; i < iluminacion.length; i++) {
+                for (int j = 0; j < iluminacion[i].length; j++) {
+                    iluminacion[i][j] = 0;
+                    bombillos[i][j] = 0;
+                    tablero[i][j] = 0;
+                }
             }
-
-            if (contador == 2) {
-                String c = (String) tokens.nextToken();
-
-                numeroColumnas = Integer.parseInt(c);
-            }
-
-            if (contador == 3) {
-
-                // tablero = new int[numeoFilas][numeroColumnas];
-                restricciones = new int[numeroFilas][numeroColumnas];
-                iluminacion = new byte[numeroFilas][numeroColumnas];
-                tablero = new byte[numeroFilas][numeroColumnas];
-                bombillos = new byte[numeroFilas][numeroColumnas];
-
-                for (int i = 0; i < iluminacion.length; i++) {
-                    for (int j = 0; j < iluminacion[i].length; j++) {
-                        iluminacion[i][j] = 0;
-                        bombillos[i][j] = 0;
+            
+            for (int i = 0; i < restricciones.length; i++) {
+                for (int j = 0; j < restricciones[i].length; j++) {
+                    int valor = Integer.parseInt(tokens.nextToken());
+                    
+                    if (valor == 0) {
+                        restricciones[i][j] = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
                         tablero[i][j] = 0;
                     }
-                }
-            }
-
-            if (contador >= 3) {
-                for (int i = 0; i < restricciones.length; i++) {
-                    for (int j = 0; j < restricciones[i].length; j++) {
-                        String valor = (String) tokens.nextToken();
-
-                        if (valor.equals("0")) {
-                            restricciones[i][j] = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
-                            tablero[i][j] = 0;
-                        }
-
-                        if (valor.equals("1")) {
-                            tablero[i][j] = 0;
-                            bombillos[i][j] = 1;
-                        }
-
-                        if (valor.equals("2")) {
-                            restricciones[i][j] = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
-                            tablero[i][j] = 1;
-                            casillasNegras++;
-                        }
-
-                        if (valor.equals("3")) {
-                            restricciones[i][j] = 0;
-                            tablero[i][j] = 1;
-                            casillasNegras++;
-                        }
-
-                        if (valor.equals("4")) {
-                            restricciones[i][j] = 1;
-                            tablero[i][j] = 1;
-                            casillasNegras++;
-                        }
-
-                        if (valor.equals("5")) {
-                            restricciones[i][j] = 2;
-                            tablero[i][j] = 1;
-                            casillasNegras++;
-                        }
-
-                        if (valor.equals("6")) {
-                            restricciones[i][j] = 3;
-                            tablero[i][j] = 1;
-                            casillasNegras++;
-                        }
-
-                        if (valor.equals("7")) {
-                            restricciones[i][j] = 4;
-                            tablero[i][j] = 1;
-                            casillasNegras++;
-                        }
-
-                        System.out.print(tablero[i][j] + " ");
+                    
+                    if (valor == 1) {
+                        tablero[i][j] = 0;
+                        bombillos[i][j] = 1;
                     }
-
-                    System.out.print("\n");
+                    
+                    if (valor == 2) {
+                        restricciones[i][j] = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+                    
+                    if (valor == 3) {
+                        restricciones[i][j] = 0;
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+                    
+                    if (valor == 4) {
+                        restricciones[i][j] = 1;
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+                    
+                    if (valor == 5) {
+                        restricciones[i][j] = 2;
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+                    
+                    if (valor == 6) {
+                        restricciones[i][j] = 3;
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+                    
+                    if (valor == 7) {
+                        restricciones[i][j] = 4;
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+                    
+                    if (valor > 7) {
+                        return false;
+                    }
+                    
+                    
+                    System.out.print(tablero[i][j] + " ");
                 }
+                
+                System.out.print("\n");
             }
+            casillasBlancas = (numeroFilas * numeroColumnas) - casillasNegras;
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return false;
         }
-
-        casillasBlancas = (numeroFilas * numeroColumnas) - casillasNegras;
+        return true;
     }
 
     /**
