@@ -40,7 +40,7 @@ import java.util.StringTokenizer;
 public class AkariFile {
 
     private String fileContents = null;
-    private int numeoFilas = 0;
+    private int numeroFilas = 0;
     private int numeroColumnas = 0;
     private int[][] Restricciones = null;
     private byte[][] Tablero = null, Bombillos = null, Iluminacion = null;
@@ -51,7 +51,7 @@ public class AkariFile {
     }
 
     public AkariFile(int numeoFilas, int numeroColumnas, int[][] restricciones, byte[][] Tablero, byte[][] Bombillos, byte[][] Iluminacion, int CasillasNegras) {
-        this.numeoFilas = numeoFilas;
+        this.numeroFilas = numeoFilas;
         this.numeroColumnas = numeroColumnas;
         this.Restricciones = restricciones;
         this.Bombillos = Bombillos;
@@ -62,24 +62,16 @@ public class AkariFile {
     }
 
     public boolean validation() {
-        byte t[][] = Tablero;
-        byte b[][] = Bombillos;
-        boolean valida = true;
-        for (int i = 0; i < t.length; i++) {
-            for (int j = 0; j < b.length; j++) {
-                if ((t[i][j] + b[i][j]) == 1) {
-                    valida = true;
-                    System.out.print("validacion =" + valida);
-                } else {
-
-                    valida = false;
-                    i = b.length;
-                    j = b.length;
-                    System.out.print("validacion =" + valida);
+        
+//        boolean valida = true;
+        for (int i = 0; i < this.numeroFilas; i++) {
+            for (int j = 0; j < this.numeroColumnas; j++) {
+                if ((Tablero[i][j] + Iluminacion[i][j]) != 1) {
+                   return false;
                 }
             }
         }
-        return valida;
+        return true;
 
     }
 
@@ -144,11 +136,11 @@ public class AkariFile {
     }
 
     public int getNumeoFilas() {
-        return numeoFilas;
+        return numeroFilas;
     }
 
     public void setNumeoFilas(int numeoFilas) {
-        this.numeoFilas = numeoFilas;
+        this.numeroFilas = numeoFilas;
     }
 
     public int getCasillasNegras() {
@@ -191,7 +183,7 @@ public class AkariFile {
 
             if (contador == 1) {
                 String f = (String) tokens.nextToken();
-                numeoFilas = Integer.parseInt(f);
+                numeroFilas = Integer.parseInt(f);
             }
 
             if (contador == 2) {
@@ -201,10 +193,10 @@ public class AkariFile {
 
             if (contador == 3) {
                 //   tablero = new int[numeoFilas][numeroColumnas];
-                Restricciones = new int[numeoFilas][numeroColumnas];
-                Iluminacion = new byte[numeoFilas][numeroColumnas];
-                Tablero = new byte[numeoFilas][numeroColumnas];
-                Bombillos = new byte[numeoFilas][numeroColumnas];
+                Restricciones = new int[numeroFilas][numeroColumnas];
+                Iluminacion = new byte[numeroFilas][numeroColumnas];
+                Tablero = new byte[numeroFilas][numeroColumnas];
+                Bombillos = new byte[numeroFilas][numeroColumnas];
                 for (int i = 0; i < Iluminacion.length; i++) {
                     for (int j = 0; j < Iluminacion[i].length; j++) {
                         Iluminacion[i][j] = 0;
@@ -265,7 +257,7 @@ public class AkariFile {
             }
 
         }
-        casillasBlancas = (numeoFilas * numeroColumnas) - casillasNegras;
+        casillasBlancas = (numeroFilas * numeroColumnas) - casillasNegras;
     }
 
     public void iluminarFila(int i, int j, int n, int m) {
@@ -306,7 +298,7 @@ public class AkariFile {
 
     public boolean ponerBombillo(int fila, int columna) {
 
-        int m = numeoFilas;
+        int m = numeroFilas;
         int n = numeroColumnas;
         if (Tablero[fila][columna] == 0 && Iluminacion[fila][columna] == 0) {
             Bombillos[fila][columna] = 1;
@@ -320,26 +312,11 @@ public class AkariFile {
 
     public void inicializarMatriz() {
 
-        for (int i = 0; i < numeoFilas; i++) {
+        for (int i = 0; i < numeroFilas; i++) {
             for (int j = 0; j < numeroColumnas; j++) {
                 Bombillos[i][j] = 0;
                 Iluminacion[i][j] = 0;
             }
-        }
-
-        for (int i = 0; i < numeoFilas; i++) {
-            for (int j = 0; j < numeroColumnas; j++) {
-                System.out.print(Bombillos[i][j]+" ");
-            }
-            System.out.println("");
-        }
-        
-        
-        for (int i = 0; i < numeoFilas; i++) {
-            for (int j = 0; j < numeroColumnas; j++) {
-                System.out.print(Iluminacion[i][j]+" ");
-            }
-            System.out.println("");
         }
     }
 }

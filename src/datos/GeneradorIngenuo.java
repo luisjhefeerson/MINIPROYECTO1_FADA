@@ -62,10 +62,7 @@ public class GeneradorIngenuo {
         }
 
         System.out.println("Cromosoma: " + contador);
-        for (int i = 0; i < cromosoma.length; i++) {
-            System.out.print(cromosoma[i] + " ");
-
-        }
+        
 
         System.out.println("");
 
@@ -83,7 +80,9 @@ public class GeneradorIngenuo {
 
                 if (akari.getTablero()[i][j] == 0) {
                     if (cromosoma[counter] == 1) {
+//                        System.out.println(i+","+j);
                         if (!akari.ponerBombillo(i, j)) {
+                            System.out.println("no logro validar");
                             return false;
                         }
                     }
