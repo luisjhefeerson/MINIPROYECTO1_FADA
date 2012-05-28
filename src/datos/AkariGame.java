@@ -64,142 +64,6 @@ public class AkariGame {
      * Method description
      *
      *
-     * @return
-     */
-    public boolean validation() {
-
-//      boolean valida = true;
-        for (int i = 0; i < this.numeroFilas; i++) {
-            for (int j = 0; j < this.numeroColumnas; j++) {
-                if ((tablero[i][j] + iluminacion[i][j]) != 1) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-    private boolean procesarFileContents() {
-
-        StringTokenizer tokens = new StringTokenizer(fileContents);
-
-        try {
-            numeroFilas = Integer.parseInt(tokens.nextToken());
-            numeroColumnas = Integer.parseInt(tokens.nextToken());
-            
-            restricciones = new int[numeroFilas][numeroColumnas];
-            iluminacion = new byte[numeroFilas][numeroColumnas];
-            tablero = new byte[numeroFilas][numeroColumnas];
-            bombillos = new byte[numeroFilas][numeroColumnas];
-            
-            for (int i = 0; i < iluminacion.length; i++) {
-                for (int j = 0; j < iluminacion[i].length; j++) {
-                    iluminacion[i][j] = 0;
-                    bombillos[i][j] = 0;
-                    tablero[i][j] = 0;
-                }
-            }
-            
-            for (int i = 0; i < restricciones.length; i++) {
-                for (int j = 0; j < restricciones[i].length; j++) {
-                    int valor = Integer.parseInt(tokens.nextToken());
-                    
-                    if (valor == 0) {
-                        restricciones[i][j] = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
-                        tablero[i][j] = 0;
-                    }
-                    
-                    if (valor == 1) {
-                        tablero[i][j] = 0;
-                        bombillos[i][j] = 1;
-                    }
-                    
-                    if (valor == 2) {
-                        restricciones[i][j] = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
-                        tablero[i][j] = 1;
-                        casillasNegras++;
-                    }
-                    
-                    if (valor == 3) {
-                        restricciones[i][j] = 0;
-                        tablero[i][j] = 1;
-                        casillasNegras++;
-                    }
-                    
-                    if (valor == 4) {
-                        restricciones[i][j] = 1;
-                        tablero[i][j] = 1;
-                        casillasNegras++;
-                    }
-                    
-                    if (valor == 5) {
-                        restricciones[i][j] = 2;
-                        tablero[i][j] = 1;
-                        casillasNegras++;
-                    }
-                    
-                    if (valor == 6) {
-                        restricciones[i][j] = 3;
-                        tablero[i][j] = 1;
-                        casillasNegras++;
-                    }
-                    
-                    if (valor == 7) {
-                        restricciones[i][j] = 4;
-                        tablero[i][j] = 1;
-                        casillasNegras++;
-                    }
-                    
-                    if (valor > 7) {
-                        return false;
-                    }
-                    
-                    
-                    System.out.print(tablero[i][j] + " ");
-                }
-                
-                System.out.print("\n");
-            }
-            casillasBlancas = (numeroFilas * numeroColumnas) - casillasNegras;
-        } catch (Exception e) {
-            System.err.println(e.toString());
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param i
-     * @param j
-     * @param n
-     * @param m
-     */
-    public void iluminarFila(int i, int j, int n, int m) {
-        for (int x = j; x < n; x++) {
-            if (tablero[i][x] == 0) {
-                iluminacion[i][x] = 1;
-            } else {
-                break;
-            }
-        }
-
-        for (int x = j; x >= 0; x--) {
-            if (tablero[i][x] == 0) {
-                iluminacion[i][x] = 1;
-            } else {
-                break;
-            }
-        }
-    }
-
-    /**
-     * Method description
-     *
-     *
      * @param i
      * @param j
      * @param m
@@ -226,23 +90,26 @@ public class AkariGame {
      * Method description
      *
      *
-     * @param fila
-     * @param columna
-     *
-     * @return
+     * @param i
+     * @param j
+     * @param n
+     * @param m
      */
-    public boolean ponerBombillo(int fila, int columna) {
-        int m = numeroFilas;
-        int n = numeroColumnas;
+    public void iluminarFila(int i, int j, int n, int m) {
+        for (int x = j; x < n; x++) {
+            if (tablero[i][x] == 0) {
+                iluminacion[i][x] = 1;
+            } else {
+                break;
+            }
+        }
 
-        if ((tablero[fila][columna] == 0) && (iluminacion[fila][columna] == 0)) {
-            bombillos[fila][columna] = 1;
-            iluminarFila(fila, columna, n, m);
-            iluminarColumna(fila, columna, m);
-
-            return true;
-        } else {
-            return false;
+        for (int x = j; x >= 0; x--) {
+            if (tablero[i][x] == 0) {
+                iluminacion[i][x] = 1;
+            } else {
+                break;
+            }
         }
     }
 
@@ -291,187 +158,212 @@ public class AkariGame {
         }
     }
 
-    //<editor-fold defaultstate="collapsed" desc="GETTERS AND SETTERS">
+    /**
+     * Method description
+     *
+     *
+     * @param fila
+     * @param columna
+     *
+     * @return
+     */
+    public boolean ponerBombillo(int fila, int columna) {
+        int m = numeroFilas;
+        int n = numeroColumnas;
+
+        if ((tablero[fila][columna] == 0) && (iluminacion[fila][columna] == 0)) {
+            bombillos[fila][columna] = 1;
+            iluminarFila(fila, columna, n, m);
+            iluminarColumna(fila, columna, m);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean procesarFileContents() {
+        StringTokenizer tokens = new StringTokenizer(fileContents);
+
+        try {
+            numeroFilas = Integer.parseInt(tokens.nextToken());
+            numeroColumnas = Integer.parseInt(tokens.nextToken());
+            restricciones = new int[numeroFilas][numeroColumnas];
+            iluminacion = new byte[numeroFilas][numeroColumnas];
+            tablero = new byte[numeroFilas][numeroColumnas];
+            bombillos = new byte[numeroFilas][numeroColumnas];
+
+            for (int i = 0; i < iluminacion.length; i++) {
+                for (int j = 0; j < iluminacion[i].length; j++) {
+                    iluminacion[i][j] = 0;
+                    bombillos[i][j] = 0;
+                    tablero[i][j] = 0;
+                }
+            }
+
+            for (int i = 0; i < restricciones.length; i++) {
+                for (int j = 0; j < restricciones[i].length; j++) {
+                    int valor = Integer.parseInt(tokens.nextToken());
+
+                    if (valor == 0) {
+                        restricciones[i][j] = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
+                        tablero[i][j] = 0;
+                    }
+
+                    if (valor == 1) {
+                        tablero[i][j] = 0;
+                        bombillos[i][j] = 1;
+                    }
+
+                    if (valor == 2) {
+                        restricciones[i][j] = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+
+                    if (valor == 3) {
+                        restricciones[i][j] = 0;
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+
+                    if (valor == 4) {
+                        restricciones[i][j] = 1;
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+
+                    if (valor == 5) {
+                        restricciones[i][j] = 2;
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+
+                    if (valor == 6) {
+                        restricciones[i][j] = 3;
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+
+                    if (valor == 7) {
+                        restricciones[i][j] = 4;
+                        tablero[i][j] = 1;
+                        casillasNegras++;
+                    }
+
+                    if (valor > 7) {
+                        return false;
+                    }
+
+                    System.out.print(tablero[i][j] + " ");
+                }
+
+                System.out.print("\n");
+            }
+
+            casillasBlancas = (numeroFilas * numeroColumnas) - casillasNegras;
+        } catch (Exception e) {
+            System.err.println(e.toString());
+
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * Method description
      *
      *
      * @return
      */
+    public boolean validation() {
+
+//      boolean valida = true;
+        for (int i = 0; i < this.numeroFilas; i++) {
+            for (int j = 0; j < this.numeroColumnas; j++) {
+                if ((tablero[i][j] + iluminacion[i][j]) != 1) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="GETTERS AND SETTERS">
     public byte[][] getBombillos() {
         return bombillos;
     }
 
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public int getCasillasBlancas() {
-        return casillasBlancas;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public int getCasillasNegras() {
-        return casillasNegras;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public String getFileContents() {
-        return fileContents;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public byte[][] getIluminacion() {
-        return iluminacion;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public int getNumeroColumnas() {
-        return numeroColumnas;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public int getNumeroFilas() {
-        return numeroFilas;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public int[][] getRestricciones() {
-        return restricciones;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public byte[][] getTablero() {
-        return tablero;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param bombillos
-     */
     public void setBombillos(byte[][] bombillos) {
         this.bombillos = bombillos;
     }
 
-    /**
-     * Method description
-     *
-     *
-     * @param casillasBlancas
-     */
+    public int getCasillasBlancas() {
+        return casillasBlancas;
+    }
+
     public void setCasillasBlancas(int casillasBlancas) {
         this.casillasBlancas = casillasBlancas;
     }
 
-    /**
-     * Method description
-     *
-     *
-     * @param casillasNegras
-     */
+    public int getCasillasNegras() {
+        return casillasNegras;
+    }
+
     public void setCasillasNegras(int casillasNegras) {
         this.casillasNegras = casillasNegras;
     }
 
-    /**
-     * Method description
-     *
-     *
-     * @param fileContents
-     */
+    public String getFileContents() {
+        return fileContents;
+    }
+
     public void setFileContents(String fileContents) {
         this.fileContents = fileContents;
     }
 
-    /**
-     * Method description
-     *
-     *
-     * @param iluminacion
-     */
+    public byte[][] getIluminacion() {
+        return iluminacion;
+    }
+
     public void setIluminacion(byte[][] iluminacion) {
         this.iluminacion = iluminacion;
     }
 
-    /**
-     * Method description
-     *
-     *
-     * @param numeroColumnas
-     */
+    public int getNumeroColumnas() {
+        return numeroColumnas;
+    }
+
     public void setNumeroColumnas(int numeroColumnas) {
         this.numeroColumnas = numeroColumnas;
     }
 
-    /**
-     * Method description
-     *
-     *
-     * @param numeroFilas
-     */
+    public int getNumeroFilas() {
+        return numeroFilas;
+    }
+
     public void setNumeroFilas(int numeroFilas) {
         this.numeroFilas = numeroFilas;
     }
 
-    /**
-     * Method description
-     *
-     *
-     * @param restricciones
-     */
+    public int[][] getRestricciones() {
+        return restricciones;
+    }
+
     public void setRestricciones(int[][] restricciones) {
         this.restricciones = restricciones;
     }
 
-    /**
-     * Method description
-     *
-     *
-     * @param tablero
-     */
+    public byte[][] getTablero() {
+        return tablero;
+    }
+
     public void setTablero(byte[][] tablero) {
         this.tablero = tablero;
     }
-    //</editor-fold>
+    // </editor-fold>
 }
 
 
