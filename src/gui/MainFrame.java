@@ -41,6 +41,12 @@ public class MainFrame extends javax.swing.JFrame {
     AkariGame akariGame;
     GeneradorIngenuo generadorIngenuo;
     private JLabel[][] labels;
+    int widthLabel;
+    int heightLabel;
+    int xInicial;
+    int anchoTablero;
+    int yInicial;
+    int altoTablero;
 
     public MainFrame() {
         initComponents();
@@ -256,7 +262,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
 
         if (generadorIngenuo.solucionIngenua()) {
-            Iluminar();
+            Graficar();
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -267,7 +273,7 @@ public class MainFrame extends javax.swing.JFrame {
         akariGame.inicializarMatriz();
         jPanelGraphiclView.removeAll();
         Graficar();
-        
+
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void Graficar() {
@@ -363,8 +369,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         byte[][] tableroBombillos = akariGame.getTableroBombillos();
+
         for (int i = 0; i < labels.length; i++) {
             for (int j = 0; j < labels[i].length; j++) {
+
                 if (tableroIluminacion[i][j] == 1) {
                     labels[i][j].setBackground(Color.yellow);
                 }
@@ -372,6 +380,12 @@ public class MainFrame extends javax.swing.JFrame {
                     labels[i][j].setText(null);
                     labels[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bombilla.jpg")));
                 }
+                jPanelGraphiclView.add(labels[i][j]);//adiciona los labels al contenedor
+                labels[i][j].setBounds(
+                        xInicial + ((widthLabel + 1) * j),
+                        yInicial + ((heightLabel + 1) * i),
+                        widthLabel,
+                        heightLabel);//ubica los labels en forma de cuadricula. Anteriormente habia un error aqui!!
             }
         }
     }

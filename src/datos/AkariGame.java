@@ -48,7 +48,7 @@ public class AkariGame {
     private int casillasNegras = 0;
     private int numeroColumnas = 0;
     private int numeroFilas = 0;
-    private int[][] talberoRestricciones = null;
+    private int[][] tableroRestricciones = null;
     private byte[][] tableroCasillasNegras = null;
     private byte[][] tableroBombillos = null;
     private byte[][] tableroIluminacion = null;
@@ -187,7 +187,7 @@ public class AkariGame {
         try {
             numeroFilas = Integer.parseInt(tokens.nextToken());
             numeroColumnas = Integer.parseInt(tokens.nextToken());
-            talberoRestricciones = new int[numeroFilas][numeroColumnas];
+            tableroRestricciones = new int[numeroFilas][numeroColumnas];
             tableroIluminacion = new byte[numeroFilas][numeroColumnas];
             tableroCasillasNegras = new byte[numeroFilas][numeroColumnas];
             tableroBombillos = new byte[numeroFilas][numeroColumnas];
@@ -205,7 +205,7 @@ public class AkariGame {
                     int valor = Integer.parseInt(tokens.nextToken());
 
                     if (valor == 0) {
-                        talberoRestricciones[i][j] = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
+                        tableroRestricciones[i][j] = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
                         tableroCasillasNegras[i][j] = 0;
                     }
 
@@ -215,37 +215,37 @@ public class AkariGame {
                     }
 
                     if (valor == 2) {
-                        talberoRestricciones[i][j] = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
+                        tableroRestricciones[i][j] = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 3) {
-                        talberoRestricciones[i][j] = 0;
+                        tableroRestricciones[i][j] = 0;
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 4) {
-                        talberoRestricciones[i][j] = 1;
+                        tableroRestricciones[i][j] = 1;
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 5) {
-                        talberoRestricciones[i][j] = 2;
+                        tableroRestricciones[i][j] = 2;
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 6) {
-                        talberoRestricciones[i][j] = 3;
+                        tableroRestricciones[i][j] = 3;
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 7) {
-                        talberoRestricciones[i][j] = 4;
+                        tableroRestricciones[i][j] = 4;
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
@@ -278,15 +278,82 @@ public class AkariGame {
      */
     public boolean validation() {
 
-//      boolean valida = true;
+        // OR operation
         for (int i = 0; i < this.numeroFilas; i++) {
             for (int j = 0; j < this.numeroColumnas; j++) {
+
                 if ((tableroCasillasNegras[i][j] + tableroIluminacion[i][j]) != 1) {
                     return false;
                 }
+
+                if (tableroRestricciones[i][j] >= 0 && tableroRestricciones[i][j] <= 4) {
+                    int suma = 0;
+
+                    // Suma en casos especiales
+
+                    // 1. Esquina superior izquierda
+                    if (i == 0 && j == 0) {
+                        suma = tableroBombillos[i + 1][j] // Abajo
+                                + tableroBombillos[i][j + 1]; // Derecha
+
+                    } // 2. Esquina superior derecha
+                    else if (i == 0 && j == (numeroColumnas - 1)) {
+                        suma = tableroBombillos[i + 1][j] // Abajo 
+                                + tableroBombillos[i][j - 1]; // Izquierda
+
+                    } // 3. Esquina inferior izquierda
+                    else if (i == (numeroFilas - 1) && j == 0) {
+                        suma = tableroBombillos[i - 1][j] // Arriba
+                                + tableroBombillos[i][j + 1]; // Derecha
+
+                    } // 4. Esquina inferior derecha
+                    else if (i == (numeroFilas - 1) && j == (numeroColumnas - 1)) {
+                        suma = tableroBombillos[i - 1][j] // Arriba
+                                + tableroBombillos[i][j - 1]; // Izquierda
+
+                    } 
+                    else {
+
+                        // 5. Primera fila, pero no esquina superior
+                        if (i == 0) {
+                            suma = tableroBombillos[i + 1][j] // Abajo
+                                    + tableroBombillos[i][j + 1] // Derecha
+                                    + tableroBombillos[i][j - 1]; // Izquierda
+
+                        } //6. Ultima Fila, pero no esquina inferior
+                        else if (i == (numeroFilas-1) ) {
+                            suma = tableroBombillos[i - 1][j] //Arriba
+                                    + tableroBombillos[i][j + 1] //Derecha
+                                    + tableroBombillos[i][j - 1]; //Izquierda
+
+                        } //7. Primera columna, pero no esquina izquierda
+                        else if (j == 0) {
+                            suma = tableroBombillos[i + 1][j] // Abajo
+                                    + tableroBombillos[i - 1][j] // Arriba
+                                    + tableroBombillos[i][j + 1]; // Derecha
+
+                        } // 8. Ultima columna, pero no esquina derecha
+                        else if (j == (numeroColumnas-1)) {
+                            suma = tableroBombillos[i + 1][j] // Arriba
+                                    + tableroBombillos[i - 1][j] // Abajo
+                                    + tableroBombillos[i][j - 1]; // Izquierda
+
+                        } // Para todos los demas casos 
+                        else {
+                            suma = tableroBombillos[i + 1][j] // Abajo
+                                    + tableroBombillos[i - 1][j] // Arriba
+                                    + tableroBombillos[i][j + 1] // Derecha
+                                    + tableroBombillos[i][j - 1]; // Izquierda
+                        }
+                    }
+
+                    if (suma != tableroRestricciones[i][j]) {
+                        return false;
+                    }
+                }
+
             }
         }
-
         return true;
     }
 
@@ -348,11 +415,11 @@ public class AkariGame {
     }
 
     public int[][] getTalberoRestricciones() {
-        return talberoRestricciones;
+        return tableroRestricciones;
     }
 
     public void setTalberoRestricciones(int[][] talberoRestricciones) {
-        this.talberoRestricciones = talberoRestricciones;
+        this.tableroRestricciones = talberoRestricciones;
     }
 
     public String getTextoEnArchivo() {
