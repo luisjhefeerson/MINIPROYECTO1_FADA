@@ -301,8 +301,6 @@ public class MainFrame extends javax.swing.JFrame {
         for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
             for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
 
-                System.out.println("Estoy por aqui");
-
                 labels[i][j] = new JLabel();
                 labels[i][j].setOpaque(true);
                 labels[i][j].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
