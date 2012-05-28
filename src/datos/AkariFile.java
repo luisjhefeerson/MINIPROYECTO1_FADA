@@ -4,7 +4,7 @@
 //
 // ARCHIVO: AkariFile.java
 //
-// FECHA: 12/05/14
+// FECHA: 12/05/27
 //
 // AUTORES:
 //     Marx Arturo Arias - 0840247-3743
@@ -25,9 +25,11 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
+
+
+
 package datos;
 
-//~--- JDK imports ------------------------------------------------------------
 import java.awt.Label;
 
 import java.io.BufferedReader;
@@ -38,41 +40,41 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class AkariFile {
+    private int[][]  Restricciones   = null;
+    private int      casillasBlancas = 0;
+    private int      casillasNegras  = 0;
+    private String   fileContents    = null;
+    private int      numeroColumnas  = 0;
+    private int      numeroFilas     = 0;
+    private byte[][] Tablero         = null,
+                     Bombillos       = null,
+                     Iluminacion     = null;
 
-    private String fileContents = null;
-    private int numeroFilas = 0;
-    private int numeroColumnas = 0;
-    private int[][] Restricciones = null;
-    private byte[][] Tablero = null, Bombillos = null, Iluminacion = null;
-    private int casillasNegras = 0;
-    private int casillasBlancas = 0;
+    public AkariFile() {}
 
-    public AkariFile() {
-    }
-
-    public AkariFile(int numeoFilas, int numeroColumnas, int[][] restricciones, byte[][] Tablero, byte[][] Bombillos, byte[][] Iluminacion, int CasillasNegras) {
-        this.numeroFilas = numeoFilas;
+    public AkariFile(int numeoFilas, int numeroColumnas, int[][] restricciones, byte[][] Tablero, byte[][] Bombillos,
+                     byte[][] Iluminacion, int CasillasNegras) {
+        this.numeroFilas    = numeoFilas;
         this.numeroColumnas = numeroColumnas;
-        this.Restricciones = restricciones;
-        this.Bombillos = Bombillos;
-        this.Tablero = Tablero;
-        this.Iluminacion = Iluminacion;
+        this.Restricciones  = restricciones;
+        this.Bombillos      = Bombillos;
+        this.Tablero        = Tablero;
+        this.Iluminacion    = Iluminacion;
         this.casillasNegras = CasillasNegras;
-
     }
 
     public boolean validation() {
-        
-//        boolean valida = true;
+
+//      boolean valida = true;
         for (int i = 0; i < this.numeroFilas; i++) {
             for (int j = 0; j < this.numeroColumnas; j++) {
                 if ((Tablero[i][j] + Iluminacion[i][j]) != 1) {
-                   return false;
+                    return false;
                 }
             }
         }
-        return true;
 
+        return true;
     }
 
     public int getCasillasBlancas() {
@@ -153,7 +155,7 @@ public class AkariFile {
 
     public boolean loadFromFile(File selectedFile) {
         BufferedReader datos = null;
-        String lectura;
+        String         lectura;
 
         try {
             datos = new BufferedReader(new FileReader(selectedFile));
@@ -166,6 +168,7 @@ public class AkariFile {
 
             fileContents = bufer.toString();
             procesarFileContents();
+
             return true;
         } catch (IOException ex) {
             System.out.println(ex.toString());
@@ -175,35 +178,41 @@ public class AkariFile {
     }
 
     private void procesarFileContents() {
-        StringTokenizer tokens = new StringTokenizer(fileContents);
-        int contador = 0;
+        StringTokenizer tokens   = new StringTokenizer(fileContents);
+        int             contador = 0;
 
         while (tokens.hasMoreTokens()) {
             contador++;
 
             if (contador == 1) {
                 String f = (String) tokens.nextToken();
+
                 numeroFilas = Integer.parseInt(f);
             }
 
             if (contador == 2) {
                 String c = (String) tokens.nextToken();
+
                 numeroColumnas = Integer.parseInt(c);
             }
 
             if (contador == 3) {
-                //   tablero = new int[numeoFilas][numeroColumnas];
+
+                // tablero = new int[numeoFilas][numeroColumnas];
                 Restricciones = new int[numeroFilas][numeroColumnas];
-                Iluminacion = new byte[numeroFilas][numeroColumnas];
-                Tablero = new byte[numeroFilas][numeroColumnas];
-                Bombillos = new byte[numeroFilas][numeroColumnas];
+                Iluminacion   = new byte[numeroFilas][numeroColumnas];
+                Tablero       = new byte[numeroFilas][numeroColumnas];
+                Bombillos     = new byte[numeroFilas][numeroColumnas];
+
                 for (int i = 0; i < Iluminacion.length; i++) {
                     for (int j = 0; j < Iluminacion[i].length; j++) {
                         Iluminacion[i][j] = 0;
-                        Bombillos[i][j] = 0;
-                        Tablero[i][j] = 0;
-                        //System.out.print(Tablero[i][j]+"\t");
+                        Bombillos[i][j]   = 0;
+                        Tablero[i][j]     = 0;
+
+                        // System.out.print(Tablero[i][j]+"\t");
                     }
+
                     // System.out.print("\n");
                 }
             }
@@ -212,56 +221,65 @@ public class AkariFile {
                 for (int i = 0; i < Restricciones.length; i++) {
                     for (int j = 0; j < Restricciones[i].length; j++) {
                         String valor = (String) tokens.nextToken();
+
                         if (valor.equals("0")) {
-                            Restricciones[i][j] = 8;//para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
-                            Tablero[i][j] = 0;
+                            Restricciones[i][j] = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
+                            Tablero[i][j]       = 0;
                         }
+
                         if (valor.equals("1")) {
-                            Tablero[i][j] = 0;
+                            Tablero[i][j]   = 0;
                             Bombillos[i][j] = 1;
                         }
+
                         if (valor.equals("2")) {
-                            Restricciones[i][j] = 8;//PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
-                            Tablero[i][j] = 1;
+                            Restricciones[i][j] = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
+                            Tablero[i][j]       = 1;
                             casillasNegras++;
                         }
+
                         if (valor.equals("3")) {
                             Restricciones[i][j] = 0;
-                            Tablero[i][j] = 1;
+                            Tablero[i][j]       = 1;
                             casillasNegras++;
                         }
+
                         if (valor.equals("4")) {
                             Restricciones[i][j] = 1;
-                            Tablero[i][j] = 1;
+                            Tablero[i][j]       = 1;
                             casillasNegras++;
                         }
+
                         if (valor.equals("5")) {
                             Restricciones[i][j] = 2;
-                            Tablero[i][j] = 1;
+                            Tablero[i][j]       = 1;
                             casillasNegras++;
                         }
+
                         if (valor.equals("6")) {
                             Restricciones[i][j] = 3;
-                            Tablero[i][j] = 1;
+                            Tablero[i][j]       = 1;
                             casillasNegras++;
                         }
+
                         if (valor.equals("7")) {
                             Restricciones[i][j] = 4;
-                            Tablero[i][j] = 1;
+                            Tablero[i][j]       = 1;
                             casillasNegras++;
                         }
+
                         System.out.print(Tablero[i][j] + " ");
                     }
+
                     System.out.print("\n");
                 }
             }
-
         }
+
         casillasBlancas = (numeroFilas * numeroColumnas) - casillasNegras;
     }
 
     public void iluminarFila(int i, int j, int n, int m) {
-
         for (int x = j; x < n; x++) {
             if (Tablero[i][x] == 0) {
                 Iluminacion[i][x] = 1;
@@ -269,6 +287,7 @@ public class AkariFile {
                 break;
             }
         }
+
         for (int x = j; x >= 0; x--) {
             if (Tablero[i][x] == 0) {
                 Iluminacion[i][x] = 1;
@@ -279,7 +298,6 @@ public class AkariFile {
     }
 
     public void iluminarColumna(int i, int j, int m) {
-
         for (int y = i; y < m; y++) {
             if (Tablero[y][j] == 0) {
                 Iluminacion[y][j] = 1;
@@ -287,6 +305,7 @@ public class AkariFile {
                 break;
             }
         }
+
         for (int y = i; y >= 0; y--) {
             if (Tablero[y][j] == 0) {
                 Iluminacion[y][j] = 1;
@@ -297,13 +316,14 @@ public class AkariFile {
     }
 
     public boolean ponerBombillo(int fila, int columna) {
-
         int m = numeroFilas;
         int n = numeroColumnas;
-        if (Tablero[fila][columna] == 0 && Iluminacion[fila][columna] == 0) {
+
+        if ((Tablero[fila][columna] == 0) && (Iluminacion[fila][columna] == 0)) {
             Bombillos[fila][columna] = 1;
             iluminarFila(fila, columna, n, m);
             iluminarColumna(fila, columna, m);
+
             return true;
         } else {
             return false;
@@ -311,20 +331,11 @@ public class AkariFile {
     }
 
     public void inicializarMatriz() {
-
         for (int i = 0; i < numeroFilas; i++) {
             for (int j = 0; j < numeroColumnas; j++) {
-                Bombillos[i][j] = 0;
+                Bombillos[i][j]   = 0;
                 Iluminacion[i][j] = 0;
             }
         }
     }
 }
-
-     
-    
-        
-        
-
-
-//~ Formatted by Jindent --- http://www.jindent.com
