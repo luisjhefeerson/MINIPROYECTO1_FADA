@@ -99,7 +99,7 @@ public class GeneradorIngenuo {
 
         for (int i = 0; i < akari.getNumeroFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
-                if (akari.getTablero()[i][j] == 0) {
+                if (akari.getTableroCasillasNegras()[i][j] == 0) {
                     if (cromosoma[counter] == 1) {
                         if (!akari.ponerBombillo(i, j)) {
                             System.out.println("No permite colocar Bombillo en: " + i + "," + j);

@@ -295,7 +295,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void Graficar() {
-        byte[][] tablero = akariGame.getTablero();
+        byte[][] tableroCasillasNegras = akariGame.getTableroCasillasNegras();
         byte[][] tableroBombillos = akariGame.getTableroBombillos();
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         int[][] tableroRestricciones = akariGame.getTalberoRestricciones();
@@ -318,11 +318,11 @@ public class MainFrame extends javax.swing.JFrame {
             for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {//for para las columas
                 labels[j][i] = new Label();
                 //TABLERO CASILLAS BLANCAS Y NEGRAS
-                if (tablero[j][i] == 0)//cuando el valor es 0 la casilla es blanca vacia
+                if (tableroCasillasNegras[j][i] == 0)//cuando el valor es 0 la casilla es blanca vacia
                 {
                     labels[j][i].setBackground(Color.white);
                 }
-                if (tablero[j][i] == 1) { //cuando el valor es 1 la casilla es negra
+                if (tableroCasillasNegras[j][i] == 1) { //cuando el valor es 1 la casilla es negra
                     labels[j][i].setBackground(Color.black);
                     labels[j][i].setForeground(Color.white);
                 }
