@@ -32,6 +32,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+
 import java.util.StringTokenizer;
 
 /**
@@ -42,12 +43,12 @@ import java.util.StringTokenizer;
  */
 public class AkariGame {
 
-    private int[][] restricciones = null;
     private int casillasBlancas = 0;
     private int casillasNegras = 0;
     private String fileContents = null;
     private int numeroColumnas = 0;
     private int numeroFilas = 0;
+    private int[][] restricciones = null;
     private byte[][] tablero = null,
             bombillos = null,
             iluminacion = null;
@@ -111,11 +112,7 @@ public class AkariGame {
                         iluminacion[i][j] = 0;
                         bombillos[i][j] = 0;
                         tablero[i][j] = 0;
-
-                        // System.out.print(Tablero[i][j]+"\t");
                     }
-
-                    // System.out.print("\n");
                 }
             }
 
@@ -275,18 +272,6 @@ public class AkariGame {
      * Method description
      *
      *
-     * @param fileName
-     *
-     * @return
-     */
-    public boolean loadFromFile(String fileName) {
-        return true;
-    }
-
-    /**
-     * Method description
-     *
-     *
      * @param selectedFile
      *
      * @return
@@ -315,75 +300,188 @@ public class AkariGame {
         }
     }
 
+    //<editor-fold defaultstate="collapsed" desc="GETTERS AND SETTERS">
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public byte[][] getBombillos() {
         return bombillos;
     }
 
-    public void setBombillos(byte[][] bombillos) {
-        this.bombillos = bombillos;
-    }
-
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public int getCasillasBlancas() {
         return casillasBlancas;
     }
 
-    public void setCasillasBlancas(int casillasBlancas) {
-        this.casillasBlancas = casillasBlancas;
-    }
-
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public int getCasillasNegras() {
         return casillasNegras;
     }
 
-    public void setCasillasNegras(int casillasNegras) {
-        this.casillasNegras = casillasNegras;
-    }
-
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public String getFileContents() {
         return fileContents;
     }
 
-    public void setFileContents(String fileContents) {
-        this.fileContents = fileContents;
-    }
-
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public byte[][] getIluminacion() {
         return iluminacion;
     }
 
-    public void setIluminacion(byte[][] iluminacion) {
-        this.iluminacion = iluminacion;
-    }
-
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public int getNumeroColumnas() {
         return numeroColumnas;
     }
 
-    public void setNumeroColumnas(int numeroColumnas) {
-        this.numeroColumnas = numeroColumnas;
-    }
-
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public int getNumeroFilas() {
         return numeroFilas;
     }
 
-    public void setNumeroFilas(int numeroFilas) {
-        this.numeroFilas = numeroFilas;
-    }
-
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public int[][] getRestricciones() {
         return restricciones;
     }
 
-    public void setRestricciones(int[][] restricciones) {
-        this.restricciones = restricciones;
-    }
-
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public byte[][] getTablero() {
         return tablero;
     }
 
+    /**
+     * Method description
+     *
+     *
+     * @param bombillos
+     */
+    public void setBombillos(byte[][] bombillos) {
+        this.bombillos = bombillos;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param casillasBlancas
+     */
+    public void setCasillasBlancas(int casillasBlancas) {
+        this.casillasBlancas = casillasBlancas;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param casillasNegras
+     */
+    public void setCasillasNegras(int casillasNegras) {
+        this.casillasNegras = casillasNegras;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param fileContents
+     */
+    public void setFileContents(String fileContents) {
+        this.fileContents = fileContents;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param iluminacion
+     */
+    public void setIluminacion(byte[][] iluminacion) {
+        this.iluminacion = iluminacion;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param numeroColumnas
+     */
+    public void setNumeroColumnas(int numeroColumnas) {
+        this.numeroColumnas = numeroColumnas;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param numeroFilas
+     */
+    public void setNumeroFilas(int numeroFilas) {
+        this.numeroFilas = numeroFilas;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param restricciones
+     */
+    public void setRestricciones(int[][] restricciones) {
+        this.restricciones = restricciones;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param tablero
+     */
     public void setTablero(byte[][] tablero) {
         this.tablero = tablero;
     }
+    //</editor-fold>
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com
