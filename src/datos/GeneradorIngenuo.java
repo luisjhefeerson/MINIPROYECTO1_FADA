@@ -4,7 +4,7 @@
 //
 // ARCHIVO: GeneradorIngenuo.java
 //
-// FECHA: 12/05/27
+// FECHA: 12/05/28
 //
 // AUTORES:
 //     Marx Arturo Arias - 0840247-3743
@@ -25,78 +25,118 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
+
+
+
 package datos;
 
-import datos.AkariFile;
+//~--- non-JDK imports --------------------------------------------------------
 
+import datos.AkariGame;
+
+/**
+ * Class description
+ *
+ *
+ * @version        12/05/28
+ */
 public class GeneradorIngenuo {
+    AkariGame akari;
+    int       casillasEnBlanco;
+    int[]     cromosoma;
+    int       numeroCromosoma;
 
-    AkariFile akari;
-    int casillasEnBlanco;
-    int numeroCromosoma;
-    int[] cromosoma;
-
-    public GeneradorIngenuo(AkariFile tablero) {
-        numeroCromosoma = 0;
-        this.akari = tablero;
+    /**
+     * Constructs ...
+     *
+     *
+     * @param tablero
+     */
+    public GeneradorIngenuo(AkariGame tablero) {
+        numeroCromosoma  = 289;
+        this.akari       = tablero;
         casillasEnBlanco = tablero.getCasillasBlancas();
         System.out.println("Casillas en Blanco: " + casillasEnBlanco);
     }
 
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public int[] generarSiguiteCromosoma() {
         numeroCromosoma++;
 
         String numeroEnBinario = Integer.toBinaryString(numeroCromosoma);
+
         System.out.println("Cromosoma: " + numeroCromosoma);
         System.out.println("En Binario: " + numeroEnBinario);
 
         // Inicializar Cromosoma
         cromosoma = new int[casillasEnBlanco];
+
         for (int i = 0; i < cromosoma.length; i++) {
             cromosoma[i] = 0;
         }
 
         for (int i = 0; i < numeroEnBinario.length(); i++) {
-            cromosoma[cromosoma.length - 1 - i] = Integer.parseInt(numeroEnBinario.substring(numeroEnBinario.length() - 1 - i,
-                    numeroEnBinario.length() - i));
+            cromosoma[cromosoma.length - 1 - i] = Integer.parseInt(numeroEnBinario.substring(numeroEnBinario.length()
+                    - 1 - i, numeroEnBinario.length() - i));
         }
-        System.out.print("\n");
+
         return cromosoma;
     }
 
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public boolean applicarCromosoma() {
-
         int counter = 0;
 
-        for (int i = 0; i < akari.getNumeoFilas(); i++) {
+        for (int i = 0; i < akari.getNumeroFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
-
                 if (akari.getTablero()[i][j] == 0) {
                     if (cromosoma[counter] == 1) {
                         if (!akari.ponerBombillo(i, j)) {
                             System.out.println("No permite colocar Bombillo en: " + i + "," + j);
+
                             return false;
                         }
                     }
+
                     counter++;
                 }
-
             }
         }
+
         return akari.validation();
     }
 
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public boolean solucionIngenua() {
-
         generarSiguiteCromosoma();
+
         boolean b = applicarCromosoma();
 
         while ((!b) && (numeroCromosoma < Math.pow(2, casillasEnBlanco) - 1)) {
-            System.out.println("Aplicar Cromosoma: " + numeroCromosoma + "Resultado: " + b);
             generarSiguiteCromosoma();
             akari.inicializarMatriz();
             b = applicarCromosoma();
+            System.out.println("Aplicar Cromosoma: " + numeroCromosoma + " Resultado: " + b + "\n\n");
         }
+
         return b;
     }
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com
