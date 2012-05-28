@@ -244,6 +244,8 @@ public class MainFrame extends javax.swing.JFrame {
                 jTextArea.setText(akariGame.getFileContents());
                 generadorIngenuo = new GeneradorIngenuo(akariGame);
                 Graficar();
+            }else{
+                JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido",  JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -293,10 +295,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void Graficar() {
-        byte[][] MTablero = akariGame.getTablero();
-        byte[][] MBombillos = akariGame.getBombillos();
-        byte[][] MIluminacion = akariGame.getIluminacion();
-        int[][] MRestricciones = akariGame.getRestricciones();
+        byte[][] tablero = akariGame.getTablero();
+        byte[][] tableroBombillos = akariGame.getTableroBombillos();
+        byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
+        int[][] tableroRestricciones = akariGame.getTalberoRestricciones();
         labels = new Label[akariGame.getNumeroFilas()][akariGame.getNumeroColumnas()];
 
         int x = 0;
@@ -316,38 +318,38 @@ public class MainFrame extends javax.swing.JFrame {
             for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {//for para las columas
                 labels[j][i] = new Label();
                 //TABLERO CASILLAS BLANCAS Y NEGRAS
-                if (MTablero[j][i] == 0)//cuando el valor es 0 la casilla es blanca vacia
+                if (tablero[j][i] == 0)//cuando el valor es 0 la casilla es blanca vacia
                 {
                     labels[j][i].setBackground(Color.white);
                 }
-                if (MTablero[j][i] == 1) { //cuando el valor es 1 la casilla es negra
+                if (tablero[j][i] == 1) { //cuando el valor es 1 la casilla es negra
                     labels[j][i].setBackground(Color.black);
                     labels[j][i].setForeground(Color.white);
                 }
                 //TABLERO DE RESTRICCIONES
-                if (MRestricciones[j][i] == 0)//la casilla tiene el numero 0
+                if (tableroRestricciones[j][i] == 0)//la casilla tiene el numero 0
                 {
                     labels[j][i].setText("   0");
                 }
-                if (MRestricciones[j][i] == 1)//la casilla tiene el numero 1
+                if (tableroRestricciones[j][i] == 1)//la casilla tiene el numero 1
                 {
                     labels[j][i].setText("   1");
                 }
-                if (MRestricciones[j][i] == 2)//la casilla tiene el numero 2
+                if (tableroRestricciones[j][i] == 2)//la casilla tiene el numero 2
                 {
                     labels[j][i].setText("   2");
                 }
-                if (MRestricciones[j][i] == 3)//la casilla tiene el numero 3                {
+                if (tableroRestricciones[j][i] == 3)//la casilla tiene el numero 3                {
                 {
                     labels[j][i].setText("   3");
                 }
-                if (MRestricciones[j][i] == 4)//la casilla tiene el numero 4                
+                if (tableroRestricciones[j][i] == 4)//la casilla tiene el numero 4                
                 {
                     labels[j][i].setText("   4");
                 }
 
                 //TABLERO BOMBILLOS
-                if (MBombillos[j][i] == 1) {//cuando el valor es 1 la casilla tiene bombillo
+                if (tableroBombillos[j][i] == 1) {//cuando el valor es 1 la casilla tiene bombillo
                     labels[j][i].setBackground(Color.YELLOW);
                     labels[j][i].setForeground(Color.BLACK);
                     labels[j][i].setText("  B");
@@ -355,7 +357,7 @@ public class MainFrame extends javax.swing.JFrame {
                 // if (MBombillos[j][i] == 0) //cuando el valor es 0 la casilla no tiene bombillos
                 //   Labels[j][i].setBackground(Color.WHITE);
                 //TABLERO ILUMINACION    
-                if (MIluminacion[j][i] == 1) //cuando el valor es 1 la casilla se ilumina
+                if (tableroIluminacion[j][i] == 1) //cuando el valor es 1 la casilla se ilumina
                 {
                     labels[j][i].setBackground(Color.YELLOW);
                 }
@@ -371,14 +373,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void Iluminar() {
-        byte[][] MIluminacion = akariGame.getIluminacion();
-        byte[][] MBombillos = akariGame.getBombillos();
+        byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
+        byte[][] tableroBombillos = akariGame.getTableroBombillos();
         for (int i = 0; i < labels.length; i++) {
             for (int j = 0; j < labels[i].length; j++) {
-                if (MIluminacion[i][j] == 1) {
+                if (tableroIluminacion[i][j] == 1) {
                     labels[i][j].setBackground(Color.yellow);
                 }
-                if (MBombillos[i][j] == 1) {
+                if (tableroBombillos[i][j] == 1) {
                     labels[i][j].setText("  B");
                 }
             }

@@ -48,10 +48,10 @@ public class AkariGame {
     private String fileContents = null;
     private int numeroColumnas = 0;
     private int numeroFilas = 0;
-    private int[][] restricciones = null;
+    private int[][] talberoRestricciones = null;
     private byte[][] tablero = null,
-            bombillos = null,
-            iluminacion = null;
+            tableroBombillos = null,
+            tableroIluminacion = null;
 
     /**
      * Constructs ...
@@ -71,7 +71,7 @@ public class AkariGame {
     public void iluminarColumna(int i, int j, int m) {
         for (int y = i; y < m; y++) {
             if (tablero[y][j] == 0) {
-                iluminacion[y][j] = 1;
+                tableroIluminacion[y][j] = 1;
             } else {
                 break;
             }
@@ -79,7 +79,7 @@ public class AkariGame {
 
         for (int y = i; y >= 0; y--) {
             if (tablero[y][j] == 0) {
-                iluminacion[y][j] = 1;
+                tableroIluminacion[y][j] = 1;
             } else {
                 break;
             }
@@ -98,7 +98,7 @@ public class AkariGame {
     public void iluminarFila(int i, int j, int n, int m) {
         for (int x = j; x < n; x++) {
             if (tablero[i][x] == 0) {
-                iluminacion[i][x] = 1;
+                tableroIluminacion[i][x] = 1;
             } else {
                 break;
             }
@@ -106,7 +106,7 @@ public class AkariGame {
 
         for (int x = j; x >= 0; x--) {
             if (tablero[i][x] == 0) {
-                iluminacion[i][x] = 1;
+                tableroIluminacion[i][x] = 1;
             } else {
                 break;
             }
@@ -120,8 +120,8 @@ public class AkariGame {
     public void inicializarMatriz() {
         for (int i = 0; i < numeroFilas; i++) {
             for (int j = 0; j < numeroColumnas; j++) {
-                bombillos[i][j] = 0;
-                iluminacion[i][j] = 0;
+                tableroBombillos[i][j] = 0;
+                tableroIluminacion[i][j] = 0;
             }
         }
     }
@@ -148,12 +148,11 @@ public class AkariGame {
             }
 
             fileContents = bufer.toString();
-            procesarFileContents();
+            return procesarFileContents();
 
-            return true;
         } catch (IOException ex) {
-            System.out.println(ex.toString());
 
+            System.out.println(ex.toString());
             return false;
         }
     }
@@ -171,8 +170,8 @@ public class AkariGame {
         int m = numeroFilas;
         int n = numeroColumnas;
 
-        if ((tablero[fila][columna] == 0) && (iluminacion[fila][columna] == 0)) {
-            bombillos[fila][columna] = 1;
+        if ((tablero[fila][columna] == 0) && (tableroIluminacion[fila][columna] == 0)) {
+            tableroBombillos[fila][columna] = 1;
             iluminarFila(fila, columna, n, m);
             iluminarColumna(fila, columna, m);
 
@@ -188,65 +187,65 @@ public class AkariGame {
         try {
             numeroFilas = Integer.parseInt(tokens.nextToken());
             numeroColumnas = Integer.parseInt(tokens.nextToken());
-            restricciones = new int[numeroFilas][numeroColumnas];
-            iluminacion = new byte[numeroFilas][numeroColumnas];
+            talberoRestricciones = new int[numeroFilas][numeroColumnas];
+            tableroIluminacion = new byte[numeroFilas][numeroColumnas];
             tablero = new byte[numeroFilas][numeroColumnas];
-            bombillos = new byte[numeroFilas][numeroColumnas];
+            tableroBombillos = new byte[numeroFilas][numeroColumnas];
 
-            for (int i = 0; i < iluminacion.length; i++) {
-                for (int j = 0; j < iluminacion[i].length; j++) {
-                    iluminacion[i][j] = 0;
-                    bombillos[i][j] = 0;
+            for (int i = 0; i < numeroFilas; i++) {
+                for (int j = 0; j < numeroColumnas; j++) {
+                    tableroIluminacion[i][j] = 0;
+                    tableroBombillos[i][j] = 0;
                     tablero[i][j] = 0;
                 }
             }
 
-            for (int i = 0; i < restricciones.length; i++) {
-                for (int j = 0; j < restricciones[i].length; j++) {
+            for (int i = 0; i < numeroFilas; i++) {
+                for (int j = 0; j < numeroColumnas; j++) {
                     int valor = Integer.parseInt(tokens.nextToken());
 
                     if (valor == 0) {
-                        restricciones[i][j] = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
+                        talberoRestricciones[i][j] = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
                         tablero[i][j] = 0;
                     }
 
                     if (valor == 1) {
                         tablero[i][j] = 0;
-                        bombillos[i][j] = 1;
+                        tableroBombillos[i][j] = 1;
                     }
 
                     if (valor == 2) {
-                        restricciones[i][j] = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
+                        talberoRestricciones[i][j] = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
                         tablero[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 3) {
-                        restricciones[i][j] = 0;
+                        talberoRestricciones[i][j] = 0;
                         tablero[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 4) {
-                        restricciones[i][j] = 1;
+                        talberoRestricciones[i][j] = 1;
                         tablero[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 5) {
-                        restricciones[i][j] = 2;
+                        talberoRestricciones[i][j] = 2;
                         tablero[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 6) {
-                        restricciones[i][j] = 3;
+                        talberoRestricciones[i][j] = 3;
                         tablero[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 7) {
-                        restricciones[i][j] = 4;
+                        talberoRestricciones[i][j] = 4;
                         tablero[i][j] = 1;
                         casillasNegras++;
                     }
@@ -282,7 +281,7 @@ public class AkariGame {
 //      boolean valida = true;
         for (int i = 0; i < this.numeroFilas; i++) {
             for (int j = 0; j < this.numeroColumnas; j++) {
-                if ((tablero[i][j] + iluminacion[i][j]) != 1) {
+                if ((tablero[i][j] + tableroIluminacion[i][j]) != 1) {
                     return false;
                 }
             }
@@ -292,14 +291,6 @@ public class AkariGame {
     }
 
     // <editor-fold defaultstate="collapsed" desc="GETTERS AND SETTERS">
-    public byte[][] getBombillos() {
-        return bombillos;
-    }
-
-    public void setBombillos(byte[][] bombillos) {
-        this.bombillos = bombillos;
-    }
-
     public int getCasillasBlancas() {
         return casillasBlancas;
     }
@@ -324,14 +315,6 @@ public class AkariGame {
         this.fileContents = fileContents;
     }
 
-    public byte[][] getIluminacion() {
-        return iluminacion;
-    }
-
-    public void setIluminacion(byte[][] iluminacion) {
-        this.iluminacion = iluminacion;
-    }
-
     public int getNumeroColumnas() {
         return numeroColumnas;
     }
@@ -348,20 +331,36 @@ public class AkariGame {
         this.numeroFilas = numeroFilas;
     }
 
-    public int[][] getRestricciones() {
-        return restricciones;
-    }
-
-    public void setRestricciones(int[][] restricciones) {
-        this.restricciones = restricciones;
-    }
-
     public byte[][] getTablero() {
         return tablero;
     }
 
     public void setTablero(byte[][] tablero) {
         this.tablero = tablero;
+    }
+
+    public byte[][] getTableroBombillos() {
+        return tableroBombillos;
+    }
+
+    public void setTableroBombillos(byte[][] tableroBombillos) {
+        this.tableroBombillos = tableroBombillos;
+    }
+
+    public byte[][] getTableroIluminacion() {
+        return tableroIluminacion;
+    }
+
+    public void setTableroIluminacion(byte[][] tableroIluminacion) {
+        this.tableroIluminacion = tableroIluminacion;
+    }
+
+    public int[][] getTalberoRestricciones() {
+        return talberoRestricciones;
+    }
+
+    public void setTalberoRestricciones(int[][] talberoRestricciones) {
+        this.talberoRestricciones = talberoRestricciones;
     }
     // </editor-fold>
 }
