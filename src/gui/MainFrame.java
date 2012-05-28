@@ -33,6 +33,7 @@ import java.awt.Color;
 import java.awt.Label;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -239,13 +240,13 @@ public class MainFrame extends javax.swing.JFrame {
 
             File selectedFile = selectorArchivo.getSelectedFile();
             akariGame = new AkariGame();
-            
+
             if (akariGame.loadFromFile(selectedFile)) {
-                jTextArea.setText(akariGame.getFileContents());
+                jTextArea.setText(akariGame.getTextoEnArchivo());
                 generadorIngenuo = new GeneradorIngenuo(akariGame);
                 Graficar();
-            }else{
-                JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido",  JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -295,84 +296,101 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void Graficar() {
+
         byte[][] tableroCasillasNegras = akariGame.getTableroCasillasNegras();
         byte[][] tableroBombillos = akariGame.getTableroBombillos();
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         int[][] tableroRestricciones = akariGame.getTalberoRestricciones();
+
         labels = new Label[akariGame.getNumeroFilas()][akariGame.getNumeroColumnas()];
 
-        int x = 0;
-        int anchoTablero = akariGame.getNumeroColumnas() * (20 + 1);
-        int y = 0;
-        int altoTablero = akariGame.getNumeroFilas() * (20 + 1);
+        // Ajuste de dimensiones para centrar tablero
+        int widthLabel= 25; 
+        int heightLabel = 25;
+        
+        int xInicial = 0;
+        int anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
+        int yInicial = 0;
+        int altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
 
         if (anchoTablero < jPanelGraphiclView.getWidth()) {
-            x = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
+            xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
         }
 
         if (altoTablero < jPanelGraphiclView.getHeight()) {
-            y = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
+            yInicial = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
         }
-        //IMPORTANTE: las j y las i estan trocadas por el orden en que pinta java los componentes en el contenedor
-        for (int i = 0; i < akariGame.getNumeroFilas(); i++) {//for para las filas
-            for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {//for para las columas
-                labels[j][i] = new Label();
+
+        //IMPORTANTE: El erro que habia aqui antes se arreglo
+
+        for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
+            for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
+
+                System.out.println("Estoy por aqui");
+
+                labels[i][j] = new Label();
+                labels[i][j].setAlignment(java.awt.Label.CENTER);
+
+//                labels[i][j].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
                 //TABLERO CASILLAS BLANCAS Y NEGRAS
-                if (tableroCasillasNegras[j][i] == 0)//cuando el valor es 0 la casilla es blanca vacia
+                if (tableroCasillasNegras[i][j] == 0) //cuando el valor es 0 la casilla es blanca
                 {
-                    labels[j][i].setBackground(Color.white);
+                    labels[i][j].setBackground(Color.white);
                 }
-                if (tableroCasillasNegras[j][i] == 1) { //cuando el valor es 1 la casilla es negra
-                    labels[j][i].setBackground(Color.black);
-                    labels[j][i].setForeground(Color.white);
+                if (tableroCasillasNegras[i][j] == 1) { //cuando el valor es 1 la casilla es negra
+                    labels[i][j].setBackground(Color.black);
+                    labels[i][j].setForeground(Color.white);
                 }
+
                 //TABLERO DE RESTRICCIONES
-                if (tableroRestricciones[j][i] == 0)//la casilla tiene el numero 0
+                if (tableroRestricciones[i][j] == 0)//la casilla tiene el numero 0
                 {
-                    labels[j][i].setText("   0");
+                    labels[i][j].setText("0");
                 }
-                if (tableroRestricciones[j][i] == 1)//la casilla tiene el numero 1
+                if (tableroRestricciones[i][j] == 1)//la casilla tiene el numero 1
                 {
-                    labels[j][i].setText("   1");
+                    labels[i][j].setText("1");
                 }
-                if (tableroRestricciones[j][i] == 2)//la casilla tiene el numero 2
+                if (tableroRestricciones[i][j] == 2)//la casilla tiene el numero 2
                 {
-                    labels[j][i].setText("   2");
+                    labels[i][j].setText("2");
                 }
-                if (tableroRestricciones[j][i] == 3)//la casilla tiene el numero 3                {
+                if (tableroRestricciones[i][j] == 3)//la casilla tiene el numero 3                {
                 {
-                    labels[j][i].setText("   3");
+                    labels[i][j].setText("3");
                 }
-                if (tableroRestricciones[j][i] == 4)//la casilla tiene el numero 4                
+                if (tableroRestricciones[i][j] == 4)//la casilla tiene el numero 4                
                 {
-                    labels[j][i].setText("   4");
+                    labels[i][j].setText("4");
                 }
 
                 //TABLERO BOMBILLOS
-                if (tableroBombillos[j][i] == 1) {//cuando el valor es 1 la casilla tiene bombillo
-                    labels[j][i].setBackground(Color.YELLOW);
-                    labels[j][i].setForeground(Color.BLACK);
-                    labels[j][i].setText("  B");
+                if (tableroBombillos[i][j] == 1) {//cuando el valor es 1 la casilla tiene bombillo
+                    labels[i][j].setBackground(Color.YELLOW);
+                    labels[i][j].setForeground(Color.BLACK);
+                    labels[i][j].setText("B");
                 }
-                // if (MBombillos[j][i] == 0) //cuando el valor es 0 la casilla no tiene bombillos
-                //   Labels[j][i].setBackground(Color.WHITE);
+
                 //TABLERO ILUMINACION    
-                if (tableroIluminacion[j][i] == 1) //cuando el valor es 1 la casilla se ilumina
+                if (tableroIluminacion[i][j] == 1) //cuando el valor es 1 la casilla se ilumina
                 {
-                    labels[j][i].setBackground(Color.YELLOW);
+                    labels[i][j].setBackground(Color.YELLOW);
                 }
-                //if (MIluminacion[j][i] == 0) //cuando el valor es 0 la casilla no se ilumina
-                //  Labels[j][i].setBackground(Color.WHITE);
-                labels[j][i].setBounds(x + (21 * i), y + (21 * j), 20, 20);//ubica los labels en forma de cuadricula
 
-                jPanelGraphiclView.add(labels[j][i]);//adiciona los labels al contenedor
-
+                jPanelGraphiclView.add(labels[i][j]);//adiciona los labels al contenedor
+                labels[i][j].setBounds(
+                        xInicial + ((widthLabel+1) * j),
+                        yInicial + ((heightLabel+1) * i), 
+                        widthLabel, 
+                        heightLabel);//ubica los labels en forma de cuadricula. Anteriormente habia un error aqui!!
             }
         }
 
     }
 
     public void Iluminar() {
+
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         byte[][] tableroBombillos = akariGame.getTableroBombillos();
         for (int i = 0; i < labels.length; i++) {
@@ -381,7 +399,7 @@ public class MainFrame extends javax.swing.JFrame {
                     labels[i][j].setBackground(Color.yellow);
                 }
                 if (tableroBombillos[i][j] == 1) {
-                    labels[i][j].setText("  B");
+                    labels[i][j].setText("B");
                 }
             }
         }

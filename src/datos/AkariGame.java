@@ -43,15 +43,15 @@ import java.util.StringTokenizer;
  */
 public class AkariGame {
 
+    private String textoEnArchivo = null;
     private int casillasBlancas = 0;
     private int casillasNegras = 0;
-    private String fileContents = null;
     private int numeroColumnas = 0;
     private int numeroFilas = 0;
     private int[][] talberoRestricciones = null;
-    private byte[][] tableroCasillasNegras = null,
-            tableroBombillos = null,
-            tableroIluminacion = null;
+    private byte[][] tableroCasillasNegras = null;
+    private byte[][] tableroBombillos = null;
+    private byte[][] tableroIluminacion = null;
 
     /**
      * Constructs ...
@@ -147,7 +147,7 @@ public class AkariGame {
                 bufer.append(lectura + "\n");
             }
 
-            fileContents = bufer.toString();
+            textoEnArchivo = bufer.toString();
             return procesarFileContents();
 
         } catch (IOException ex) {
@@ -182,7 +182,7 @@ public class AkariGame {
     }
 
     private boolean procesarFileContents() {
-        StringTokenizer tokens = new StringTokenizer(fileContents);
+        StringTokenizer tokens = new StringTokenizer(textoEnArchivo);
 
         try {
             numeroFilas = Integer.parseInt(tokens.nextToken());
@@ -307,14 +307,6 @@ public class AkariGame {
         this.casillasNegras = casillasNegras;
     }
 
-    public String getFileContents() {
-        return fileContents;
-    }
-
-    public void setFileContents(String fileContents) {
-        this.fileContents = fileContents;
-    }
-
     public int getNumeroColumnas() {
         return numeroColumnas;
     }
@@ -361,6 +353,14 @@ public class AkariGame {
 
     public void setTalberoRestricciones(int[][] talberoRestricciones) {
         this.talberoRestricciones = talberoRestricciones;
+    }
+
+    public String getTextoEnArchivo() {
+        return textoEnArchivo;
+    }
+
+    public void setTextoEnArchivo(String textoEnArchivo) {
+        this.textoEnArchivo = textoEnArchivo;
     }
     // </editor-fold>
 }
