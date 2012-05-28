@@ -230,28 +230,20 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMICargarTableroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICargarTableroActionPerformed
 
-        JFileChooser selectorArchivo = new JFileChooser();//escogedor de archivo
+        JFileChooser selectorArchivo = new JFileChooser("./tests/");
+        
         selectorArchivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int resultado = selectorArchivo.showOpenDialog(this);
-
-
+       
         if (resultado != JFileChooser.CANCEL_OPTION) {
             archivoEntrada = new AkariFile();
             File selectedFile = selectorArchivo.getSelectedFile();
             archivoEntrada.loadFromFile(selectedFile);
             jTextArea.setText(archivoEntrada.getFileContents());
             ingenuo = new GeneradorIngenuo(archivoEntrada);
-
-//            if (archivoEntrada.validarEntrada().equals("")) {
-            //pasarPrueba();    
             Graficar();
-            
-            //Iluminar();
-//            } else {
-//                JOptionPane.showMessageDialog(this, archivoEntrada.validarEntrada());
-//            }
-
         }
+        
     }//GEN-LAST:event_jMICargarTableroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
