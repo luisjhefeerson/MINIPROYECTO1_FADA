@@ -40,7 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     AkariGame akariGame;
     GeneradorIngenuo generadorIngenuo;
-    private Label[][] labels;
+    private JLabel[][] labels;
 
     public MainFrame() {
         initComponents();
@@ -74,6 +74,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MINIPROYECTO 1 - FADA");
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanelPrincipal.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -302,12 +303,12 @@ public class MainFrame extends javax.swing.JFrame {
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         int[][] tableroRestricciones = akariGame.getTalberoRestricciones();
 
-        labels = new Label[akariGame.getNumeroFilas()][akariGame.getNumeroColumnas()];
+        labels = new JLabel[akariGame.getNumeroFilas()][akariGame.getNumeroColumnas()];
 
         // Ajuste de dimensiones para centrar tablero
-        int widthLabel= 25; 
-        int heightLabel = 25;
-        
+        int widthLabel = 30;
+        int heightLabel = 30;
+
         int xInicial = 0;
         int anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
         int yInicial = 0;
@@ -321,17 +322,16 @@ public class MainFrame extends javax.swing.JFrame {
             yInicial = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
         }
 
-        //IMPORTANTE: El erro que habia aqui antes se arreglo
+        //IMPORTANTE: El error que habia aqui antes se arreglo
 
         for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
             for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
 
                 System.out.println("Estoy por aqui");
 
-                labels[i][j] = new Label();
-                labels[i][j].setAlignment(java.awt.Label.CENTER);
-
-//                labels[i][j].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                labels[i][j] = new JLabel();
+                labels[i][j].setOpaque(true);
+                labels[i][j].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
                 //TABLERO CASILLAS BLANCAS Y NEGRAS
                 if (tableroCasillasNegras[i][j] == 0) //cuando el valor es 0 la casilla es blanca
@@ -367,9 +367,8 @@ public class MainFrame extends javax.swing.JFrame {
 
                 //TABLERO BOMBILLOS
                 if (tableroBombillos[i][j] == 1) {//cuando el valor es 1 la casilla tiene bombillo
-                    labels[i][j].setBackground(Color.YELLOW);
-                    labels[i][j].setForeground(Color.BLACK);
-                    labels[i][j].setText("B");
+                    labels[i][j].setText(null);
+                    labels[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bombilla.jpg")));
                 }
 
                 //TABLERO ILUMINACION    
@@ -380,9 +379,9 @@ public class MainFrame extends javax.swing.JFrame {
 
                 jPanelGraphiclView.add(labels[i][j]);//adiciona los labels al contenedor
                 labels[i][j].setBounds(
-                        xInicial + ((widthLabel+1) * j),
-                        yInicial + ((heightLabel+1) * i), 
-                        widthLabel, 
+                        xInicial + ((widthLabel + 1) * j),
+                        yInicial + ((heightLabel + 1) * i),
+                        widthLabel,
                         heightLabel);//ubica los labels en forma de cuadricula. Anteriormente habia un error aqui!!
             }
         }
@@ -399,7 +398,8 @@ public class MainFrame extends javax.swing.JFrame {
                     labels[i][j].setBackground(Color.yellow);
                 }
                 if (tableroBombillos[i][j] == 1) {
-                    labels[i][j].setText("B");
+                    labels[i][j].setText(null);
+                    labels[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bombilla.jpg")));
                 }
             }
         }
