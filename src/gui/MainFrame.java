@@ -258,7 +258,7 @@ public class MainFrame extends javax.swing.JFrame {
         if (generadorIngenuo.solucionIngenua()) {
             Iluminar();
         } else {
-            JOptionPane.showMessageDialog(rootPane, "NO se pudo hallar soluciòn");
+            JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonSiguienteActionPerformed
 
@@ -267,34 +267,8 @@ public class MainFrame extends javax.swing.JFrame {
         akariGame.inicializarMatriz();
         jPanelGraphiclView.removeAll();
         Graficar();
-//      Iluminar();
+        
     }//GEN-LAST:event_jButtonBorrarActionPerformed
-
-    public void pasarPrueba() {
-        AkariGame ak = new AkariGame();
-        int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0},
-            {1, 1, 1, 1, 0, 0, 1, 1},
-            {1, 1, 1, 1, 0, 0, 1, 1},
-            {1, 1, 1, 1, 0, 0, 1, 1},
-            {1, 1, 1, 1, 0, 0, 1, 1},
-            {1, 1, 1, 1, 0, 0, 1, 1},
-            {1, 1, 1, 1, 0, 0, 1, 1},
-            {1, 1, 1, 1, 0, 0, 1, 1},};
-
-
-        int B[][] = {
-            {1, 0, 1, 1, 1, 0, 1, 1},
-            {1, 1, 1, 1, 1, 0, 1, 1},
-            {1, 1, 1, 1, 1, 0, 1, 1},
-            {1, 1, 1, 1, 1, 0, 1, 1},
-            {1, 1, 1, 1, 1, 0, 1, 1},
-            {1, 1, 1, 1, 1, 0, 1, 1},
-            {1, 1, 1, 1, 1, 0, 1, 1},
-            {1, 1, 1, 1, 1, 0, 1, 1},};
-//        ak.validation(a);
-
-
-    }
 
     private void Graficar() {
 
@@ -385,7 +359,6 @@ public class MainFrame extends javax.swing.JFrame {
                         heightLabel);//ubica los labels en forma de cuadricula. Anteriormente habia un error aqui!!
             }
         }
-
     }
 
     public void Iluminar() {
