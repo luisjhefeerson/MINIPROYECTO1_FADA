@@ -70,6 +70,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelGraphiclView = new javax.swing.JPanel();
         jButtonSiguiente = new javax.swing.JButton();
         jButtonBorrar = new javax.swing.JButton();
+        jSlider1 = new javax.swing.JSlider();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
@@ -93,7 +94,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanelPrincipal.add(jSeparator2);
-        jSeparator2.setBounds(400, 115, 5, 480);
+        jSeparator2.setBounds(320, 115, 5, 480);
 
         jLabelTitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -117,13 +118,13 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelTextView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTextView.setText("TEXT VIEW");
         jPanelPrincipal.add(jLabelTextView);
-        jLabelTextView.setBounds(0, 120, 400, 30);
+        jLabelTextView.setBounds(0, 120, 320, 30);
 
         jLabelgraphicalview.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabelgraphicalview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelgraphicalview.setText("GRAPHICAL VIEW");
         jPanelPrincipal.add(jLabelgraphicalview);
-        jLabelgraphicalview.setBounds(610, 120, 190, 30);
+        jLabelgraphicalview.setBounds(320, 120, 480, 30);
 
         jTextArea.setColumns(20);
         jTextArea.setEditable(false);
@@ -131,7 +132,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPaneTextView.setViewportView(jTextArea);
 
         jPanelPrincipal.add(jScrollPaneTextView);
-        jScrollPaneTextView.setBounds(10, 160, 380, 380);
+        jScrollPaneTextView.setBounds(10, 160, 300, 380);
 
         jScrollPanelGraphView.setBackground(new java.awt.Color(242, 240, 240));
 
@@ -148,7 +149,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonSiguiente);
-        jButtonSiguiente.setBounds(530, 120, 100, 30);
+        jButtonSiguiente.setBounds(330, 210, 80, 30);
 
         jButtonBorrar.setText("Borrar");
         jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +158,19 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonBorrar);
-        jButtonBorrar.setBounds(420, 120, 100, 30);
+        jButtonBorrar.setBounds(330, 170, 80, 30);
+
+        jSlider1.setMaximum(50);
+        jSlider1.setMinimum(10);
+        jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
+        jSlider1.setValue(30);
+        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider1StateChanged(evt);
+            }
+        });
+        jPanelPrincipal.add(jSlider1);
+        jSlider1.setBounds(340, 250, 50, 260);
 
         getContentPane().add(jPanelPrincipal);
         jPanelPrincipal.setBounds(0, 0, 800, 600);
@@ -278,6 +291,37 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+
+
+        widthLabel = jSlider1.getValue();
+        heightLabel = jSlider1.getValue();
+
+        anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
+        altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
+
+        if (anchoTablero < jPanelGraphiclView.getWidth()) {
+            xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
+        }
+
+        if (altoTablero < jPanelGraphiclView.getHeight()) {
+            yInicial = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
+        }
+
+        for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
+            for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
+                jLabelTablero[i][j].setBounds(
+                        xInicial + ((widthLabel + 1) * j),
+                        yInicial + ((heightLabel + 1) * i),
+                        widthLabel,
+                        heightLabel);
+            }
+        }
+
+
+
+    }//GEN-LAST:event_jSlider1StateChanged
+
     private void Graficar() {
 
         byte[][] tableroCasillasNegras = akariGame.getTableroCasillasNegras();
@@ -293,7 +337,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         xInicial = 0;
         yInicial = 0;
-        
+
         anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
         altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
 
@@ -387,12 +431,12 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    public void limpiarTodo(){
+    public void limpiarTodo() {
         jTextArea.setText(null);
         jPanelGraphiclView.removeAll();
         jPanelGraphiclView.repaint();
     }
-    
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -442,6 +486,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPanelGraphView;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSlider jSlider1;
     private javax.swing.JTextArea jTextArea;
     // End of variables declaration//GEN-END:variables
 }
