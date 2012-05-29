@@ -390,11 +390,11 @@ public class MainFrame extends javax.swing.JFrame {
     public void limpiarTodo(){
         jTextArea.setText(null);
 
-        for (int i = 0; i < jLabelTablero.length; i++) {
-            for (int j = 0; j < jLabelTablero[i].length; j++) {
-                jLabelTablero[i][j].setVisible(false);
-            }
-        }
+//        for (int i = 0; i < jLabelTablero.length; i++) {
+//            for (int j = 0; j < jLabelTablero[i].length; j++) {
+//                jLabelTablero[i][j].setVisible(false);
+//            }
+//        }
         jPanelGraphiclView.removeAll();
     }
     
