@@ -318,9 +318,9 @@ public class AkariGame {
         // OR operation
         for (int i = 0; i < this.numeroFilas; i++) {
             for (int j = 0; j < this.numeroColumnas; j++) {
-                if ((tableroCasillasNegras[i][j] + tableroIluminacion[i][j]) != 1) {
-                    return false;
-                }
+//                if ((tableroCasillasNegras[i][j] + tableroIluminacion[i][j]) != 1) {
+//                    return false;
+//                }
 
                 if ((tableroRestricciones[i][j] >= 0) && (tableroRestricciones[i][j] <= 4)) {
                     int suma = 0;

@@ -29,6 +29,7 @@ package gui;
 
 import datos.AkariGame;
 import datos.GeneradorIngenuo;
+import datos.GeneradorNoTanIngenuo;
 import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -41,6 +42,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     AkariGame akariGame;
     GeneradorIngenuo generadorIngenuo;
+    GeneradorNoTanIngenuo generadorNoTanIngenuo;
     private JLabel[][] jLabelTablero;
     int widthLabel;
     int heightLabel;
@@ -272,7 +274,8 @@ public class MainFrame extends javax.swing.JFrame {
             if (akariGame.loadFromFile(selectedFile)) {
                 limpiarTodo();
                 jTextArea.setText(akariGame.getTextoEnArchivo());
-                generadorIngenuo = new GeneradorIngenuo(akariGame);
+                generadorNoTanIngenuo = new GeneradorNoTanIngenuo(akariGame);
+//                generadorIngenuo = new GeneradorIngenuo(akariGame);
                 Graficar();
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido", JOptionPane.ERROR_MESSAGE);
@@ -283,7 +286,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
 
-        if (generadorIngenuo.solucionIngenua()) {
+        if (generadorNoTanIngenuo.solucionNoTanIngenua()) {
             Iluminar();
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
