@@ -2,7 +2,7 @@
 // FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS
 // MINIPROYECTO 1: SOLUCIÓN PARA UN JUEGO DE LÓGICA: AKARI
 //
-// ARCHIVO: GeneradorIngenuo.java
+// ARCHIVO: GeneradorNoTanIngenuo.java
 //
 // FECHA: 12/05/29
 //
@@ -40,7 +40,7 @@ import datos.AkariGame;
  *
  * @version        12/05/28
  */
-public class GeneradorIngenuo {
+public class GeneradorNoTanIngenuo {
     AkariGame akari;
     int       casillasEnBlanco;
     int[]     cromosoma;
@@ -52,7 +52,7 @@ public class GeneradorIngenuo {
      *
      * @param tablero
      */
-    public GeneradorIngenuo(AkariGame tablero) {
+    public GeneradorNoTanIngenuo(AkariGame tablero) {
         numeroCromosoma  = 0;
         this.akari       = tablero;
         casillasEnBlanco = tablero.getCasillasBlancas();
