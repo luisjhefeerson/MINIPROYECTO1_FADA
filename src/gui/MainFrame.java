@@ -30,7 +30,6 @@ package gui;
 import datos.AkariGame;
 import datos.GeneradorIngenuo;
 import java.awt.Color;
-import java.awt.Label;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -135,6 +134,8 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPaneTextView.setBounds(10, 160, 380, 380);
 
         jScrollPanelGraphView.setBackground(new java.awt.Color(242, 240, 240));
+
+        jPanelGraphiclView.setLayout(null);
         jScrollPanelGraphView.setViewportView(jPanelGraphiclView);
 
         jPanelPrincipal.add(jScrollPanelGraphView);
@@ -262,7 +263,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
 
         if (generadorIngenuo.solucionIngenua()) {
-            Graficar();
+            Iluminar();
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -286,13 +287,14 @@ public class MainFrame extends javax.swing.JFrame {
         labels = new JLabel[akariGame.getNumeroFilas()][akariGame.getNumeroColumnas()];
 
         // Ajuste de dimensiones para centrar tablero
-        int widthLabel = 30;
-        int heightLabel = 30;
+        widthLabel = 30;
+        heightLabel = 30;
 
-        int xInicial = 0;
-        int anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
-        int yInicial = 0;
-        int altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
+        xInicial = 0;
+        yInicial = 0;
+        
+        anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
+        altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
 
         if (anchoTablero < jPanelGraphiclView.getWidth()) {
             xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
@@ -380,12 +382,6 @@ public class MainFrame extends javax.swing.JFrame {
                     labels[i][j].setText(null);
                     labels[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bombilla.jpg")));
                 }
-                jPanelGraphiclView.add(labels[i][j]);//adiciona los labels al contenedor
-                labels[i][j].setBounds(
-                        xInicial + ((widthLabel + 1) * j),
-                        yInicial + ((heightLabel + 1) * i),
-                        widthLabel,
-                        heightLabel);//ubica los labels en forma de cuadricula. Anteriormente habia un error aqui!!
             }
         }
     }
