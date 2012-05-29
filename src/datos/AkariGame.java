@@ -69,7 +69,7 @@ public class AkariGame {
      * @param numeroFilas
      */
     public void iluminarColumna(int i, int j) {
-        
+
         // Iluminar Hacia Abajo        
         for (int y = i; y < numeroFilas; y++) {
             if (tableroCasillasNegras[y][j] == 0) {
@@ -93,26 +93,26 @@ public class AkariGame {
      * Method description
      *
      *
-     * @param i
-     * @param j
+     * @param fila
+     * @param columna
      * @param numeroColumnas
      * @param m
      */
-    public void iluminarFila(int i, int j) {
-        
+    public void iluminarFila(int fila, int columna) {
+
         // Iluminar hacia la derecha
-        for (int x = j; x < numeroColumnas; x++) {
-            if (tableroCasillasNegras[i][x] == 0) {
-                tableroIluminacion[i][x] = 1;
+        for (int x = columna; x < numeroColumnas; x++) {
+            if (tableroCasillasNegras[fila][x] == 0) {
+                tableroIluminacion[fila][x] = 1;
             } else {
                 break;
             }
         }
 
         // Iluminar hacia la izquierda
-        for (int x = j; x >= 0; x--) {
-            if (tableroCasillasNegras[i][x] == 0) {
-                tableroIluminacion[i][x] = 1;
+        for (int x = columna; x >= 0; x--) {
+            if (tableroCasillasNegras[fila][x] == 0) {
+                tableroIluminacion[fila][x] = 1;
             } else {
                 break;
             }
@@ -167,17 +167,41 @@ public class AkariGame {
      * Method description
      *
      *
-     * @param fila
-     * @param columna
+     * @param i
+     * @param j
      *
      * @return
      */
-    public boolean ponerBombillo(int fila, int columna) {
+    public boolean ponerBombillo(int i, int j) {
 
-        if ((tableroCasillasNegras[fila][columna] == 0) && (tableroIluminacion[fila][columna] == 0)) {
-            tableroBombillos[fila][columna] = 1;
-            iluminarFila(fila, columna);
-            iluminarColumna(fila, columna);
+        if ((tableroCasillasNegras[i][j] == 0) && (tableroIluminacion[i][j] == 0)) {
+            tableroBombillos[i][j] = 1;
+            iluminarFila(i, j);
+            iluminarColumna(i, j);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean quitarBombillo(int fila, int columna) {
+
+        if (tableroBombillos[fila][columna] == 1) {
+            
+            tableroBombillos[fila][columna] = 0;
+            System.out.println("Quitando bombillo!");
+            for (int i = 0; i < numeroFilas; i++) 
+                for (int j = 0; j < numeroColumnas; j++) 
+                    tableroIluminacion[i][j] = 0;
+
+            for (int i = 0; i < numeroFilas; i++) {
+                for (int j = 0; j < numeroColumnas; j++) {
+                    if (tableroBombillos[i][j] == 1) {
+                        iluminarFila(i, j);
+                        iluminarColumna(i, j);
+                    }
+                }
+            }
             return true;
         } else {
             return false;

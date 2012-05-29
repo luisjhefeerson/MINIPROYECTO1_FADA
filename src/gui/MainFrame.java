@@ -336,7 +336,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         if (akariGame.ponerBombillo(i, j)) {
             Iluminar();
+        } else if (akariGame.quitarBombillo(i, j)) {
+            System.out.println("Quita bombillo true!!");
+            Iluminar();
         }
+
     }
 
     private void Graficar() {
@@ -441,10 +445,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         byte[][] tableroBombillos = akariGame.getTableroBombillos();
+        byte[][] tableroCasillasNegras = akariGame.getTableroCasillasNegras();
 
         for (int i = 0; i < jLabelTablero.length; i++) {
             for (int j = 0; j < jLabelTablero[i].length; j++) {
 
+                if (tableroCasillasNegras[i][j] != 1) {
+                    jLabelTablero[i][j].setIcon(null);
+                    jLabelTablero[i][j].setBackground(Color.white);
+                }
                 if (tableroIluminacion[i][j] == 1) {
                     jLabelTablero[i][j].setBackground(Color.yellow);
                 }
