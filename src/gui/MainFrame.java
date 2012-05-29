@@ -327,7 +327,6 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jSlider1StateChanged
     
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
-        
         String name = ((JLabel) evt.getSource()).getName();
         int i = Integer.parseInt(name.split(",")[0]);
         int j = Integer.parseInt(name.split(",")[1]);
