@@ -66,10 +66,12 @@ public class AkariGame {
      *
      * @param i
      * @param j
-     * @param m
+     * @param numeroFilas
      */
-    public void iluminarColumna(int i, int j, int m) {
-        for (int y = i; y < m; y++) {
+    public void iluminarColumna(int i, int j) {
+        
+        // Iluminar Hacia Abajo        
+        for (int y = i; y < numeroFilas; y++) {
             if (tableroCasillasNegras[y][j] == 0) {
                 tableroIluminacion[y][j] = 1;
             } else {
@@ -77,6 +79,7 @@ public class AkariGame {
             }
         }
 
+        // Iluminar Hacia Arriba
         for (int y = i; y >= 0; y--) {
             if (tableroCasillasNegras[y][j] == 0) {
                 tableroIluminacion[y][j] = 1;
@@ -92,11 +95,13 @@ public class AkariGame {
      *
      * @param i
      * @param j
-     * @param n
+     * @param numeroColumnas
      * @param m
      */
-    public void iluminarFila(int i, int j, int n, int m) {
-        for (int x = j; x < n; x++) {
+    public void iluminarFila(int i, int j) {
+        
+        // Iluminar hacia la derecha
+        for (int x = j; x < numeroColumnas; x++) {
             if (tableroCasillasNegras[i][x] == 0) {
                 tableroIluminacion[i][x] = 1;
             } else {
@@ -104,6 +109,7 @@ public class AkariGame {
             }
         }
 
+        // Iluminar hacia la izquierda
         for (int x = j; x >= 0; x--) {
             if (tableroCasillasNegras[i][x] == 0) {
                 tableroIluminacion[i][x] = 1;
@@ -167,14 +173,11 @@ public class AkariGame {
      * @return
      */
     public boolean ponerBombillo(int fila, int columna) {
-        int m = numeroFilas;
-        int n = numeroColumnas;
 
         if ((tableroCasillasNegras[fila][columna] == 0) && (tableroIluminacion[fila][columna] == 0)) {
             tableroBombillos[fila][columna] = 1;
-            iluminarFila(fila, columna, n, m);
-            iluminarColumna(fila, columna, m);
-
+            iluminarFila(fila, columna);
+            iluminarColumna(fila, columna);
             return true;
         } else {
             return false;
@@ -210,8 +213,10 @@ public class AkariGame {
                     }
 
                     if (valor == 1) {
+                        tableroRestricciones[i][j] = 8;
                         tableroCasillasNegras[i][j] = 0;
                         tableroBombillos[i][j] = 1;
+
                     }
 
                     if (valor == 2) {
@@ -311,8 +316,7 @@ public class AkariGame {
                         suma = tableroBombillos[i - 1][j] // Arriba
                                 + tableroBombillos[i][j - 1]; // Izquierda
 
-                    } 
-                    else {
+                    } else {
 
                         // 5. Primera fila, pero no esquina superior
                         if (i == 0) {
@@ -321,7 +325,7 @@ public class AkariGame {
                                     + tableroBombillos[i][j - 1]; // Izquierda
 
                         } //6. Ultima Fila, pero no esquina inferior
-                        else if (i == (numeroFilas-1) ) {
+                        else if (i == (numeroFilas - 1)) {
                             suma = tableroBombillos[i - 1][j] //Arriba
                                     + tableroBombillos[i][j + 1] //Derecha
                                     + tableroBombillos[i][j - 1]; //Izquierda
@@ -333,7 +337,7 @@ public class AkariGame {
                                     + tableroBombillos[i][j + 1]; // Derecha
 
                         } // 8. Ultima columna, pero no esquina derecha
-                        else if (j == (numeroColumnas-1)) {
+                        else if (j == (numeroColumnas - 1)) {
                             suma = tableroBombillos[i + 1][j] // Arriba
                                     + tableroBombillos[i - 1][j] // Abajo
                                     + tableroBombillos[i][j - 1]; // Izquierda
