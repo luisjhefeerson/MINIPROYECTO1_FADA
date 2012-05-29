@@ -337,8 +337,10 @@ public class MainFrame extends javax.swing.JFrame {
         if (akariGame.ponerBombillo(i, j)) {
             Iluminar();
         } else if (akariGame.quitarBombillo(i, j)) {
-            System.out.println("Quita bombillo true!!");
             Iluminar();
+        }
+        if (akariGame.validation()) {
+            JOptionPane.showMessageDialog(this, "FELICITACIONES GANASTE!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }

@@ -189,7 +189,6 @@ public class AkariGame {
         if (tableroBombillos[fila][columna] == 1) {
             
             tableroBombillos[fila][columna] = 0;
-            System.out.println("Quitando bombillo!");
             for (int i = 0; i < numeroFilas; i++) 
                 for (int j = 0; j < numeroColumnas; j++) 
                     tableroIluminacion[i][j] = 0;
