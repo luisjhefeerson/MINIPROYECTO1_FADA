@@ -39,7 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     AkariGame akariGame;
     GeneradorIngenuo generadorIngenuo;
-    private JLabel[][] labels;
+    private JLabel[][] jLabelTablero;
     int widthLabel;
     int heightLabel;
     int xInicial;
@@ -250,6 +250,7 @@ public class MainFrame extends javax.swing.JFrame {
             akariGame = new AkariGame();
 
             if (akariGame.loadFromFile(selectedFile)) {
+                limpiarTodo();
                 jTextArea.setText(akariGame.getTextoEnArchivo());
                 generadorIngenuo = new GeneradorIngenuo(akariGame);
                 Graficar();
@@ -284,7 +285,7 @@ public class MainFrame extends javax.swing.JFrame {
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         int[][] tableroRestricciones = akariGame.getTalberoRestricciones();
 
-        labels = new JLabel[akariGame.getNumeroFilas()][akariGame.getNumeroColumnas()];
+        jLabelTablero = new JLabel[akariGame.getNumeroFilas()][akariGame.getNumeroColumnas()];
 
         // Ajuste de dimensiones para centrar tablero
         widthLabel = 30;
@@ -309,56 +310,56 @@ public class MainFrame extends javax.swing.JFrame {
         for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
             for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
 
-                labels[i][j] = new JLabel();
-                labels[i][j].setOpaque(true);
-                labels[i][j].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                jLabelTablero[i][j] = new JLabel();
+                jLabelTablero[i][j].setOpaque(true);
+                jLabelTablero[i][j].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
                 //TABLERO CASILLAS BLANCAS Y NEGRAS
                 if (tableroCasillasNegras[i][j] == 0) //cuando el valor es 0 la casilla es blanca
                 {
-                    labels[i][j].setBackground(Color.white);
+                    jLabelTablero[i][j].setBackground(Color.white);
                 }
                 if (tableroCasillasNegras[i][j] == 1) { //cuando el valor es 1 la casilla es negra
-                    labels[i][j].setBackground(Color.black);
-                    labels[i][j].setForeground(Color.white);
+                    jLabelTablero[i][j].setBackground(Color.black);
+                    jLabelTablero[i][j].setForeground(Color.white);
                 }
 
                 //TABLERO DE RESTRICCIONES
                 if (tableroRestricciones[i][j] == 0)//la casilla tiene el numero 0
                 {
-                    labels[i][j].setText("0");
+                    jLabelTablero[i][j].setText("0");
                 }
                 if (tableroRestricciones[i][j] == 1)//la casilla tiene el numero 1
                 {
-                    labels[i][j].setText("1");
+                    jLabelTablero[i][j].setText("1");
                 }
                 if (tableroRestricciones[i][j] == 2)//la casilla tiene el numero 2
                 {
-                    labels[i][j].setText("2");
+                    jLabelTablero[i][j].setText("2");
                 }
                 if (tableroRestricciones[i][j] == 3)//la casilla tiene el numero 3                {
                 {
-                    labels[i][j].setText("3");
+                    jLabelTablero[i][j].setText("3");
                 }
                 if (tableroRestricciones[i][j] == 4)//la casilla tiene el numero 4                
                 {
-                    labels[i][j].setText("4");
+                    jLabelTablero[i][j].setText("4");
                 }
 
                 //TABLERO BOMBILLOS
                 if (tableroBombillos[i][j] == 1) {//cuando el valor es 1 la casilla tiene bombillo
-                    labels[i][j].setText(null);
-                    labels[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bombilla.jpg")));
+                    jLabelTablero[i][j].setText(null);
+                    jLabelTablero[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bombilla.jpg")));
                 }
 
                 //TABLERO ILUMINACION    
                 if (tableroIluminacion[i][j] == 1) //cuando el valor es 1 la casilla se ilumina
                 {
-                    labels[i][j].setBackground(Color.YELLOW);
+                    jLabelTablero[i][j].setBackground(Color.YELLOW);
                 }
 
-                jPanelGraphiclView.add(labels[i][j]);//adiciona los labels al contenedor
-                labels[i][j].setBounds(
+                jPanelGraphiclView.add(jLabelTablero[i][j]);//adiciona los labels al contenedor
+                jLabelTablero[i][j].setBounds(
                         xInicial + ((widthLabel + 1) * j),
                         yInicial + ((heightLabel + 1) * i),
                         widthLabel,
@@ -372,20 +373,24 @@ public class MainFrame extends javax.swing.JFrame {
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         byte[][] tableroBombillos = akariGame.getTableroBombillos();
 
-        for (int i = 0; i < labels.length; i++) {
-            for (int j = 0; j < labels[i].length; j++) {
+        for (int i = 0; i < jLabelTablero.length; i++) {
+            for (int j = 0; j < jLabelTablero[i].length; j++) {
 
                 if (tableroIluminacion[i][j] == 1) {
-                    labels[i][j].setBackground(Color.yellow);
+                    jLabelTablero[i][j].setBackground(Color.yellow);
                 }
                 if (tableroBombillos[i][j] == 1) {
-                    labels[i][j].setText(null);
-                    labels[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bombilla.jpg")));
+                    jLabelTablero[i][j].setText(null);
+                    jLabelTablero[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bombilla.jpg")));
                 }
             }
         }
     }
 
+    public void limpiarTodo(){
+        jTextArea.setText(null);
+        jPanelGraphiclView.removeAll();
+    }
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
