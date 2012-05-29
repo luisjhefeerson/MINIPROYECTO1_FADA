@@ -34,6 +34,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -46,8 +48,10 @@ public class MainFrame extends javax.swing.JFrame {
     int anchoTablero;
     int yInicial;
     int altoTablero;
+    boolean tableroCargado;
 
     public MainFrame() {
+        tableroCargado = false;
         initComponents();
     }
 
@@ -258,7 +262,8 @@ public class MainFrame extends javax.swing.JFrame {
         int resultado = selectorArchivo.showOpenDialog(this);
 
         if (resultado != JFileChooser.CANCEL_OPTION) {
-
+            
+            
             File selectedFile = selectorArchivo.getSelectedFile();
             akariGame = new AkariGame();
 
@@ -293,32 +298,31 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
 
-
-        widthLabel = jSlider1.getValue();
-        heightLabel = jSlider1.getValue();
-
-        anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
-        altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
-
-        if (anchoTablero < jPanelGraphiclView.getWidth()) {
-            xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
-        }
-
-        if (altoTablero < jPanelGraphiclView.getHeight()) {
-            yInicial = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
-        }
-
-        for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
-            for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
-                jLabelTablero[i][j].setBounds(
-                        xInicial + ((widthLabel + 1) * j),
-                        yInicial + ((heightLabel + 1) * i),
-                        widthLabel,
-                        heightLabel);
+        if (tableroCargado) {
+            widthLabel = jSlider1.getValue();
+            heightLabel = jSlider1.getValue();
+            
+            anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
+            altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
+            
+            if (anchoTablero < jPanelGraphiclView.getWidth()) {
+                xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
+            }
+            
+            if (altoTablero < jPanelGraphiclView.getHeight()) {
+                yInicial = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
+            }
+            
+            for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
+                for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
+                    jLabelTablero[i][j].setBounds(
+                            xInicial + ((widthLabel + 1) * j),
+                            yInicial + ((heightLabel + 1) * i),
+                            widthLabel,
+                            heightLabel);
+                }
             }
         }
-
-
 
     }//GEN-LAST:event_jSlider1StateChanged
 
@@ -334,6 +338,7 @@ public class MainFrame extends javax.swing.JFrame {
         // Ajuste de dimensiones para centrar tablero
         widthLabel = 30;
         heightLabel = 30;
+        jSlider1.setValue(30);
 
         xInicial = 0;
         yInicial = 0;
@@ -350,13 +355,15 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         //IMPORTANTE: El error que habia aqui antes se arreglo
-
+        Border border = LineBorder.createGrayLineBorder();
+        
         for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
             for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
 
                 jLabelTablero[i][j] = new JLabel();
                 jLabelTablero[i][j].setOpaque(true);
                 jLabelTablero[i][j].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                jLabelTablero[i][j].setBorder(border);
 
                 //TABLERO CASILLAS BLANCAS Y NEGRAS
                 if (tableroCasillasNegras[i][j] == 0) //cuando el valor es 0 la casilla es blanca
@@ -410,6 +417,7 @@ public class MainFrame extends javax.swing.JFrame {
                         heightLabel);//ubica los labels en forma de cuadricula. Anteriormente habia un error aqui!!
             }
         }
+        tableroCargado = true;
     }
 
     public void Iluminar() {
@@ -435,6 +443,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea.setText(null);
         jPanelGraphiclView.removeAll();
         jPanelGraphiclView.repaint();
+        tableroCargado = false;
     }
 
     public static void main(String args[]) {
