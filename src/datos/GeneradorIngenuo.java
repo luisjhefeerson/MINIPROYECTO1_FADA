@@ -53,7 +53,7 @@ public class GeneradorIngenuo {
      * @param tablero
      */
     public GeneradorIngenuo(AkariGame tablero) {
-        numeroCromosoma  = 289;
+        numeroCromosoma  = 0;
         this.akari       = tablero;
         casillasEnBlanco = tablero.getCasillasBlancas();
         System.out.println("Casillas en Blanco: " + casillasEnBlanco);
@@ -124,7 +124,6 @@ public class GeneradorIngenuo {
      */
     public boolean solucionIngenua() {
         generarSiguiteCromosoma();
-
         boolean b = applicarCromosoma();
 
         while ((!b) && (numeroCromosoma < Math.pow(2, casillasEnBlanco) - 1)) {
