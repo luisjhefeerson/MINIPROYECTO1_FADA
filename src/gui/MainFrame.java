@@ -38,7 +38,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 public class MainFrame extends javax.swing.JFrame {
-    
+
     AkariGame akariGame;
     GeneradorIngenuo generadorIngenuo;
     private JLabel[][] jLabelTablero;
@@ -49,12 +49,14 @@ public class MainFrame extends javax.swing.JFrame {
     int yInicial;
     int altoTablero;
     boolean tableroCargado;
-    
+
     public MainFrame() {
         tableroCargado = false;
+        widthLabel = 30;
+        heightLabel = 30;
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -220,7 +222,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jMISalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMISalirActionPerformed
-    
+
     private void jMIAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAcercaDeActionPerformed
         //<editor-fold defaultstate="collapsed" desc="jMIAcercaDeActionPerformed()">
         String acercaDe = "FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS\n"
@@ -248,25 +250,25 @@ public class MainFrame extends javax.swing.JFrame {
                 + "\n"
                 + "ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION\n"
                 + "UNIVERSIDAD DEL VALLE";
-        
-        
+
+
         JOptionPane.showMessageDialog(this, acercaDe, "Acerda de", JOptionPane.INFORMATION_MESSAGE);
         //</editor-fold>
     }//GEN-LAST:event_jMIAcercaDeActionPerformed
-    
+
     private void jMICargarTableroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICargarTableroActionPerformed
-        
+
         JFileChooser selectorArchivo = new JFileChooser("./tests/");
-        
+
         selectorArchivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int resultado = selectorArchivo.showOpenDialog(this);
-        
+
         if (resultado != JFileChooser.CANCEL_OPTION) {
-            
-            
+
+
             File selectedFile = selectorArchivo.getSelectedFile();
             akariGame = new AkariGame();
-            
+
             if (akariGame.loadFromFile(selectedFile)) {
                 limpiarTodo();
                 jTextArea.setText(akariGame.getTextoEnArchivo());
@@ -276,43 +278,44 @@ public class MainFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
+
     }//GEN-LAST:event_jMICargarTableroActionPerformed
-    
+
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
-        
+
         if (generadorIngenuo.solucionIngenua()) {
             Iluminar();
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonSiguienteActionPerformed
-    
+
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-        
+
         akariGame.inicializarMatriz();
         jPanelGraphiclView.removeAll();
+        jPanelGraphiclView.repaint();
         Graficar();
-        
+
     }//GEN-LAST:event_jButtonBorrarActionPerformed
-    
+
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        
+
         if (tableroCargado) {
             widthLabel = jSlider1.getValue();
             heightLabel = jSlider1.getValue();
-            
+
             anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
             altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
-            
+
             if (anchoTablero < jPanelGraphiclView.getWidth()) {
                 xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
             }
-            
+
             if (altoTablero < jPanelGraphiclView.getHeight()) {
                 yInicial = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
             }
-            
+
             for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
                 for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
                     jLabelTablero[i][j].setBounds(
@@ -323,53 +326,50 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         }
-        
+
     }//GEN-LAST:event_jSlider1StateChanged
-    
+
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
         String name = ((JLabel) evt.getSource()).getName();
         int i = Integer.parseInt(name.split(",")[0]);
         int j = Integer.parseInt(name.split(",")[1]);
-        
+
         if (akariGame.ponerBombillo(i, j)) {
             Iluminar();
         }
     }
-    
+
     private void Graficar() {
-        
+
         byte[][] tableroCasillasNegras = akariGame.getTableroCasillasNegras();
         byte[][] tableroBombillos = akariGame.getTableroBombillos();
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         int[][] tableroRestricciones = akariGame.getTalberoRestricciones();
-        
+
         jLabelTablero = new JLabel[akariGame.getNumeroFilas()][akariGame.getNumeroColumnas()];
 
         // Ajuste de dimensiones para centrar tablero
-        widthLabel = 30;
-        heightLabel = 30;
-        jSlider1.setValue(30);
-        
+
         xInicial = 0;
         yInicial = 0;
-        
+
         anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
         altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
-        
+
         if (anchoTablero < jPanelGraphiclView.getWidth()) {
             xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
         }
-        
+
         if (altoTablero < jPanelGraphiclView.getHeight()) {
             yInicial = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
         }
 
         //IMPORTANTE: El error que habia aqui antes se arreglo
         Border border = LineBorder.createGrayLineBorder();
-        
+
         for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
             for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
-                
+
                 jLabelTablero[i][j] = new JLabel();
                 jLabelTablero[i][j].setOpaque(true);
                 jLabelTablero[i][j].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -425,7 +425,7 @@ public class MainFrame extends javax.swing.JFrame {
                 {
                     jLabelTablero[i][j].setBackground(Color.YELLOW);
                 }
-                
+
                 jPanelGraphiclView.add(jLabelTablero[i][j]);//adiciona los labels al contenedor
                 jLabelTablero[i][j].setBounds(
                         xInicial + ((widthLabel + 1) * j),
@@ -436,15 +436,15 @@ public class MainFrame extends javax.swing.JFrame {
         }
         tableroCargado = true;
     }
-    
+
     public void Iluminar() {
-        
+
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         byte[][] tableroBombillos = akariGame.getTableroBombillos();
-        
+
         for (int i = 0; i < jLabelTablero.length; i++) {
             for (int j = 0; j < jLabelTablero[i].length; j++) {
-                
+
                 if (tableroIluminacion[i][j] == 1) {
                     jLabelTablero[i][j].setBackground(Color.yellow);
                 }
@@ -455,14 +455,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void limpiarTodo() {
         jTextArea.setText(null);
         jPanelGraphiclView.removeAll();
         jPanelGraphiclView.repaint();
         tableroCargado = false;
     }
-    
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -485,7 +485,7 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
                 new MainFrame().setVisible(true);
             }
