@@ -25,9 +25,13 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
+
+
+
 package datos;
 
 //~--- non-JDK imports --------------------------------------------------------
+
 import datos.AkariGame;
 
 /**
@@ -37,12 +41,11 @@ import datos.AkariGame;
  * @version 12/05/28
  */
 public class GeneradorNoTanIngenuo {
-
     private byte[][] casillasTenidasEnCuenta = null;
-    AkariGame akari;
-    int[] cromosoma;
-    int longitudCromosoma;
-    int numeroCromosoma;
+    AkariGame        akari;
+    int[]            cromosoma;
+    int              longitudCromosoma;
+    int              numeroCromosoma;
 
     /**
      * Constructs ...
@@ -51,8 +54,8 @@ public class GeneradorNoTanIngenuo {
      * @param tablero
      */
     public GeneradorNoTanIngenuo(AkariGame tablero) {
-        this.numeroCromosoma = 0;
-        this.akari = tablero;
+        this.numeroCromosoma   = 0;
+        this.akari             = tablero;
         this.longitudCromosoma = findCasillasATenerEnCuenta();
         System.out.println("Casillas a tener en cuenta!: " + longitudCromosoma);
     }
@@ -101,9 +104,11 @@ public class GeneradorNoTanIngenuo {
                     if (cromosoma[counter] == 1) {
                         if (!akari.ponerBombillo(i, j)) {
                             System.out.println("No permite colocar Bombillo en: " + i + "," + j);
+
                             return false;
                         }
                     }
+
                     counter++;
                 }
             }
@@ -150,40 +155,39 @@ public class GeneradorNoTanIngenuo {
                     // 1. Esquina superior izquierda
                     if ((i == 0) && (j == 0)) {
                         if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
-                            casillasTenidasEnCuenta[i + 1][j] = 1;    // Abajo
+                            casillasTenidasEnCuenta[i + 1][j] = 1;        // Abajo
                         }
 
                         if (akari.getTableroCasillasNegras()[i][j + 1] == 0) {
-                            casillasTenidasEnCuenta[i][j + 1] = 1;    // Derecha
+                            casillasTenidasEnCuenta[i][j + 1] = 1;        // Derecha
                         }
-                    } // 2. Esquina superior derecha
-                    else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
+                    }                                                     // 2. Esquina superior derecha
+                            else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
                         if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
-                            casillasTenidasEnCuenta[i + 1][j] = 1;    // Abajo
+                            casillasTenidasEnCuenta[i + 1][j] = 1;        // Abajo
                         }
 
                         if (akari.getTableroCasillasNegras()[i][j - 1] == 0) {
-                            casillasTenidasEnCuenta[i][j - 1] = 1;    // Izquierda
+                            casillasTenidasEnCuenta[i][j - 1] = 1;        // Izquierda
                         }
-                    } // 3. Esquina inferior izquierda
-                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
+                    }                                                     // 3. Esquina inferior izquierda
+                            else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
                         if (akari.getTableroCasillasNegras()[i - 1][j] == 0) {
-                            casillasTenidasEnCuenta[i - 1][j] = 1;    // Arriba
+                            casillasTenidasEnCuenta[i - 1][j] = 1;        // Arriba
                         }
 
                         if (akari.getTableroCasillasNegras()[i][j + 1] == 0) {
-                            casillasTenidasEnCuenta[i][j + 1] = 1;    // Derecha
+                            casillasTenidasEnCuenta[i][j + 1] = 1;        // Derecha
                         }
-                    } // 4. Esquina inferior derecha
-                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
+                    }                                                     // 4. Esquina inferior derecha
+                            else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
                         if (akari.getTableroCasillasNegras()[i - 1][j] == 0) {
-                            casillasTenidasEnCuenta[i - 1][j] = 1;    // Arriba
+                            casillasTenidasEnCuenta[i - 1][j] = 1;        // Arriba
                         }
 
                         if (akari.getTableroCasillasNegras()[i][j - 1] == 0) {
-                            casillasTenidasEnCuenta[i][j - 1] = 1;    // Izquierda
+                            casillasTenidasEnCuenta[i][j - 1] = 1;        // Izquierda
                         }
-
                     } else {
 
                         // 5. Primera fila, pero no esquina superior
@@ -199,8 +203,8 @@ public class GeneradorNoTanIngenuo {
                             if (akari.getTableroCasillasNegras()[i][j - 1] == 0) {
                                 casillasTenidasEnCuenta[i][j - 1] = 1;    // Izquierda
                             }
-                        } // 6. Ultima Fila, pero no esquina inferior
-                        else if (i == (akari.getNumeroFilas() - 1)) {
+                        }                                                 // 6. Ultima Fila, pero no esquina inferior
+                                else if (i == (akari.getNumeroFilas() - 1)) {
                             if (akari.getTableroCasillasNegras()[i - 1][j] == 0) {
                                 casillasTenidasEnCuenta[i - 1][j] = 1;    // Arriba
                             }
@@ -212,8 +216,8 @@ public class GeneradorNoTanIngenuo {
                             if (akari.getTableroCasillasNegras()[i][j - 1] == 0) {
                                 casillasTenidasEnCuenta[i][j - 1] = 1;    // Izquierda
                             }
-                        } // 7. Primera columna, pero no esquina izquierda
-                        else if (j == 0) {
+                        }                                                 // 7. Primera columna, pero no esquina izquierda
+                                else if (j == 0) {
                             if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
                                 casillasTenidasEnCuenta[i + 1][j] = 1;    // Abajo
                             }
@@ -225,8 +229,8 @@ public class GeneradorNoTanIngenuo {
                             if (akari.getTableroCasillasNegras()[i][j + 1] == 0) {
                                 casillasTenidasEnCuenta[i][j + 1] = 1;    // Derecha
                             }
-                        } // 8. Ultima columna, pero no esquina derecha
-                        else if (j == (akari.getNumeroColumnas() - 1)) {
+                        }                                                 // 8. Ultima columna, pero no esquina derecha
+                                else if (j == (akari.getNumeroColumnas() - 1)) {
                             if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
                                 casillasTenidasEnCuenta[i + 1][j] = 1;    // Abajo
                             }
@@ -238,8 +242,8 @@ public class GeneradorNoTanIngenuo {
                             if (akari.getTableroCasillasNegras()[i][j - 1] == 0) {
                                 casillasTenidasEnCuenta[i][j - 1] = 1;    // Izquierda
                             }
-                        } // Para todos los demas casos
-                        else {
+                        }                                                 // Para todos los demas casos
+                                else {
                             if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
                                 casillasTenidasEnCuenta[i + 1][j] = 1;    // Abajo
                             }
@@ -253,7 +257,7 @@ public class GeneradorNoTanIngenuo {
                             }
 
                             if (akari.getTableroCasillasNegras()[i][j - 1] == 0) {
-                                casillasTenidasEnCuenta[i][j - 1] = 1;    // Izquierda                  
+                                casillasTenidasEnCuenta[i][j - 1] = 1;    // Izquierda
                             }
                         }
                     }
@@ -280,6 +284,3 @@ public class GeneradorNoTanIngenuo {
         return numeroDeCasillas;
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

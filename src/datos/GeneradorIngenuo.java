@@ -137,6 +137,3 @@ public class GeneradorIngenuo {
         return b;
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com
