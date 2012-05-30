@@ -81,6 +81,7 @@ public class MainFrame extends javax.swing.JFrame {
         jSlider1 = new javax.swing.JSlider();
         jButtonMedioInge = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButtonIluminar = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
@@ -198,6 +199,16 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setText("ZOOM:");
         jPanelPrincipal.add(jLabel1);
         jLabel1.setBounds(310, 430, 100, 19);
+
+        jButtonIluminar.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jButtonIluminar.setText("Iluminar");
+        jButtonIluminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIluminarActionPerformed(evt);
+            }
+        });
+        jPanelPrincipal.add(jButtonIluminar);
+        jButtonIluminar.setBounds(310, 265, 100, 31);
 
         getContentPane().add(jPanelPrincipal);
         jPanelPrincipal.setBounds(0, 0, 800, 600);
@@ -359,6 +370,16 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonMedioIngeActionPerformed
+
+    private void jButtonIluminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIluminarActionPerformed
+        
+        if (generadorNoTanIngenuo.intentarIluminar()) {
+            Iluminar();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se pudo iluminar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButtonIluminarActionPerformed
 
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
         String name = ((JLabel) evt.getSource()).getName();
@@ -535,6 +556,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBorrar;
+    private javax.swing.JButton jButtonIluminar;
     private javax.swing.JButton jButtonIngenuo;
     private javax.swing.JButton jButtonMedioInge;
     private javax.swing.JLabel jLabel1;
