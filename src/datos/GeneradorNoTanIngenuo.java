@@ -345,8 +345,13 @@ public class GeneradorNoTanIngenuo {
             akari.inicializarMatriz();
             exito = applicarCromosoma(casillasTenidasEnCuenta, cromosoma, true);
         } while (!exito && !stop);
-
-        return intentarIluminar();
+        
+        if (exito) {
+            return intentarIluminar();
+        }else{
+            return false;
+        }
+        
     }
 
     public boolean intentarIluminar() {
