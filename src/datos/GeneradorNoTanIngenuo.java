@@ -25,14 +25,9 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
-
-
 package datos;
 
 //~--- non-JDK imports --------------------------------------------------------
-
-import datos.AkariGame;
-
 /**
  * Class description
  *
@@ -40,11 +35,14 @@ import datos.AkariGame;
  * @version 12/05/28
  */
 public class GeneradorNoTanIngenuo {
-    private byte[][] casillasTenidasEnCuenta = null;
-    AkariGame        akari;
-    int[]            cromosoma;
-    int              longitudCromosoma;
-    int              numeroCromosoma;
+
+    AkariGame akari;
+    private int[][] casillasNoIluminadas;
+    private int[][] casillasTenidasEnCuenta;
+    boolean[] cromosoma;
+    boolean[] sumando;
+    boolean stop;
+    int nCasillasNoIluminadas;
 
     /**
      * Constructs ...
@@ -53,9 +51,23 @@ public class GeneradorNoTanIngenuo {
      * @param tablero
      */
     public GeneradorNoTanIngenuo(AkariGame tablero) {
-        this.numeroCromosoma   = 0;
-        this.akari             = tablero;
-        this.longitudCromosoma = findCasillasATenerEnCuenta();
+
+        this.stop = false;
+        this.akari = tablero;
+        int longitudCromosoma = findCasillasATenerEnCuenta();
+        this.cromosoma = new boolean[longitudCromosoma];
+        this.sumando = new boolean[longitudCromosoma];
+
+        // Inicializar el cromosoma y el sumando
+        for (int i = 0; i < sumando.length; i++) {
+            sumando[i] = false;
+            cromosoma[i] = false;
+        }
+
+        // Terminando de Inicializar el sumando = (1)= 0000....0001
+        sumando[sumando.length - 1] = true;
+
+
         System.out.println("Casillas a tener en cuenta!: " + longitudCromosoma);
     }
 
@@ -65,20 +77,17 @@ public class GeneradorNoTanIngenuo {
      *
      * @return
      */
-    public boolean applicarCromosoma() {
-        int counter = 0;
+    public boolean applicarCromosoma(int[][] matrizValidacion, boolean [] cromosoma) {
 
+        int counter = 0;
         for (int i = 0; i < akari.getNumeroFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
-                if (casillasTenidasEnCuenta[i][j] == 1) {
-                    if (cromosoma[counter] == 1) {
+                if (matrizValidacion[i][j] == 1) {
+                    if (cromosoma[counter]) {
                         if (!akari.ponerBombillo(i, j)) {
-                            System.out.println("No permite colocar Bombillo en: " + i + "," + j);
-
                             return false;
                         }
                     }
-
                     counter++;
                 }
             }
@@ -87,8 +96,15 @@ public class GeneradorNoTanIngenuo {
         return akari.validation(true);
     }
 
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     private int findCasillasATenerEnCuenta() {
-        casillasTenidasEnCuenta = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
+
+        casillasTenidasEnCuenta = new int[akari.getNumeroFilas()][akari.getNumeroColumnas()];
 
         for (int i = 0; i < akari.getNumeroFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
@@ -110,8 +126,8 @@ public class GeneradorNoTanIngenuo {
                         if (akari.getTableroCasillasNegras()[i][j + 1] == 0) {
                             casillasTenidasEnCuenta[i][j + 1] = 1;        // Derecha
                         }
-                    }                                                     // 2. Esquina superior derecha
-                            else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
+                    } // 2. Esquina superior derecha
+                    else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
                         if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
                             casillasTenidasEnCuenta[i + 1][j] = 1;        // Abajo
                         }
@@ -119,8 +135,8 @@ public class GeneradorNoTanIngenuo {
                         if (akari.getTableroCasillasNegras()[i][j - 1] == 0) {
                             casillasTenidasEnCuenta[i][j - 1] = 1;        // Izquierda
                         }
-                    }                                                     // 3. Esquina inferior izquierda
-                            else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
+                    } // 3. Esquina inferior izquierda
+                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
                         if (akari.getTableroCasillasNegras()[i - 1][j] == 0) {
                             casillasTenidasEnCuenta[i - 1][j] = 1;        // Arriba
                         }
@@ -128,8 +144,8 @@ public class GeneradorNoTanIngenuo {
                         if (akari.getTableroCasillasNegras()[i][j + 1] == 0) {
                             casillasTenidasEnCuenta[i][j + 1] = 1;        // Derecha
                         }
-                    }                                                     // 4. Esquina inferior derecha
-                            else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
+                    } // 4. Esquina inferior derecha
+                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
                         if (akari.getTableroCasillasNegras()[i - 1][j] == 0) {
                             casillasTenidasEnCuenta[i - 1][j] = 1;        // Arriba
                         }
@@ -152,8 +168,8 @@ public class GeneradorNoTanIngenuo {
                             if (akari.getTableroCasillasNegras()[i][j - 1] == 0) {
                                 casillasTenidasEnCuenta[i][j - 1] = 1;    // Izquierda
                             }
-                        }                                                 // 6. Ultima Fila, pero no esquina inferior
-                                else if (i == (akari.getNumeroFilas() - 1)) {
+                        } // 6. Ultima Fila, pero no esquina inferior
+                        else if (i == (akari.getNumeroFilas() - 1)) {
                             if (akari.getTableroCasillasNegras()[i - 1][j] == 0) {
                                 casillasTenidasEnCuenta[i - 1][j] = 1;    // Arriba
                             }
@@ -165,8 +181,8 @@ public class GeneradorNoTanIngenuo {
                             if (akari.getTableroCasillasNegras()[i][j - 1] == 0) {
                                 casillasTenidasEnCuenta[i][j - 1] = 1;    // Izquierda
                             }
-                        }                                                 // 7. Primera columna, pero no esquina izquierda
-                                else if (j == 0) {
+                        } // 7. Primera columna, pero no esquina izquierda
+                        else if (j == 0) {
                             if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
                                 casillasTenidasEnCuenta[i + 1][j] = 1;    // Abajo
                             }
@@ -178,8 +194,8 @@ public class GeneradorNoTanIngenuo {
                             if (akari.getTableroCasillasNegras()[i][j + 1] == 0) {
                                 casillasTenidasEnCuenta[i][j + 1] = 1;    // Derecha
                             }
-                        }                                                 // 8. Ultima columna, pero no esquina derecha
-                                else if (j == (akari.getNumeroColumnas() - 1)) {
+                        } // 8. Ultima columna, pero no esquina derecha
+                        else if (j == (akari.getNumeroColumnas() - 1)) {
                             if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
                                 casillasTenidasEnCuenta[i + 1][j] = 1;    // Abajo
                             }
@@ -191,8 +207,8 @@ public class GeneradorNoTanIngenuo {
                             if (akari.getTableroCasillasNegras()[i][j - 1] == 0) {
                                 casillasTenidasEnCuenta[i][j - 1] = 1;    // Izquierda
                             }
-                        }                                                 // Para todos los demas casos
-                                else {
+                        } // Para todos los demas casos
+                        else {
                             if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
                                 casillasTenidasEnCuenta[i + 1][j] = 1;    // Abajo
                             }
@@ -236,30 +252,76 @@ public class GeneradorNoTanIngenuo {
     /**
      * Method description
      *
+     */
+    private void findCasillasNoIluminadas() {
+        this.nCasillasNoIluminadas = 0;
+        this.casillasNoIluminadas = new int[akari.getNumeroFilas()][akari.getNumeroColumnas()];
+
+        for (int i = 0; i < akari.getNumeroFilas(); i++) {
+            for (int j = 0; j < akari.getNumeroColumnas(); j++) {
+                casillasNoIluminadas[i][j] = akari.getTableroIluminacion()[i][j]
+                        + akari.getTableroCasillasNegras()[i][j];
+
+                if (casillasNoIluminadas[i][j] == 0) {
+                    nCasillasNoIluminadas++;
+                }
+
+                System.out.print(casillasNoIluminadas[i][j] + " ");
+            }
+
+            System.out.println();
+        }
+
+        System.out.println("\nCantidad de casillas si ilunimar:" + nCasillasNoIluminadas);
+    }
+
+    /**
+     * Method description
+     *
      *
      * @return
      */
-    public int[] generarSiguiteCromosoma() {
-        numeroCromosoma++;
+    public boolean[] generarSiguiteCromosoma(boolean[] cromosoma, boolean[] sumando) {
 
-        String numeroEnBinario = Integer.toBinaryString(numeroCromosoma);
+        // Inicializar Cromosoma Salida
+        boolean[] salida = new boolean[cromosoma.length];
 
-        System.out.println("Cromosoma: " + numeroCromosoma);
-        System.out.println("En Binario: " + numeroEnBinario);
+        boolean acarreo = false;
 
-        // Inicializar Cromosoma
-        cromosoma = new int[longitudCromosoma];
-
-        for (int i = 0; i < cromosoma.length; i++) {
-            cromosoma[i] = 0;
+        for (int i = salida.length - 1; i >= 0; i--) {
+            if (cromosoma[i] && sumando[i]) {
+                if (acarreo) {
+                    salida[i] = true;
+                    acarreo = true;
+                } else {
+                    salida[i] = false;
+                    acarreo = true;
+                }
+            } else if (cromosoma[i] || sumando[i]) {
+                if (acarreo) {
+                    salida[i] = false;
+                    acarreo = true;
+                } else {
+                    salida[i] = true;
+                    acarreo = false;
+                }
+            } else {
+                if (acarreo) {
+                    salida[i] = true;
+                    acarreo = false;
+                } else {
+                    salida[i] = false;
+                    acarreo = false;
+                }
+            }
         }
 
-        for (int i = 0; i < numeroEnBinario.length(); i++) {
-            cromosoma[cromosoma.length - 1 - i] = Integer.parseInt(numeroEnBinario.substring(numeroEnBinario.length()
-                    - 1 - i, numeroEnBinario.length() - i));
+//         check overflow
+        if (acarreo) {
+            stop = true;
         }
 
-        return cromosoma;
+        return salida;
     }
 
     /**
@@ -269,17 +331,32 @@ public class GeneradorNoTanIngenuo {
      * @return
      */
     public boolean solucionNoTanIngenua() {
-        generarSiguiteCromosoma();
 
-        boolean b = applicarCromosoma();
-
-        while ((!b) && (numeroCromosoma < Math.pow(2, longitudCromosoma) - 1)) {
-            generarSiguiteCromosoma();
+        boolean exito;
+        do {
+            cromosoma = generarSiguiteCromosoma(cromosoma, sumando);
             akari.inicializarMatriz();
-            b = applicarCromosoma();
-            System.out.println("Aplicar Cromosoma: " + numeroCromosoma + " Resultado: " + b + "\n\n");
-        }
+            exito = applicarCromosoma(casillasTenidasEnCuenta, cromosoma);
+        } while (!exito && !stop);
+        findCasillasNoIluminadas();
+        return exito;
 
-        return b;
+//        while(!stop){
+//            String numero = "";
+//            System.out.println("\nNuevo Cromosoma:");
+//            cromosoma = generarSiguiteCromosoma(cromosoma, sumando);
+//            for (int i = 0; i < cromosoma.length; i++) {
+//                if (cromosoma[i]) {
+//                    numero += 1;
+//                    System.out.print(1 + " ");
+//                } else {
+//                    System.out.print(0 + " ");
+//                    numero += 0;
+//                }
+//            }
+//            System.out.println("Numero:" + Integer.parseInt(numero, 2));
+//        }
+//        return true;
+        
     }
 }

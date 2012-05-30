@@ -358,7 +358,6 @@ public class MainFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_jButtonMedioIngeActionPerformed
 
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
