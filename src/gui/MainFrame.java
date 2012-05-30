@@ -76,9 +76,11 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea = new javax.swing.JTextArea();
         jScrollPanelGraphView = new javax.swing.JScrollPane();
         jPanelGraphiclView = new javax.swing.JPanel();
-        jButtonSiguiente = new javax.swing.JButton();
+        jButtonIngenuo = new javax.swing.JButton();
         jButtonBorrar = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
+        jButtonSiguiente1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
@@ -96,43 +98,43 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/UNIVALLE.jpg"))); // NOI18N
         jPanelPrincipal.add(jLabelLogo);
-        jLabelLogo.setBounds(20, 5, 72, 100);
+        jLabelLogo.setBounds(50, 10, 58, 80);
         jPanelPrincipal.add(jSeparator1);
-        jSeparator1.setBounds(0, 110, 800, 5);
+        jSeparator1.setBounds(0, 95, 800, 5);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanelPrincipal.add(jSeparator2);
-        jSeparator2.setBounds(320, 115, 5, 480);
+        jSeparator2.setBounds(300, 105, 5, 480);
 
-        jLabelTitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabelTitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS");
         jPanelPrincipal.add(jLabelTitulo);
-        jLabelTitulo.setBounds(92, 10, 708, 30);
+        jLabelTitulo.setBounds(90, 0, 708, 30);
 
-        jLabelSubtitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabelSubtitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabelSubtitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelSubtitulo.setText("MINIPROYECTO 1");
+        jLabelSubtitulo.setText("MINIPROYECTO 1 - SOLUCIÓN PARA UN JUEGO DE LÓGICA");
         jPanelPrincipal.add(jLabelSubtitulo);
-        jLabelSubtitulo.setBounds(92, 40, 708, 30);
+        jLabelSubtitulo.setBounds(90, 20, 708, 30);
 
-        jLabelSubtitulo1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabelSubtitulo1.setFont(new java.awt.Font("Trebuchet MS", 1, 50)); // NOI18N
         jLabelSubtitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelSubtitulo1.setText("SOLUCIÓN PARA UN JUEGO DE LÓGICA: AKARI");
+        jLabelSubtitulo1.setText("AKARI");
         jPanelPrincipal.add(jLabelSubtitulo1);
-        jLabelSubtitulo1.setBounds(92, 70, 708, 30);
+        jLabelSubtitulo1.setBounds(90, 45, 708, 50);
 
         jLabelTextView.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabelTextView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTextView.setText("TEXT VIEW");
         jPanelPrincipal.add(jLabelTextView);
-        jLabelTextView.setBounds(0, 120, 320, 30);
+        jLabelTextView.setBounds(0, 105, 320, 30);
 
         jLabelgraphicalview.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabelgraphicalview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelgraphicalview.setText("GRAPHICAL VIEW");
         jPanelPrincipal.add(jLabelgraphicalview);
-        jLabelgraphicalview.setBounds(320, 120, 480, 30);
+        jLabelgraphicalview.setBounds(320, 105, 480, 30);
 
         jTextArea.setColumns(20);
         jTextArea.setEditable(false);
@@ -140,7 +142,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPaneTextView.setViewportView(jTextArea);
 
         jPanelPrincipal.add(jScrollPaneTextView);
-        jScrollPaneTextView.setBounds(10, 160, 300, 380);
+        jScrollPaneTextView.setBounds(10, 145, 280, 380);
 
         jScrollPanelGraphView.setBackground(new java.awt.Color(242, 240, 240));
 
@@ -148,17 +150,19 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPanelGraphView.setViewportView(jPanelGraphiclView);
 
         jPanelPrincipal.add(jScrollPanelGraphView);
-        jScrollPanelGraphView.setBounds(415, 160, 380, 380);
+        jScrollPanelGraphView.setBounds(415, 145, 380, 380);
 
-        jButtonSiguiente.setText("Siguiente");
-        jButtonSiguiente.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIngenuo.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jButtonIngenuo.setText("Ingenuo");
+        jButtonIngenuo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSiguienteActionPerformed(evt);
+                jButtonIngenuoActionPerformed(evt);
             }
         });
-        jPanelPrincipal.add(jButtonSiguiente);
-        jButtonSiguiente.setBounds(330, 210, 80, 30);
+        jPanelPrincipal.add(jButtonIngenuo);
+        jButtonIngenuo.setBounds(310, 195, 100, 31);
 
+        jButtonBorrar.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jButtonBorrar.setText("Borrar");
         jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,11 +170,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonBorrar);
-        jButtonBorrar.setBounds(330, 170, 80, 30);
+        jButtonBorrar.setBounds(310, 160, 100, 31);
 
+        jSlider1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jSlider1.setMaximum(50);
         jSlider1.setMinimum(10);
-        jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider1.setValue(30);
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -178,7 +182,22 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jSlider1);
-        jSlider1.setBounds(340, 250, 50, 260);
+        jSlider1.setBounds(310, 450, 100, 50);
+
+        jButtonSiguiente1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jButtonSiguiente1.setText("MedioInge");
+        jButtonSiguiente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSiguiente1ActionPerformed(evt);
+            }
+        });
+        jPanelPrincipal.add(jButtonSiguiente1);
+        jButtonSiguiente1.setBounds(310, 230, 100, 31);
+
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jLabel1.setText("ZOOM:");
+        jPanelPrincipal.add(jLabel1);
+        jLabel1.setBounds(310, 430, 100, 19);
 
         getContentPane().add(jPanelPrincipal);
         jPanelPrincipal.setBounds(0, 0, 800, 600);
@@ -218,7 +237,7 @@ public class MainFrame extends javax.swing.JFrame {
         setJMenuBar(jMenuBar);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-810)/2, (screenSize.height-580)/2, 810, 580);
+        setBounds((screenSize.width-810)/2, (screenSize.height-565)/2, 810, 565);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMISalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISalirActionPerformed
@@ -275,7 +294,7 @@ public class MainFrame extends javax.swing.JFrame {
                 limpiarTodo();
                 jTextArea.setText(akariGame.getTextoEnArchivo());
                 generadorNoTanIngenuo = new GeneradorNoTanIngenuo(akariGame);
-//                generadorIngenuo = new GeneradorIngenuo(akariGame);
+                generadorIngenuo = new GeneradorIngenuo(akariGame);
                 Graficar();
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido", JOptionPane.ERROR_MESSAGE);
@@ -284,14 +303,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMICargarTableroActionPerformed
 
-    private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
+    private void jButtonIngenuoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngenuoActionPerformed
 
         if (generadorNoTanIngenuo.solucionNoTanIngenua()) {
             Iluminar();
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButtonSiguienteActionPerformed
+    }//GEN-LAST:event_jButtonIngenuoActionPerformed
 
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
 
@@ -331,6 +350,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jSlider1StateChanged
+
+    private void jButtonSiguiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguiente1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSiguiente1ActionPerformed
 
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
         String name = ((JLabel) evt.getSource()).getName();
@@ -507,7 +530,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBorrar;
-    private javax.swing.JButton jButtonSiguiente;
+    private javax.swing.JButton jButtonIngenuo;
+    private javax.swing.JButton jButtonSiguiente1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelSubtitulo;
     private javax.swing.JLabel jLabelSubtitulo1;
