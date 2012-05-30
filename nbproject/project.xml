@@ -6,6 +6,7 @@
             <name>MINIPROYECTO1_FADA</name>
             <source-roots>
                 <root id="src.dir"/>
+                <root id="src.src-james.dir" name="Propuesta Código Alterna"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>
