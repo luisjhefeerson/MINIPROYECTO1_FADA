@@ -100,7 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelPrincipal.add(jLabelLogo);
         jLabelLogo.setBounds(50, 10, 58, 80);
         jPanelPrincipal.add(jSeparator1);
-        jSeparator1.setBounds(0, 95, 800, 5);
+        jSeparator1.setBounds(0, 95, 900, 5);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanelPrincipal.add(jSeparator2);
@@ -110,31 +110,31 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS");
         jPanelPrincipal.add(jLabelTitulo);
-        jLabelTitulo.setBounds(90, 0, 708, 30);
+        jLabelTitulo.setBounds(90, 0, 808, 30);
 
         jLabelSubtitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabelSubtitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelSubtitulo.setText("MINIPROYECTO 1 - SOLUCIÓN PARA UN JUEGO DE LÓGICA");
         jPanelPrincipal.add(jLabelSubtitulo);
-        jLabelSubtitulo.setBounds(90, 20, 708, 30);
+        jLabelSubtitulo.setBounds(90, 20, 808, 30);
 
         jLabelSubtitulo1.setFont(new java.awt.Font("Trebuchet MS", 1, 50)); // NOI18N
         jLabelSubtitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelSubtitulo1.setText("AKARI");
         jPanelPrincipal.add(jLabelSubtitulo1);
-        jLabelSubtitulo1.setBounds(90, 45, 708, 50);
+        jLabelSubtitulo1.setBounds(90, 45, 808, 50);
 
         jLabelTextView.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabelTextView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTextView.setText("TEXT VIEW");
+        jLabelTextView.setText("ARCHIVO ENTRADA");
         jPanelPrincipal.add(jLabelTextView);
         jLabelTextView.setBounds(0, 105, 320, 30);
 
         jLabelgraphicalview.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabelgraphicalview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelgraphicalview.setText("GRAPHICAL VIEW");
+        jLabelgraphicalview.setText("VISTA GRAFICA");
         jPanelPrincipal.add(jLabelgraphicalview);
-        jLabelgraphicalview.setBounds(320, 105, 480, 30);
+        jLabelgraphicalview.setBounds(320, 105, 580, 30);
 
         jTextArea.setColumns(20);
         jTextArea.setEditable(false);
@@ -150,7 +150,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPanelGraphView.setViewportView(jPanelGraphiclView);
 
         jPanelPrincipal.add(jScrollPanelGraphView);
-        jScrollPanelGraphView.setBounds(415, 145, 380, 380);
+        jScrollPanelGraphView.setBounds(415, 145, 480, 380);
 
         jButtonIngenuo.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jButtonIngenuo.setText("Ingenuo");
@@ -200,7 +200,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setBounds(310, 430, 100, 19);
 
         getContentPane().add(jPanelPrincipal);
-        jPanelPrincipal.setBounds(0, 0, 800, 600);
+        jPanelPrincipal.setBounds(0, 0, 900, 600);
 
         jMenuArchivo.setText("Archivo");
 
@@ -237,7 +237,7 @@ public class MainFrame extends javax.swing.JFrame {
         setJMenuBar(jMenuBar);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-810)/2, (screenSize.height-565)/2, 810, 565);
+        setBounds((screenSize.width-910)/2, (screenSize.height-565)/2, 910, 565);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMISalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISalirActionPerformed
