@@ -79,7 +79,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonIngenuo = new javax.swing.JButton();
         jButtonBorrar = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
-        jButtonSiguiente1 = new javax.swing.JButton();
+        jButtonMedioInge = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
@@ -184,15 +184,15 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelPrincipal.add(jSlider1);
         jSlider1.setBounds(310, 450, 100, 50);
 
-        jButtonSiguiente1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
-        jButtonSiguiente1.setText("MedioInge");
-        jButtonSiguiente1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonMedioInge.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jButtonMedioInge.setText("MedioInge");
+        jButtonMedioInge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSiguiente1ActionPerformed(evt);
+                jButtonMedioIngeActionPerformed(evt);
             }
         });
-        jPanelPrincipal.add(jButtonSiguiente1);
-        jButtonSiguiente1.setBounds(310, 230, 100, 31);
+        jPanelPrincipal.add(jButtonMedioInge);
+        jButtonMedioInge.setBounds(310, 230, 100, 31);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jLabel1.setText("ZOOM:");
@@ -305,7 +305,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonIngenuoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngenuoActionPerformed
 
-        if (generadorNoTanIngenuo.solucionNoTanIngenua()) {
+        if (generadorIngenuo.solucionIngenua()) {
             Iluminar();
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
@@ -351,9 +351,15 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jSlider1StateChanged
 
-    private void jButtonSiguiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguiente1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonSiguiente1ActionPerformed
+    private void jButtonMedioIngeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMedioIngeActionPerformed
+
+        if (generadorNoTanIngenuo.solucionNoTanIngenua()) {
+            Iluminar();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jButtonMedioIngeActionPerformed
 
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
         String name = ((JLabel) evt.getSource()).getName();
@@ -365,7 +371,7 @@ public class MainFrame extends javax.swing.JFrame {
         } else if (akariGame.quitarBombillo(i, j)) {
             Iluminar();
         }
-        if (akariGame.validation()) {
+        if (akariGame.validation(false)) {
             JOptionPane.showMessageDialog(this, "FELICITACIONES GANASTE!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
         }
 
@@ -531,7 +537,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonIngenuo;
-    private javax.swing.JButton jButtonSiguiente1;
+    private javax.swing.JButton jButtonMedioInge;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelSubtitulo;
