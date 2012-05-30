@@ -4,7 +4,7 @@
 //
 // ARCHIVO: GeneradorNoTanIngenuo.java
 //
-// FECHA: 12/05/29
+// FECHA:  12/05/30
 //
 // AUTORES:
 //     Marx Arturo Arias - 0840247-3743
@@ -25,7 +25,6 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
-
 
 
 package datos;
@@ -66,35 +65,6 @@ public class GeneradorNoTanIngenuo {
      *
      * @return
      */
-    public int[] generarSiguiteCromosoma() {
-        numeroCromosoma++;
-
-        String numeroEnBinario = Integer.toBinaryString(numeroCromosoma);
-
-        System.out.println("Cromosoma: " + numeroCromosoma);
-        System.out.println("En Binario: " + numeroEnBinario);
-
-        // Inicializar Cromosoma
-        cromosoma = new int[longitudCromosoma];
-
-        for (int i = 0; i < cromosoma.length; i++) {
-            cromosoma[i] = 0;
-        }
-
-        for (int i = 0; i < numeroEnBinario.length(); i++) {
-            cromosoma[cromosoma.length - 1 - i] = Integer.parseInt(numeroEnBinario.substring(numeroEnBinario.length()
-                    - 1 - i, numeroEnBinario.length() - i));
-        }
-
-        return cromosoma;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
     public boolean applicarCromosoma() {
         int counter = 0;
 
@@ -115,27 +85,6 @@ public class GeneradorNoTanIngenuo {
         }
 
         return akari.validation(true);
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public boolean solucionNoTanIngenua() {
-        generarSiguiteCromosoma();
-
-        boolean b = applicarCromosoma();
-
-        while ((!b) && (numeroCromosoma < Math.pow(2, longitudCromosoma) - 1)) {
-            generarSiguiteCromosoma();
-            akari.inicializarMatriz();
-            b = applicarCromosoma();
-            System.out.println("Aplicar Cromosoma: " + numeroCromosoma + " Resultado: " + b + "\n\n");
-        }
-
-        return b;
     }
 
     private int findCasillasATenerEnCuenta() {
@@ -282,5 +231,55 @@ public class GeneradorNoTanIngenuo {
         }
 
         return numeroDeCasillas;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
+    public int[] generarSiguiteCromosoma() {
+        numeroCromosoma++;
+
+        String numeroEnBinario = Integer.toBinaryString(numeroCromosoma);
+
+        System.out.println("Cromosoma: " + numeroCromosoma);
+        System.out.println("En Binario: " + numeroEnBinario);
+
+        // Inicializar Cromosoma
+        cromosoma = new int[longitudCromosoma];
+
+        for (int i = 0; i < cromosoma.length; i++) {
+            cromosoma[i] = 0;
+        }
+
+        for (int i = 0; i < numeroEnBinario.length(); i++) {
+            cromosoma[cromosoma.length - 1 - i] = Integer.parseInt(numeroEnBinario.substring(numeroEnBinario.length()
+                    - 1 - i, numeroEnBinario.length() - i));
+        }
+
+        return cromosoma;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
+    public boolean solucionNoTanIngenua() {
+        generarSiguiteCromosoma();
+
+        boolean b = applicarCromosoma();
+
+        while ((!b) && (numeroCromosoma < Math.pow(2, longitudCromosoma) - 1)) {
+            generarSiguiteCromosoma();
+            akari.inicializarMatriz();
+            b = applicarCromosoma();
+            System.out.println("Aplicar Cromosoma: " + numeroCromosoma + " Resultado: " + b + "\n\n");
+        }
+
+        return b;
     }
 }

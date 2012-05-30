@@ -4,7 +4,7 @@
 //
 // ARCHIVO: GeneradorIngenuo.java
 //
-// FECHA: 12/05/29
+// FECHA:  12/05/30
 //
 // AUTORES:
 //     Marx Arturo Arias - 0840247-3743
@@ -25,7 +25,6 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
-
 
 
 package datos;
@@ -65,6 +64,34 @@ public class GeneradorIngenuo {
      *
      * @return
      */
+    public boolean applicarCromosoma() {
+        int counter = 0;
+
+        for (int i = 0; i < akari.getNumeroFilas(); i++) {
+            for (int j = 0; j < akari.getNumeroColumnas(); j++) {
+                if (akari.getTableroCasillasNegras()[i][j] == 0) {
+                    if (cromosoma[counter] == 1) {
+                        if (!akari.ponerBombillo(i, j)) {
+                            System.out.println("No permite colocar Bombillo en: " + i + "," + j);
+
+                            return false;
+                        }
+                    }
+
+                    counter++;
+                }
+            }
+        }
+
+        return akari.validation(false);
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
     public int[] generarSiguiteCromosoma() {
         numeroCromosoma++;
 
@@ -86,34 +113,6 @@ public class GeneradorIngenuo {
         }
 
         return cromosoma;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public boolean applicarCromosoma() {
-        int counter = 0;
-
-        for (int i = 0; i < akari.getNumeroFilas(); i++) {
-            for (int j = 0; j < akari.getNumeroColumnas(); j++) {
-                if (akari.getTableroCasillasNegras()[i][j] == 0) {
-                    if (cromosoma[counter] == 1) {
-                        if (!akari.ponerBombillo(i, j)) {
-                            System.out.println("No permite colocar Bombillo en: " + i + "," + j);
-
-                            return false;
-                        }
-                    }
-
-                    counter++;
-                }
-            }
-        }
-
-        return akari.validation(false);
     }
 
     /**

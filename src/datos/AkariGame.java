@@ -4,7 +4,7 @@
 //
 // ARCHIVO: AkariGame.java
 //
-// FECHA: 12/05/29
+// FECHA:  12/05/30
 //
 // AUTORES:
 //     Marx Arturo Arias - 0840247-3743
@@ -25,7 +25,6 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
-
 
 
 package datos;
@@ -183,40 +182,6 @@ public class AkariGame {
         }
     }
 
-    /**
-     * Method description
-     *
-     *
-     * @param fila
-     * @param columna
-     *
-     * @return
-     */
-    public boolean quitarBombillo(int fila, int columna) {
-        if (tableroBombillos[fila][columna] == 1) {
-            tableroBombillos[fila][columna] = 0;
-
-            for (int i = 0; i < numeroFilas; i++) {
-                for (int j = 0; j < numeroColumnas; j++) {
-                    tableroIluminacion[i][j] = 0;
-                }
-            }
-
-            for (int i = 0; i < numeroFilas; i++) {
-                for (int j = 0; j < numeroColumnas; j++) {
-                    if (tableroBombillos[i][j] == 1) {
-                        iluminarFila(i, j);
-                        iluminarColumna(i, j);
-                    }
-                }
-            }
-
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private boolean procesarFileContents() {
         StringTokenizer tokens = new StringTokenizer(textoEnArchivo);
 
@@ -305,6 +270,40 @@ public class AkariGame {
         }
 
         return true;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param fila
+     * @param columna
+     *
+     * @return
+     */
+    public boolean quitarBombillo(int fila, int columna) {
+        if (tableroBombillos[fila][columna] == 1) {
+            tableroBombillos[fila][columna] = 0;
+
+            for (int i = 0; i < numeroFilas; i++) {
+                for (int j = 0; j < numeroColumnas; j++) {
+                    tableroIluminacion[i][j] = 0;
+                }
+            }
+
+            for (int i = 0; i < numeroFilas; i++) {
+                for (int j = 0; j < numeroColumnas; j++) {
+                    if (tableroBombillos[i][j] == 1) {
+                        iluminarFila(i, j);
+                        iluminarColumna(i, j);
+                    }
+                }
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
