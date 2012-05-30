@@ -372,13 +372,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMedioIngeActionPerformed
 
     private void jButtonIluminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIluminarActionPerformed
-        
+
         if (generadorNoTanIngenuo.intentarIluminar()) {
             Iluminar();
+            JOptionPane.showMessageDialog(this, "FELICITACIONES GANASTE!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo iluminar", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jButtonIluminarActionPerformed
 
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {

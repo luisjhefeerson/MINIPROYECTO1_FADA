@@ -263,17 +263,18 @@ public class GeneradorNoTanIngenuo {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
                 if (akari.getTableroIluminacion()[i][j] + akari.getTableroCasillasNegras()[i][j] == 1) {
                     casillasNoIluminadas[i][j] = false;
+                     System.out.print(0+" ");
                 } else {
                     casillasNoIluminadas[i][j] = true;
+                    System.out.print(1+" ");
                 }
 
                 if (casillasNoIluminadas[i][j]) {
                     nCasillasNoIluminadas++;
                 }
 
-                System.out.print(casillasNoIluminadas[i][j] + " ");
+               
             }
-
             System.out.println();
         }
         System.out.println("\nCantidad de casillas si ilunimar:" + nCasillasNoIluminadas);
@@ -344,7 +345,8 @@ public class GeneradorNoTanIngenuo {
             akari.inicializarMatriz();
             exito = applicarCromosoma(casillasTenidasEnCuenta, cromosoma, true);
         } while (!exito && !stop);
-        return exito; 
+
+        return intentarIluminar();
     }
 
     public boolean intentarIluminar() {
@@ -352,7 +354,7 @@ public class GeneradorNoTanIngenuo {
         int longitudCromosoma = findCasillasNoIluminadas();
         this.cromosomaNoIluminadas = new boolean[longitudCromosoma];
         this.sumandoNoIluminadas = new boolean[longitudCromosoma];
-
+        
         // Inicializar el cromosoma y el sumando
         for (int i = 0; i < cromosomaNoIluminadas.length; i++) {
             sumandoNoIluminadas[i] = false;
@@ -360,21 +362,34 @@ public class GeneradorNoTanIngenuo {
         }
         // Terminando de Inicializar el sumando = (1)= 0000....0001
         sumandoNoIluminadas[sumandoNoIluminadas.length - 1] = true;
+
+        byte[][] tableroBombillos = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
+        byte[][] tableroIluminacion = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
+        
+        for (int i = 0; i < akari.getNumeroFilas(); i++) {
+            for (int j = 0; j < akari.getNumeroColumnas(); j++) {
+                tableroBombillos[i][j] = akari.getTableroBombillos()[i][j];
+                tableroIluminacion[i][j] = akari.getTableroIluminacion()[i][j];
+            }
+        }
         
         boolean exito;
         do {
-            cromosomaNoIluminadas = generarSiguiteCromosoma(cromosomaNoIluminadas, sumandoNoIluminadas);
-            byte[][] tableroBombillos = akari.getTableroBombillos();
-            byte[][] tableroIluminacion = akari.getTableroIluminacion();
+            cromosomaNoIluminadas = generarSiguiteCromosoma(cromosomaNoIluminadas, sumandoNoIluminadas);          
             exito = applicarCromosoma(casillasNoIluminadas, cromosomaNoIluminadas, false);
+            
             if (!exito) {
                 akari.setTableroBombillos(tableroBombillos);
                 akari.setTableroIluminacion(tableroIluminacion);
             }
         } while (!exito && !stop);
 
-        stop=false;
-        return exito;
+        if (stop) {
+            stop=false;
+            return solucionNoTanIngenua();
+        }else{
+            return exito;
+        }
 
     }
 }
