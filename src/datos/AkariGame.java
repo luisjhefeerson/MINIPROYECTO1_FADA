@@ -4,7 +4,7 @@
 //
 // ARCHIVO: AkariGame.java
 //
-// FECHA:  12/05/30
+// FECHA: 12/05/30
 //
 // AUTORES:
 //     Marx Arturo Arias - 0840247-3743
@@ -25,9 +25,13 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
+
+
+
 package datos;
 
 //~--- JDK imports ------------------------------------------------------------
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -39,26 +43,24 @@ import java.util.StringTokenizer;
  * Class description
  *
  *
- * @version 12/05/28
+ * @version        12/05/30
  */
 public class AkariGame {
-
-    private int casillasBlancas = 0;
-    private int casillasNegras = 0;
-    private int numeroColumnas = 0;
-    private int numeroFilas = 0;
-    private byte[][] tableroBombillos = null;
+    private int      casillasBlancas       = 0;
+    private int      casillasNegras        = 0;
+    private int      numeroColumnas        = 0;
+    private int      numeroFilas           = 0;
+    private byte[][] tableroBombillos      = null;
     private byte[][] tableroCasillasNegras = null;
-    private byte[][] tableroIluminacion = null;
-    private int[][] tableroRestricciones = null;
-    private String textoEnArchivo = null;
+    private byte[][] tableroIluminacion    = null;
+    private int[][]  tableroRestricciones  = null;
+    private String   textoEnArchivo        = null;
 
     /**
      * Constructs ...
      *
      */
-    public AkariGame() {
-    }
+    public AkariGame() {}
 
     /**
      * Method description
@@ -123,7 +125,7 @@ public class AkariGame {
     public void inicializarMatriz() {
         for (int i = 0; i < numeroFilas; i++) {
             for (int j = 0; j < numeroColumnas; j++) {
-                tableroBombillos[i][j] = 0;
+                tableroBombillos[i][j]   = 0;
                 tableroIluminacion[i][j] = 0;
             }
         }
@@ -139,7 +141,7 @@ public class AkariGame {
      */
     public boolean loadFromFile(File selectedFile) {
         BufferedReader datos = null;
-        String lectura;
+        String         lectura;
 
         try {
             datos = new BufferedReader(new FileReader(selectedFile));
@@ -185,17 +187,17 @@ public class AkariGame {
         StringTokenizer tokens = new StringTokenizer(textoEnArchivo);
 
         try {
-            numeroFilas = Integer.parseInt(tokens.nextToken());
-            numeroColumnas = Integer.parseInt(tokens.nextToken());
-            tableroRestricciones = new int[numeroFilas][numeroColumnas];
-            tableroIluminacion = new byte[numeroFilas][numeroColumnas];
+            numeroFilas           = Integer.parseInt(tokens.nextToken());
+            numeroColumnas        = Integer.parseInt(tokens.nextToken());
+            tableroRestricciones  = new int[numeroFilas][numeroColumnas];
+            tableroIluminacion    = new byte[numeroFilas][numeroColumnas];
             tableroCasillasNegras = new byte[numeroFilas][numeroColumnas];
-            tableroBombillos = new byte[numeroFilas][numeroColumnas];
+            tableroBombillos      = new byte[numeroFilas][numeroColumnas];
 
             for (int i = 0; i < numeroFilas; i++) {
                 for (int j = 0; j < numeroColumnas; j++) {
-                    tableroIluminacion[i][j] = 0;
-                    tableroBombillos[i][j] = 0;
+                    tableroIluminacion[i][j]    = 0;
+                    tableroBombillos[i][j]      = 0;
                     tableroCasillasNegras[i][j] = 0;
                 }
             }
@@ -205,48 +207,48 @@ public class AkariGame {
                     int valor = Integer.parseInt(tokens.nextToken());
 
                     if (valor == 0) {
-                        tableroRestricciones[i][j] = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
+                        tableroRestricciones[i][j]  = 8;    // para casillas blancas sin bombillo, NO SE PUEDE COLOCAR NULL
                         tableroCasillasNegras[i][j] = 0;
                     }
 
                     if (valor == 1) {
-                        tableroRestricciones[i][j] = 8;
+                        tableroRestricciones[i][j]  = 8;
                         tableroCasillasNegras[i][j] = 0;
-                        tableroBombillos[i][j] = 1;
+                        tableroBombillos[i][j]      = 1;
                     }
 
                     if (valor == 2) {
-                        tableroRestricciones[i][j] = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
+                        tableroRestricciones[i][j]  = 8;    // PARA CASILLAS NEGRAS SIN NUMERO, NO SE PUEDE COLOCAR NULL
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 3) {
-                        tableroRestricciones[i][j] = 0;
+                        tableroRestricciones[i][j]  = 0;
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 4) {
-                        tableroRestricciones[i][j] = 1;
+                        tableroRestricciones[i][j]  = 1;
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 5) {
-                        tableroRestricciones[i][j] = 2;
+                        tableroRestricciones[i][j]  = 2;
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 6) {
-                        tableroRestricciones[i][j] = 3;
+                        tableroRestricciones[i][j]  = 3;
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
 
                     if (valor == 7) {
-                        tableroRestricciones[i][j] = 4;
+                        tableroRestricciones[i][j]  = 4;
                         tableroCasillasNegras[i][j] = 1;
                         casillasNegras++;
                     }
@@ -309,6 +311,7 @@ public class AkariGame {
      * Method description
      *
      *
+     * @param noIlumination
      *
      * @return
      */
@@ -317,7 +320,6 @@ public class AkariGame {
         // OR operation
         for (int i = 0; i < this.numeroFilas; i++) {
             for (int j = 0; j < this.numeroColumnas; j++) {
-
                 if (!noIlumination) {
                     if ((tableroCasillasNegras[i][j] + tableroIluminacion[i][j]) != 1) {
                         return false;
@@ -330,48 +332,48 @@ public class AkariGame {
                     // Suma en casos especiales
                     // 1. Esquina superior izquierda
                     if ((i == 0) && (j == 0)) {
-                        suma = tableroBombillos[i + 1][j] // Abajo
-                                + tableroBombillos[i][j + 1];        // Derecha
-                    } // 2. Esquina superior derecha
-                    else if ((i == 0) && (j == (numeroColumnas - 1))) {
-                        suma = tableroBombillos[i + 1][j] // Abajo
-                                + tableroBombillos[i][j - 1];        // Izquierda
-                    } // 3. Esquina inferior izquierda
-                    else if ((i == (numeroFilas - 1)) && (j == 0)) {
-                        suma = tableroBombillos[i - 1][j] // Arriba
-                                + tableroBombillos[i][j + 1];        // Derecha
-                    } // 4. Esquina inferior derecha
-                    else if ((i == (numeroFilas - 1)) && (j == (numeroColumnas - 1))) {
-                        suma = tableroBombillos[i - 1][j] // Arriba
-                                + tableroBombillos[i][j - 1];        // Izquierda
+                        suma = tableroBombillos[i + 1][j]           // Abajo
+                               + tableroBombillos[i][j + 1];        // Derecha
+                    }                                               // 2. Esquina superior derecha
+                            else if ((i == 0) && (j == (numeroColumnas - 1))) {
+                        suma = tableroBombillos[i + 1][j]           // Abajo
+                               + tableroBombillos[i][j - 1];        // Izquierda
+                    }                                               // 3. Esquina inferior izquierda
+                            else if ((i == (numeroFilas - 1)) && (j == 0)) {
+                        suma = tableroBombillos[i - 1][j]           // Arriba
+                               + tableroBombillos[i][j + 1];        // Derecha
+                    }                                               // 4. Esquina inferior derecha
+                            else if ((i == (numeroFilas - 1)) && (j == (numeroColumnas - 1))) {
+                        suma = tableroBombillos[i - 1][j]           // Arriba
+                               + tableroBombillos[i][j - 1];        // Izquierda
                     } else {
 
                         // 5. Primera fila, pero no esquina superior
                         if (i == 0) {
-                            suma = tableroBombillos[i + 1][j] // Abajo
-                                    + tableroBombillos[i][j + 1] // Derecha
-                                    + tableroBombillos[i][j - 1];    // Izquierda
-                        } // 6. Ultima Fila, pero no esquina inferior
-                        else if (i == (numeroFilas - 1)) {
-                            suma = tableroBombillos[i - 1][j] // Arriba
-                                    + tableroBombillos[i][j + 1] // Derecha
-                                    + tableroBombillos[i][j - 1];    // Izquierda
-                        } // 7. Primera columna, pero no esquina izquierda
-                        else if (j == 0) {
-                            suma = tableroBombillos[i + 1][j] // Abajo
-                                    + tableroBombillos[i - 1][j] // Arriba
-                                    + tableroBombillos[i][j + 1];    // Derecha
-                        } // 8. Ultima columna, pero no esquina derecha
-                        else if (j == (numeroColumnas - 1)) {
-                            suma = tableroBombillos[i + 1][j] // Arriba
-                                    + tableroBombillos[i - 1][j] // Abajo
-                                    + tableroBombillos[i][j - 1];    // Izquierda
-                        } // Para todos los demas casos
-                        else {
-                            suma = tableroBombillos[i + 1][j] // Abajo
-                                    + tableroBombillos[i - 1][j] // Arriba
-                                    + tableroBombillos[i][j + 1] // Derecha
-                                    + tableroBombillos[i][j - 1];    // Izquierda
+                            suma = tableroBombillos[i + 1][j]       // Abajo
+                                   + tableroBombillos[i][j + 1]     // Derecha
+                                   + tableroBombillos[i][j - 1];    // Izquierda
+                        }                                           // 6. Ultima Fila, pero no esquina inferior
+                                else if (i == (numeroFilas - 1)) {
+                            suma = tableroBombillos[i - 1][j]       // Arriba
+                                   + tableroBombillos[i][j + 1]     // Derecha
+                                   + tableroBombillos[i][j - 1];    // Izquierda
+                        }                                           // 7. Primera columna, pero no esquina izquierda
+                                else if (j == 0) {
+                            suma = tableroBombillos[i + 1][j]       // Abajo
+                                   + tableroBombillos[i - 1][j]     // Arriba
+                                   + tableroBombillos[i][j + 1];    // Derecha
+                        }                                           // 8. Ultima columna, pero no esquina derecha
+                                else if (j == (numeroColumnas - 1)) {
+                            suma = tableroBombillos[i + 1][j]       // Arriba
+                                   + tableroBombillos[i - 1][j]     // Abajo
+                                   + tableroBombillos[i][j - 1];    // Izquierda
+                        }                                           // Para todos los demas casos
+                                else {
+                            suma = tableroBombillos[i + 1][j]       // Abajo
+                                   + tableroBombillos[i - 1][j]     // Arriba
+                                   + tableroBombillos[i][j + 1]     // Derecha
+                                   + tableroBombillos[i][j - 1];    // Izquierda
                         }
                     }
 
@@ -385,7 +387,7 @@ public class AkariGame {
         return true;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="GETTERS AND SETTERS">
+    //<editor-fold defaultstate="collapsed" desc="GETTERS AND SETTERS">
     /**
      * Method description
      *
@@ -395,7 +397,7 @@ public class AkariGame {
     public int getCasillasBlancas() {
         return casillasBlancas;
     }
-
+    
     /**
      * Method description
      *
@@ -405,7 +407,7 @@ public class AkariGame {
     public int getCasillasNegras() {
         return casillasNegras;
     }
-
+    
     /**
      * Method description
      *
@@ -415,7 +417,7 @@ public class AkariGame {
     public int getNumeroColumnas() {
         return numeroColumnas;
     }
-
+    
     /**
      * Method description
      *
@@ -425,7 +427,7 @@ public class AkariGame {
     public int getNumeroFilas() {
         return numeroFilas;
     }
-
+    
     /**
      * Method description
      *
@@ -435,7 +437,7 @@ public class AkariGame {
     public byte[][] getTableroBombillos() {
         return tableroBombillos;
     }
-
+    
     /**
      * Method description
      *
@@ -445,7 +447,7 @@ public class AkariGame {
     public byte[][] getTableroCasillasNegras() {
         return tableroCasillasNegras;
     }
-
+    
     /**
      * Method description
      *
@@ -455,7 +457,7 @@ public class AkariGame {
     public byte[][] getTableroIluminacion() {
         return tableroIluminacion;
     }
-
+    
     /**
      * Method description
      *
@@ -465,7 +467,7 @@ public class AkariGame {
     public int[][] getTalberoRestricciones() {
         return tableroRestricciones;
     }
-
+    
     /**
      * Method description
      *
@@ -475,7 +477,7 @@ public class AkariGame {
     public String getTextoEnArchivo() {
         return textoEnArchivo;
     }
-
+    
     /**
      * Method description
      *
@@ -485,7 +487,7 @@ public class AkariGame {
     public void setCasillasBlancas(int casillasBlancas) {
         this.casillasBlancas = casillasBlancas;
     }
-
+    
     /**
      * Method description
      *
@@ -495,7 +497,7 @@ public class AkariGame {
     public void setCasillasNegras(int casillasNegras) {
         this.casillasNegras = casillasNegras;
     }
-
+    
     /**
      * Method description
      *
@@ -505,7 +507,7 @@ public class AkariGame {
     public void setNumeroColumnas(int numeroColumnas) {
         this.numeroColumnas = numeroColumnas;
     }
-
+    
     /**
      * Method description
      *
@@ -515,7 +517,7 @@ public class AkariGame {
     public void setNumeroFilas(int numeroFilas) {
         this.numeroFilas = numeroFilas;
     }
-
+    
     /**
      * Method description
      *
@@ -523,15 +525,15 @@ public class AkariGame {
      * @param tableroBombillos
      */
     public void setTableroBombillos(byte[][] tableroBombillos) {
-
         this.tableroBombillos = new byte[numeroFilas][numeroColumnas];
+        
         for (int i = 0; i < numeroFilas; i++) {
             for (int j = 0; j < numeroColumnas; j++) {
                 this.tableroBombillos[i][j] = tableroBombillos[i][j];
             }
         }
     }
-
+    
     /**
      * Method description
      *
@@ -541,7 +543,7 @@ public class AkariGame {
     public void setTableroCasillasNegras(byte[][] tableroCasillasNegras) {
         this.tableroCasillasNegras = tableroCasillasNegras;
     }
-
+    
     /**
      * Method description
      *
@@ -549,15 +551,15 @@ public class AkariGame {
      * @param tableroIluminacion
      */
     public void setTableroIluminacion(byte[][] tableroIluminacion) {
-
         this.tableroIluminacion = new byte[numeroFilas][numeroColumnas];
+        
         for (int i = 0; i < numeroFilas; i++) {
             for (int j = 0; j < numeroColumnas; j++) {
                 this.tableroIluminacion[i][j] = tableroIluminacion[i][j];
             }
         }
     }
-
+    
     /**
      * Method description
      *
@@ -567,7 +569,7 @@ public class AkariGame {
     public void setTalberoRestricciones(int[][] talberoRestricciones) {
         this.tableroRestricciones = talberoRestricciones;
     }
-
+    
     /**
      * Method description
      *
@@ -577,5 +579,5 @@ public class AkariGame {
     public void setTextoEnArchivo(String textoEnArchivo) {
         this.textoEnArchivo = textoEnArchivo;
     }
-    // </editor-fold>
+    //</editor-fold>  
 }
