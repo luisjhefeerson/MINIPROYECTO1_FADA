@@ -368,12 +368,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         if (akariGame.ponerBombillo(i, j)) {
             Iluminar();
+            if (akariGame.validation(false)) {
+                JOptionPane.showMessageDialog(this, "FELICITACIONES GANASTE!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
+            }
         } else if (akariGame.quitarBombillo(i, j)) {
             Iluminar();
         }
-        if (akariGame.validation(false)) {
-            JOptionPane.showMessageDialog(this, "FELICITACIONES GANASTE!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
-        }
+
 
     }
 
