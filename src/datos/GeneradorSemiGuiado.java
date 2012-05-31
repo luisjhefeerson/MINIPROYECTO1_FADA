@@ -42,6 +42,8 @@ public class GeneradorSemiGuiado {
     AkariGame akari;
     private boolean[][] casillasNoIluminadas;
     private boolean[][] casillasTenidasEnCuenta;
+    byte[][] tableroBombillosBase;
+    byte[][] tableroIluminacionBase;
     boolean[] cromosoma;
     boolean[] cromosomaNoIluminadas;
     boolean stop;
@@ -59,7 +61,9 @@ public class GeneradorSemiGuiado {
         this.stop = false;
         this.akari = tablero;
         Soluciones = new ArrayList<RespuestaNoTanIngenua>();
+        
         procesamientoDeUnoACuatro();
+        getTablerosBase();
 
         int longitudCromosoma = findCasillasATenerEnCuenta();
 
@@ -522,6 +526,7 @@ public class GeneradorSemiGuiado {
      *
      */
     private void procesamientoDeUnoACuatro() {
+        
         for (int i = 0; i < akari.getNumeroFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
 
@@ -694,6 +699,8 @@ public class GeneradorSemiGuiado {
                 }
             }
         }
+        
+        
     }
 
     /**
@@ -708,7 +715,8 @@ public class GeneradorSemiGuiado {
         do {
             cromosoma = generarSiguiteCromosoma(cromosoma, sumando);
             akari.quitarBombillosEIluminacion();
-            procesamientoDeUnoACuatro();
+            akari.setTableroIluminacion(tableroIluminacionBase);
+            akari.setTableroBombillos(tableroBombillosBase);
             exito = applicarCromosoma(casillasTenidasEnCuenta, cromosoma, true);
         } while (!exito && !stop);
 
@@ -739,9 +747,24 @@ public class GeneradorSemiGuiado {
     public void setSolucion(int i) {
         RespuestaNoTanIngenua respuesta = Soluciones.get(i);
         akari.quitarBombillosEIluminacion();
-        procesamientoDeUnoACuatro();
+        akari.setTableroBombillos(tableroBombillosBase);
+        akari.setTableroIluminacion(tableroIluminacionBase);
         applicarCromosoma(casillasTenidasEnCuenta, respuesta.getCromosoma(), true);
         applicarCromosoma(respuesta.getCasillasNoIluminadas(), respuesta.getCromosomaNoIluminadas(), false);
+    }
+
+    private void getTablerosBase() {
+       
+         tableroBombillosBase = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
+         tableroIluminacionBase = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
+
+            for (int i = 0; i < akari.getNumeroFilas(); i++) {
+                for (int j = 0; j < akari.getNumeroColumnas(); j++) {
+                    tableroBombillosBase[i][j] = akari.getTableroBombillos()[i][j];
+                    tableroIluminacionBase[i][j] = akari.getTableroIluminacion()[i][j];
+                }
+            }
+        
     }
 }
 

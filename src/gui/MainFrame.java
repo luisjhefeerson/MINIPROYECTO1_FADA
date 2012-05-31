@@ -80,13 +80,13 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelGraphiclView = new javax.swing.JPanel();
         jButtonIngenuo = new javax.swing.JButton();
         jButtonBorrar = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
+        jSliderZoom = new javax.swing.JSlider();
         jButtonMedioInge = new javax.swing.JButton();
         jLabelZomm = new javax.swing.JLabel();
-        jComboBoxSoluciones = new javax.swing.JComboBox();
+        jComboBoxSolucionesIngenuas = new javax.swing.JComboBox();
         jLabelSoluciones = new javax.swing.JLabel();
         jButtonGuiado = new javax.swing.JButton();
-        jComboBoxSoluciones1 = new javax.swing.JComboBox();
+        jComboBoxSolucionesGuiadas = new javax.swing.JComboBox();
         jLabelSoluciones1 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
@@ -167,7 +167,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonIngenuo);
-        jButtonIngenuo.setBounds(310, 185, 100, 31);
+        jButtonIngenuo.setBounds(310, 185, 100, 27);
 
         jButtonBorrar.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jButtonBorrar.setText("Borrar");
@@ -177,19 +177,19 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonBorrar);
-        jButtonBorrar.setBounds(310, 150, 100, 31);
+        jButtonBorrar.setBounds(310, 150, 100, 27);
 
-        jSlider1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
-        jSlider1.setMaximum(50);
-        jSlider1.setMinimum(10);
-        jSlider1.setValue(30);
-        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+        jSliderZoom.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jSliderZoom.setMaximum(50);
+        jSliderZoom.setMinimum(10);
+        jSliderZoom.setValue(30);
+        jSliderZoom.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSlider1StateChanged(evt);
+                jSliderZoomStateChanged(evt);
             }
         });
-        jPanelPrincipal.add(jSlider1);
-        jSlider1.setBounds(310, 450, 100, 50);
+        jPanelPrincipal.add(jSliderZoom);
+        jSliderZoom.setBounds(310, 450, 100, 50);
 
         jButtonMedioInge.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jButtonMedioInge.setText("MedioInge");
@@ -199,20 +199,20 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonMedioInge);
-        jButtonMedioInge.setBounds(310, 220, 100, 31);
+        jButtonMedioInge.setBounds(310, 220, 100, 27);
 
         jLabelZomm.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jLabelZomm.setText("ZOOM:");
         jPanelPrincipal.add(jLabelZomm);
         jLabelZomm.setBounds(310, 430, 100, 19);
 
-        jComboBoxSoluciones.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxSolucionesIngenuas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxSolucionesActionPerformed(evt);
+                jComboBoxSolucionesIngenuasActionPerformed(evt);
             }
         });
-        jPanelPrincipal.add(jComboBoxSoluciones);
-        jComboBoxSoluciones.setBounds(310, 280, 100, 28);
+        jPanelPrincipal.add(jComboBoxSolucionesIngenuas);
+        jComboBoxSolucionesIngenuas.setBounds(310, 280, 100, 20);
 
         jLabelSoluciones.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jLabelSoluciones.setText("Soluciones");
@@ -227,15 +227,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonGuiado);
-        jButtonGuiado.setBounds(310, 315, 100, 31);
+        jButtonGuiado.setBounds(310, 315, 100, 27);
 
-        jComboBoxSoluciones1.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxSolucionesGuiadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxSoluciones1ActionPerformed(evt);
+                jComboBoxSolucionesGuiadasActionPerformed(evt);
             }
         });
-        jPanelPrincipal.add(jComboBoxSoluciones1);
-        jComboBoxSoluciones1.setBounds(310, 370, 100, 28);
+        jPanelPrincipal.add(jComboBoxSolucionesGuiadas);
+        jComboBoxSolucionesGuiadas.setBounds(310, 370, 100, 20);
 
         jLabelSoluciones1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jLabelSoluciones1.setText("Soluciones");
@@ -337,9 +337,9 @@ public class MainFrame extends javax.swing.JFrame {
                 jTextArea.setText(akariGame.getTextoEnArchivo());
                 generadorNoTanIngenuo = new GeneradorNoTanIngenuo(akariGame);
                 generadorIngenuo = new GeneradorIngenuo(akariGame);
-                Graficar();
-                generadorSemiGuiado = new GeneradorSemiGuiado(akariGame);
 
+                generadorSemiGuiado = new GeneradorSemiGuiado(akariGame);
+                Graficar();
 
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido", JOptionPane.ERROR_MESSAGE);
@@ -366,11 +366,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
-    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+    private void jSliderZoomStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderZoomStateChanged
 
         if (tableroCargado) {
-            widthLabel = jSlider1.getValue();
-            heightLabel = jSlider1.getValue();
+            widthLabel = jSliderZoom.getValue();
+            heightLabel = jSliderZoom.getValue();
 
             anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
             altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
@@ -394,7 +394,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_jSlider1StateChanged
+    }//GEN-LAST:event_jSliderZoomStateChanged
 
     private void jButtonMedioIngeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMedioIngeActionPerformed
 
@@ -407,19 +407,19 @@ public class MainFrame extends javax.swing.JFrame {
             for (int i = 0; i < soluciones.length; i++) {
                 soluciones[i] = Integer.toString(i + 1);
             }
-            jComboBoxSoluciones.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
+            jComboBoxSolucionesIngenuas.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
 
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonMedioIngeActionPerformed
 
-    private void jComboBoxSolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSolucionesActionPerformed
+    private void jComboBoxSolucionesIngenuasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSolucionesIngenuasActionPerformed
 
-        generadorNoTanIngenuo.setSolucion(jComboBoxSoluciones.getSelectedIndex());
+        generadorNoTanIngenuo.setSolucion(jComboBoxSolucionesIngenuas.getSelectedIndex());
         Iluminar();
 
-    }//GEN-LAST:event_jComboBoxSolucionesActionPerformed
+    }//GEN-LAST:event_jComboBoxSolucionesIngenuasActionPerformed
 
     private void jButtonGuiadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuiadoActionPerformed
 
@@ -432,19 +432,19 @@ public class MainFrame extends javax.swing.JFrame {
             for (int i = 0; i < soluciones.length; i++) {
                 soluciones[i] = Integer.toString(i + 1);
             }
-            jComboBoxSoluciones1.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
+            jComboBoxSolucionesGuiadas.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButtonGuiadoActionPerformed
 
-    private void jComboBoxSoluciones1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSoluciones1ActionPerformed
+    private void jComboBoxSolucionesGuiadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSolucionesGuiadasActionPerformed
 
-        generadorSemiGuiado.setSolucion(jComboBoxSoluciones1.getSelectedIndex());
+        generadorSemiGuiado.setSolucion(jComboBoxSolucionesGuiadas.getSelectedIndex());
         Iluminar();
 
-    }//GEN-LAST:event_jComboBoxSoluciones1ActionPerformed
+    }//GEN-LAST:event_jComboBoxSolucionesGuiadasActionPerformed
 
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
         String name = ((JLabel) evt.getSource()).getName();
@@ -589,7 +589,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea.setText(null);
         jPanelGraphiclView.removeAll();
         jPanelGraphiclView.repaint();
-        jComboBoxSoluciones.setModel(new javax.swing.DefaultComboBoxModel(new String[]{}));
+        jComboBoxSolucionesIngenuas.setModel(new javax.swing.DefaultComboBoxModel(new String[]{}));
         tableroCargado = false;
     }
 
@@ -626,8 +626,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGuiado;
     private javax.swing.JButton jButtonIngenuo;
     private javax.swing.JButton jButtonMedioInge;
-    private javax.swing.JComboBox jComboBoxSoluciones;
-    private javax.swing.JComboBox jComboBoxSoluciones1;
+    private javax.swing.JComboBox jComboBoxSolucionesGuiadas;
+    private javax.swing.JComboBox jComboBoxSolucionesIngenuas;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelSoluciones;
     private javax.swing.JLabel jLabelSoluciones1;
@@ -649,7 +649,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPanelGraphView;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSlider jSlider1;
+    private javax.swing.JSlider jSliderZoom;
     private javax.swing.JTextArea jTextArea;
     // End of variables declaration//GEN-END:variables
 }
