@@ -30,6 +30,7 @@ package gui;
 import datos.AkariGame;
 import datos.GeneradorIngenuo;
 import datos.GeneradorNoTanIngenuo;
+import datos.GeneradorSemiGuiado;
 import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -43,6 +44,7 @@ public class MainFrame extends javax.swing.JFrame {
     AkariGame akariGame;
     GeneradorIngenuo generadorIngenuo;
     GeneradorNoTanIngenuo generadorNoTanIngenuo;
+    GeneradorSemiGuiado generadorSemiGuiado;
     private JLabel[][] jLabelTablero;
     int widthLabel;
     int heightLabel;
@@ -83,6 +85,9 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelZomm = new javax.swing.JLabel();
         jComboBoxSoluciones = new javax.swing.JComboBox();
         jLabelSoluciones = new javax.swing.JLabel();
+        jButtonGuiado = new javax.swing.JButton();
+        jComboBoxSoluciones1 = new javax.swing.JComboBox();
+        jLabelSoluciones1 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
@@ -162,7 +167,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonIngenuo);
-        jButtonIngenuo.setBounds(310, 195, 100, 31);
+        jButtonIngenuo.setBounds(310, 185, 100, 31);
 
         jButtonBorrar.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jButtonBorrar.setText("Borrar");
@@ -172,7 +177,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonBorrar);
-        jButtonBorrar.setBounds(310, 160, 100, 31);
+        jButtonBorrar.setBounds(310, 150, 100, 31);
 
         jSlider1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jSlider1.setMaximum(50);
@@ -194,7 +199,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonMedioInge);
-        jButtonMedioInge.setBounds(310, 230, 100, 31);
+        jButtonMedioInge.setBounds(310, 220, 100, 31);
 
         jLabelZomm.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jLabelZomm.setText("ZOOM:");
@@ -207,12 +212,35 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jComboBoxSoluciones);
-        jComboBoxSoluciones.setBounds(310, 300, 100, 28);
+        jComboBoxSoluciones.setBounds(310, 280, 100, 28);
 
         jLabelSoluciones.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jLabelSoluciones.setText("Soluciones");
         jPanelPrincipal.add(jLabelSoluciones);
-        jLabelSoluciones.setBounds(310, 280, 100, 19);
+        jLabelSoluciones.setBounds(310, 255, 100, 19);
+
+        jButtonGuiado.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jButtonGuiado.setText("Guiado");
+        jButtonGuiado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuiadoActionPerformed(evt);
+            }
+        });
+        jPanelPrincipal.add(jButtonGuiado);
+        jButtonGuiado.setBounds(310, 315, 100, 31);
+
+        jComboBoxSoluciones1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSoluciones1ActionPerformed(evt);
+            }
+        });
+        jPanelPrincipal.add(jComboBoxSoluciones1);
+        jComboBoxSoluciones1.setBounds(310, 370, 100, 28);
+
+        jLabelSoluciones1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jLabelSoluciones1.setText("Soluciones");
+        jPanelPrincipal.add(jLabelSoluciones1);
+        jLabelSoluciones1.setBounds(310, 350, 100, 19);
 
         getContentPane().add(jPanelPrincipal);
         jPanelPrincipal.setBounds(0, 0, 900, 600);
@@ -310,6 +338,9 @@ public class MainFrame extends javax.swing.JFrame {
                 generadorNoTanIngenuo = new GeneradorNoTanIngenuo(akariGame);
                 generadorIngenuo = new GeneradorIngenuo(akariGame);
                 Graficar();
+                generadorSemiGuiado = new GeneradorSemiGuiado(akariGame);
+
+
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido", JOptionPane.ERROR_MESSAGE);
             }
@@ -370,25 +401,50 @@ public class MainFrame extends javax.swing.JFrame {
         if (generadorNoTanIngenuo.solucionNoTanIngenua()) {
             Iluminar();
             JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, LO ENCONTRE!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
-            
-            String [] soluciones = new String[generadorNoTanIngenuo.getNumeroSoluciones()];
-            
+
+            String[] soluciones = new String[generadorNoTanIngenuo.getNumeroSoluciones()];
+
             for (int i = 0; i < soluciones.length; i++) {
-                soluciones[i]=Integer.toString(i+1);
+                soluciones[i] = Integer.toString(i + 1);
             }
             jComboBoxSoluciones.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
-            
+
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonMedioIngeActionPerformed
 
     private void jComboBoxSolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSolucionesActionPerformed
-       
+
         generadorNoTanIngenuo.setSolucion(jComboBoxSoluciones.getSelectedIndex());
         Iluminar();
-        
+
     }//GEN-LAST:event_jComboBoxSolucionesActionPerformed
+
+    private void jButtonGuiadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuiadoActionPerformed
+
+        if (generadorSemiGuiado.solucionSemiGuiada()) {
+            Iluminar();
+            JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, LO ENCONTRE!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
+
+            String[] soluciones = new String[generadorSemiGuiado.getNumeroSoluciones()];
+
+            for (int i = 0; i < soluciones.length; i++) {
+                soluciones[i] = Integer.toString(i + 1);
+            }
+            jComboBoxSoluciones1.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jButtonGuiadoActionPerformed
+
+    private void jComboBoxSoluciones1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSoluciones1ActionPerformed
+
+        generadorSemiGuiado.setSolucion(jComboBoxSoluciones1.getSelectedIndex());
+        Iluminar();
+
+    }//GEN-LAST:event_jComboBoxSoluciones1ActionPerformed
 
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
         String name = ((JLabel) evt.getSource()).getName();
@@ -533,7 +589,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea.setText(null);
         jPanelGraphiclView.removeAll();
         jPanelGraphiclView.repaint();
-        jComboBoxSoluciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
+        jComboBoxSoluciones.setModel(new javax.swing.DefaultComboBoxModel(new String[]{}));
         tableroCargado = false;
     }
 
@@ -567,11 +623,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBorrar;
+    private javax.swing.JButton jButtonGuiado;
     private javax.swing.JButton jButtonIngenuo;
     private javax.swing.JButton jButtonMedioInge;
     private javax.swing.JComboBox jComboBoxSoluciones;
+    private javax.swing.JComboBox jComboBoxSoluciones1;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelSoluciones;
+    private javax.swing.JLabel jLabelSoluciones1;
     private javax.swing.JLabel jLabelSubtitulo;
     private javax.swing.JLabel jLabelSubtitulo1;
     private javax.swing.JLabel jLabelTextView;
