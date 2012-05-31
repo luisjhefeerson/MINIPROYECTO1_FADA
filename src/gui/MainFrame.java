@@ -38,10 +38,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainFrame extends javax.swing.JFrame {
 
-    AkariGame akariGame;
+    AkariGame akariGame = null;
     GeneradorIngenuo generadorIngenuo = null;
     GeneradorNoTanIngenuo generadorNoTanIngenuo = null;
     GeneradorSemiGuiado generadorSemiGuiado = null;
@@ -88,9 +89,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonGuiado = new javax.swing.JButton();
         jComboBoxSolucionesGuiadas = new javax.swing.JComboBox();
         jLabelSoluciones1 = new javax.swing.JLabel();
+        jButtonValidar = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
+        jMenuGuardar = new javax.swing.JMenuItem();
         jMISalir = new javax.swing.JMenuItem();
         jMenuAyuda = new javax.swing.JMenu();
         jMIAcercaDe = new javax.swing.JMenuItem();
@@ -177,7 +180,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonBorrar);
-        jButtonBorrar.setBounds(310, 150, 100, 27);
+        jButtonBorrar.setBounds(310, 110, 100, 27);
 
         jSliderZoom.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jSliderZoom.setMaximum(50);
@@ -242,6 +245,16 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelPrincipal.add(jLabelSoluciones1);
         jLabelSoluciones1.setBounds(310, 350, 100, 19);
 
+        jButtonValidar.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jButtonValidar.setText("Validar");
+        jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValidarActionPerformed(evt);
+            }
+        });
+        jPanelPrincipal.add(jButtonValidar);
+        jButtonValidar.setBounds(310, 150, 100, 27);
+
         getContentPane().add(jPanelPrincipal);
         jPanelPrincipal.setBounds(0, 0, 900, 600);
 
@@ -254,6 +267,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jMenuArchivo.add(jMICargarTablero);
+
+        jMenuGuardar.setText("Guardar Partida");
+        jMenuGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuGuardarActionPerformed(evt);
+            }
+        });
+        jMenuArchivo.add(jMenuGuardar);
 
         jMISalir.setText("Salir");
         jMISalir.addActionListener(new java.awt.event.ActionListener() {
@@ -355,6 +376,7 @@ public class MainFrame extends javax.swing.JFrame {
             Iluminar();
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
+            generadorIngenuo = null;
         }
     }//GEN-LAST:event_jButtonIngenuoActionPerformed
 
@@ -416,6 +438,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
+            generadorNoTanIngenuo = null;
         }
     }//GEN-LAST:event_jButtonMedioIngeActionPerformed
 
@@ -444,6 +467,7 @@ public class MainFrame extends javax.swing.JFrame {
             jComboBoxSolucionesGuiadas.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
+            generadorSemiGuiado = null;
         }
 
     }//GEN-LAST:event_jButtonGuiadoActionPerformed
@@ -454,6 +478,33 @@ public class MainFrame extends javax.swing.JFrame {
         Iluminar();
 
     }//GEN-LAST:event_jComboBoxSolucionesGuiadasActionPerformed
+
+    private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
+
+        if (akariGame != null) {
+            if (akariGame.validation(false)) {
+                JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, SOLUCION CORRECTA!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "QUE INFELICIDAD TAN GRANDE, SOLUCION INCORRECTA!!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+    }//GEN-LAST:event_jButtonValidarActionPerformed
+
+    private void jMenuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGuardarActionPerformed
+
+        JFileChooser selectorArchivo = new JFileChooser("./tests/");
+             FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+    selectorArchivo.setFileFilter(filter);
+
+        selectorArchivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int resultado = selectorArchivo.showSaveDialog(this);
+
+        if (resultado != JFileChooser.CANCEL_OPTION) {
+            File selectedFile = new File(selectorArchivo.getSelectedFile().getAbsolutePath()+".txt");
+            akariGame.saveToFile(selectedFile);
+        }
+    }//GEN-LAST:event_jMenuGuardarActionPerformed
 
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
         String name = ((JLabel) evt.getSource()).getName();
@@ -636,6 +687,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGuiado;
     private javax.swing.JButton jButtonIngenuo;
     private javax.swing.JButton jButtonMedioInge;
+    private javax.swing.JButton jButtonValidar;
     private javax.swing.JComboBox jComboBoxSolucionesGuiadas;
     private javax.swing.JComboBox jComboBoxSolucionesIngenuas;
     private javax.swing.JLabel jLabelLogo;
@@ -653,6 +705,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenuItem jMenuGuardar;
     private javax.swing.JPanel jPanelGraphiclView;
     private javax.swing.JPanel jPanelPrincipal;
     private javax.swing.JScrollPane jScrollPaneTextView;

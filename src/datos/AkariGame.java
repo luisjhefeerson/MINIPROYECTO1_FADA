@@ -28,10 +28,7 @@
 package datos;
 
 //~--- JDK imports ------------------------------------------------------------
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import java.util.StringTokenizer;
 
@@ -631,4 +628,21 @@ public class AkariGame {
         this.solucionActual = solucionActual;
     }
     //</editor-fold>  
+
+    public void saveToFile(File selectedFile) {
+
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(selectedFile));
+            writer.write(getSolucionActual());
+        } catch (IOException e) {
+        } finally {
+            try {
+                if (writer != null) {
+                    writer.close();
+                }
+            } catch (IOException e) {
+            }
+        }
+    }
 }
