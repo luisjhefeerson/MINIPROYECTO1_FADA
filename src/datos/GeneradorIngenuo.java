@@ -28,7 +28,6 @@
 package datos;
 
 //~--- non-JDK imports --------------------------------------------------------
-import datos.AkariGame;
 
 /**
  * Class description
@@ -154,7 +153,7 @@ public class GeneradorIngenuo {
         boolean exito;
         do {
             cromosoma = generarSiguiteCromosoma(cromosoma, sumando);
-            akari.inicializarMatriz();
+            akari.quitarBombillosEIluminacion();
             exito = applicarCromosoma();
         } while (!exito && !stop);
         return exito;

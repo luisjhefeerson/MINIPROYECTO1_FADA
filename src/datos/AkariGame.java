@@ -122,7 +122,7 @@ public class AkariGame {
      * Method description
      *
      */
-    public void inicializarMatriz() {
+    public void quitarBombillosEIluminacion() {
         for (int i = 0; i < numeroFilas; i++) {
             for (int j = 0; j < numeroColumnas; j++) {
                 tableroBombillos[i][j]   = 0;

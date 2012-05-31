@@ -80,7 +80,9 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonBorrar = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
         jButtonMedioInge = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelZomm = new javax.swing.JLabel();
+        jComboBoxSoluciones = new javax.swing.JComboBox();
+        jLabelSoluciones = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
@@ -194,10 +196,23 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelPrincipal.add(jButtonMedioInge);
         jButtonMedioInge.setBounds(310, 230, 100, 31);
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
-        jLabel1.setText("ZOOM:");
-        jPanelPrincipal.add(jLabel1);
-        jLabel1.setBounds(310, 430, 100, 19);
+        jLabelZomm.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jLabelZomm.setText("ZOOM:");
+        jPanelPrincipal.add(jLabelZomm);
+        jLabelZomm.setBounds(310, 430, 100, 19);
+
+        jComboBoxSoluciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSolucionesActionPerformed(evt);
+            }
+        });
+        jPanelPrincipal.add(jComboBoxSoluciones);
+        jComboBoxSoluciones.setBounds(310, 300, 100, 28);
+
+        jLabelSoluciones.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
+        jLabelSoluciones.setText("Soluciones");
+        jPanelPrincipal.add(jLabelSoluciones);
+        jLabelSoluciones.setBounds(310, 280, 100, 19);
 
         getContentPane().add(jPanelPrincipal);
         jPanelPrincipal.setBounds(0, 0, 900, 600);
@@ -314,7 +329,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
 
-        akariGame.inicializarMatriz();
+        akariGame.quitarBombillosEIluminacion();
         jPanelGraphiclView.removeAll();
         jPanelGraphiclView.repaint();
         Graficar();
@@ -356,10 +371,25 @@ public class MainFrame extends javax.swing.JFrame {
         if (generadorNoTanIngenuo.solucionNoTanIngenua()) {
             Iluminar();
             JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, LO ENCONTRE!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
+            
+            String [] soluciones = new String[generadorNoTanIngenuo.getNumeroSoluciones()];
+            
+            for (int i = 0; i < soluciones.length; i++) {
+                soluciones[i]=Integer.toString(i+1);
+            }
+            jComboBoxSoluciones.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
+            
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonMedioIngeActionPerformed
+
+    private void jComboBoxSolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSolucionesActionPerformed
+       
+        generadorNoTanIngenuo.setSolucion(jComboBoxSoluciones.getSelectedIndex());
+        Iluminar();
+        
+    }//GEN-LAST:event_jComboBoxSolucionesActionPerformed
 
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
         String name = ((JLabel) evt.getSource()).getName();
@@ -539,12 +569,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonIngenuo;
     private javax.swing.JButton jButtonMedioInge;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox jComboBoxSoluciones;
     private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabelSoluciones;
     private javax.swing.JLabel jLabelSubtitulo;
     private javax.swing.JLabel jLabelSubtitulo1;
     private javax.swing.JLabel jLabelTextView;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelZomm;
     private javax.swing.JLabel jLabelgraphicalview;
     private javax.swing.JMenuItem jMIAcercaDe;
     private javax.swing.JMenuItem jMICargarTablero;

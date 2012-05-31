@@ -37,8 +37,9 @@ package datos;
  * @version        12/05/30
  */
 public class RespuestaNoTanIngenua {
-    boolean[] cromosoma;
-    boolean[] cromosomaNoIluminadas;
+    private boolean[][] casillasNoIluminadas;
+    boolean[]           cromosoma;
+    boolean[]           cromosomaNoIluminadas;
 
     /**
      * Constructs ...
@@ -46,10 +47,45 @@ public class RespuestaNoTanIngenua {
      *
      * @param cromosoma
      * @param cromosomaNoIluminadas
+     * @param casillasNoIluminadas
      */
-    public RespuestaNoTanIngenua(boolean[] cromosoma, boolean[] cromosomaNoIluminadas) {
+    public RespuestaNoTanIngenua(boolean[] cromosoma, boolean[] cromosomaNoIluminadas,
+                                 boolean[][] casillasNoIluminadas) {
         this.cromosoma             = cromosoma;
         this.cromosomaNoIluminadas = cromosomaNoIluminadas;
+        this.casillasNoIluminadas  = casillasNoIluminadas;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
+    public boolean[][] getCasillasNoIluminadas() {
+        return casillasNoIluminadas;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
+    public boolean[] getCromosoma() {
+        return cromosoma;
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @return
+     */
+    public boolean[] getCromosomaNoIluminadas() {
+        return cromosomaNoIluminadas;
     }
 }
 
+
+//~ Formatted by Jindent --- http://www.jindent.com
