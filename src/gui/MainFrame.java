@@ -337,9 +337,8 @@ public class MainFrame extends javax.swing.JFrame {
                 jTextArea.setText(akariGame.getTextoEnArchivo());
                 generadorNoTanIngenuo = new GeneradorNoTanIngenuo(akariGame);
                 generadorIngenuo = new GeneradorIngenuo(akariGame);
-
-                generadorSemiGuiado = new GeneradorSemiGuiado(akariGame);
                 Graficar();
+                generadorSemiGuiado = new GeneradorSemiGuiado(akariGame);
 
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido", JOptionPane.ERROR_MESSAGE);
