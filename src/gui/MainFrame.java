@@ -301,7 +301,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         if (resultado != JFileChooser.CANCEL_OPTION) {
 
-
             File selectedFile = selectorArchivo.getSelectedFile();
             akariGame = new AkariGame();
 
@@ -534,6 +533,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea.setText(null);
         jPanelGraphiclView.removeAll();
         jPanelGraphiclView.repaint();
+        jComboBoxSoluciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
         tableroCargado = false;
     }
 
