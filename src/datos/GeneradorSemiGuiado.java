@@ -59,7 +59,7 @@ public class GeneradorSemiGuiado {
         this.stop = false;
         this.akari = tablero;
         Soluciones = new ArrayList<RespuestaNoTanIngenua>();
-        procesamientoDeCuatros();
+        procesamientoDeUnoACuatro();
 
         int longitudCromosoma = findCasillasATenerEnCuenta();
 
@@ -499,7 +499,7 @@ public class GeneradorSemiGuiado {
         }
 
         int numeroCasillasNoIluminadas = 0;
-        
+
         System.out.println("\n\nMatriz Casillas no Iluminadas:");
         for (int i = 0; i < akari.getNumeroFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
@@ -512,8 +512,8 @@ public class GeneradorSemiGuiado {
             }
             System.out.println();
         }
-        
-        System.out.println("Casillas No iluminadas: "+numeroCasillasNoIluminadas);
+
+        System.out.println("Casillas No iluminadas: " + numeroCasillasNoIluminadas);
         return numeroCasillasNoIluminadas;
     }
 
@@ -521,14 +521,176 @@ public class GeneradorSemiGuiado {
      * Method description
      *
      */
-    private void procesamientoDeCuatros() {
+    private void procesamientoDeUnoACuatro() {
         for (int i = 0; i < akari.getNumeroFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
+
                 if (akari.getTalberoRestricciones()[i][j] == 4) {
                     akari.ponerBombillo(i + 1, j);    // Abajo
                     akari.ponerBombillo(i - 1, j);    // Arriba
                     akari.ponerBombillo(i, j + 1);    // Derecha
                     akari.ponerBombillo(i, j - 1);    // Izquierda
+                }
+
+                // Buscar casillas blancas al rededor de los numeros
+                int suma = 0;
+                if ((akari.getTalberoRestricciones()[i][j] >= 1) && (akari.getTalberoRestricciones()[i][j] <= 3)) {
+
+                    // Suma en casos especiales
+
+                    // 1. Esquina superior izquierda
+                    if ((i == 0) && (j == 0)) {
+                        if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
+                            suma++;    // Abajo
+                        }
+                        if (akari.getTableroCasillasNegras()[i][j + 1] == 0) {
+                            suma++;    // Derecha
+                        }
+                        if (suma == akari.getTalberoRestricciones()[i][j]) {
+                            akari.ponerBombillo(i + 1, j);
+                            akari.ponerBombillo(i, j + 1);
+                        }
+                    } // 2. Esquina superior derecha
+                    else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
+                        if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
+                            suma++; // Abajo
+                        }
+
+                        if ((akari.getTableroCasillasNegras()[i][j - 1] == 0)) {
+                            suma++;    // Izquierda
+                        }
+                        if (suma == akari.getTalberoRestricciones()[i][j]) {
+                            akari.ponerBombillo(i + 1, j);
+                            akari.ponerBombillo(i, j - 1);
+                        }
+                    } // 3. Esquina inferior izquierda
+                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
+                        if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)) {
+                            suma++;;    // Arriba
+                        }
+
+                        if ((akari.getTableroCasillasNegras()[i][j + 1] == 0)) {
+                            suma++;    // Derecha
+                        }
+
+                        if (suma == akari.getTalberoRestricciones()[i][j]) {
+                            akari.ponerBombillo(i - 1, j);
+                            akari.ponerBombillo(i, j + 1);
+                        }
+                    } // 4. Esquina inferior derecha
+                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
+                        if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)) {
+                            suma++;    // Arriba
+                        }
+
+                        if ((akari.getTableroCasillasNegras()[i][j - 1] == 0)) {
+                            suma++;    // Izquierda
+                        }
+                        if (suma == akari.getTalberoRestricciones()[i][j]) {
+                            akari.ponerBombillo(i - 1, j);
+                            akari.ponerBombillo(i, j - 1);
+                        }
+                    } else {
+
+                        // 5. Primera fila, pero no esquina superior
+                        if (i == 0) {
+                            if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
+                                suma++;   // Abajo
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i][j + 1] == 0)) {
+                                suma++;    // Derecha
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i][j - 1] == 0)) {
+                                suma++;    // Izquierda
+                            }
+                            if (suma == akari.getTalberoRestricciones()[i][j]) {
+                                akari.ponerBombillo(i + 1, j);
+                                akari.ponerBombillo(i, j + 1);
+                                akari.ponerBombillo(i, j - 1);
+                            }
+                        } // 6. Ultima Fila, pero no esquina inferior
+                        else if (i == (akari.getNumeroFilas() - 1)) {
+                            if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)) {
+                                suma++;    // Arriba
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i][j + 1] == 0)) {
+                                suma++;    // Derecha
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i][j - 1] == 0)) {
+                                suma++;    // Izquierda
+                            }
+                            if (suma == akari.getTalberoRestricciones()[i][j]) {
+                                akari.ponerBombillo(i - 1, j);
+                                akari.ponerBombillo(i, j + 1);
+                                akari.ponerBombillo(i, j - 1);
+                            }
+                        } // 7. Primera columna, pero no esquina izquierda
+                        else if (j == 0) {
+                            if ((akari.getTableroCasillasNegras()[i + 1][j] == 0)) {
+                                suma++;   // Abajo
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)) {
+                                suma++;    // Arriba
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i][j + 1] == 0)) {
+                                suma++;    // Derecha
+                            }
+
+                            if (suma == akari.getTalberoRestricciones()[i][j]) {
+                                akari.ponerBombillo(i + 1, j);
+                                akari.ponerBombillo(i - 1, j);
+                                akari.ponerBombillo(i, j + 1);
+                            }
+                        } // 8. Ultima columna, pero no esquina derecha
+                        else if (j == (akari.getNumeroColumnas() - 1)) {
+                            if ((akari.getTableroCasillasNegras()[i + 1][j] == 0)) {
+                                suma++;   // Abajo
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)) {
+                                suma++;    // Arriba
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i][j - 1] == 0)) {
+                                suma++;    // Izquierda
+                            }
+
+                            if (suma == akari.getTalberoRestricciones()[i][j]) {
+                                akari.ponerBombillo(i + 1, j);
+                                akari.ponerBombillo(i - 1, j);
+                                akari.ponerBombillo(i, j - 1);
+                            }
+                        } // Para todos los demas casos
+                        else {
+                            if ((akari.getTableroCasillasNegras()[i + 1][j] == 0)) {
+                                suma++;   // Abajo
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)) {
+                                suma++;    // Arriba
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i][j + 1] == 0)) {
+                                suma++;    // Derecha
+                            }
+
+                            if ((akari.getTableroCasillasNegras()[i][j - 1] == 0)) {
+                                suma++;    // Izquierda
+                            }
+                            if (suma == akari.getTalberoRestricciones()[i][j]) {
+                                akari.ponerBombillo(i + 1, j);
+                                akari.ponerBombillo(i - 1, j);
+                                akari.ponerBombillo(i, j + 1);
+                                akari.ponerBombillo(i, j - 1);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -546,7 +708,7 @@ public class GeneradorSemiGuiado {
         do {
             cromosoma = generarSiguiteCromosoma(cromosoma, sumando);
             akari.quitarBombillosEIluminacion();
-            procesamientoDeCuatros();
+            procesamientoDeUnoACuatro();
             exito = applicarCromosoma(casillasTenidasEnCuenta, cromosoma, true);
         } while (!exito && !stop);
 
@@ -577,7 +739,7 @@ public class GeneradorSemiGuiado {
     public void setSolucion(int i) {
         RespuestaNoTanIngenua respuesta = Soluciones.get(i);
         akari.quitarBombillosEIluminacion();
-        procesamientoDeCuatros();
+        procesamientoDeUnoACuatro();
         applicarCromosoma(casillasTenidasEnCuenta, respuesta.getCromosoma(), true);
         applicarCromosoma(respuesta.getCasillasNoIluminadas(), respuesta.getCromosomaNoIluminadas(), false);
     }
