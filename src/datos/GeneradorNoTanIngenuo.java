@@ -30,6 +30,8 @@
 
 package datos;
 
+//~--- JDK imports ------------------------------------------------------------
+
 import java.util.ArrayList;
 
 /**
@@ -39,16 +41,16 @@ import java.util.ArrayList;
  * @version 12/05/28
  */
 public class GeneradorNoTanIngenuo {
-    AkariGame           akari;
-    private boolean[][] casillasNoIluminadas;
-    private boolean[][] casillasTenidasEnCuenta;
-    boolean[]           cromosoma;
-    boolean[]           cromosomaNoIluminadas;
-    boolean             stop;
-    boolean[]           sumando;
-    boolean[]           sumandoNoIluminadas;
-    ArrayList<Boolean[]> Soluciones;
     
+    ArrayList<RespuestaNoTanIngenua> Soluciones;
+    AkariGame                        akari;
+    private boolean[][]              casillasNoIluminadas;
+    private boolean[][]              casillasTenidasEnCuenta;
+    boolean[]                        cromosoma;
+    boolean[]                        cromosomaNoIluminadas;
+    boolean                          stop;
+    boolean[]                        sumando;
+    boolean[]                        sumandoNoIluminadas;
 
     /**
      * Constructs ...
@@ -419,6 +421,3 @@ public class GeneradorNoTanIngenuo {
         }
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com
