@@ -629,7 +629,7 @@
     <object class="jindent.settings.DateFormatSetting">
      <string>environment.dateFormat</string>
      <void property="value">
-      <string>yy/MM/dd</string>
+      <string>dd.MM.yy</string>
      </void>
     </object>
    </void>

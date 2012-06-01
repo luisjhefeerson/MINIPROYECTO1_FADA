@@ -4,7 +4,7 @@
 //
 // ARCHIVO: Cromosoma.java
 //
-// FECHA:  12/06/01
+// FECHA:  01.06.12
 //
 // AUTORES:
 //     Marx Arturo Arias - 0840247-3743
