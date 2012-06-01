@@ -4,7 +4,7 @@
 //
 // ARCHIVO: RespuestaNoTanIngenua.java
 //
-// FECHA: 12/05/30
+// FECHA:  12/06/01
 //
 // AUTORES:
 //     Marx Arturo Arias - 0840247-3743
@@ -25,7 +25,6 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
-
 
 
 package datos;
@@ -86,6 +85,3 @@ public class RespuestaNoTanIngenua {
         return cromosomaNoIluminadas;
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com
