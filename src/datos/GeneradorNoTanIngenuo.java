@@ -411,14 +411,13 @@ public class GeneradorNoTanIngenuo {
      * @return
      */
     public boolean solucionNoTanIngenua() {
-        boolean exito;
-
-        do {
+        
+        boolean exito=false;
+        while (!exito && !stop){
             cromosoma = generarSiguiteCromosoma(cromosoma, sumando);
             akari.quitarBombillosEIluminacion();
             exito = applicarCromosoma(casillasTenidasEnCuenta, cromosoma, true);
-        } while (!exito && !stop);
-
+        } 
         if (exito) {
             return intentarIluminar();
         } else {

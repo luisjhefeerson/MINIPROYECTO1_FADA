@@ -710,15 +710,15 @@ public class GeneradorSemiGuiado {
      * @return
      */
     public boolean solucionSemiGuiada() {
-        boolean exito;
+        boolean exito=false;
 
-        do {
+         while (!exito && !stop) {
             cromosoma = generarSiguiteCromosoma(cromosoma, sumando);
             akari.quitarBombillosEIluminacion();
             akari.setTableroIluminacion(tableroIluminacionBase);
             akari.setTableroBombillos(tableroBombillosBase);
             exito = applicarCromosoma(casillasTenidasEnCuenta, cromosoma, true);
-        } while (!exito && !stop);
+        }
 
         if (exito) {
             return intentarIluminar();

@@ -41,7 +41,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainFrame extends javax.swing.JFrame {
-
+    
     AkariGame akariGame = null;
     GeneradorIngenuo generadorIngenuo = null;
     GeneradorNoTanIngenuo generadorNoTanIngenuo = null;
@@ -54,14 +54,15 @@ public class MainFrame extends javax.swing.JFrame {
     int yInicial;
     int altoTablero;
     boolean tableroCargado;
-
+    private boolean todasDeUna;
+    
     public MainFrame() {
         tableroCargado = false;
         widthLabel = 30;
         heightLabel = 30;
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -90,6 +91,7 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBoxSolucionesGuiadas = new javax.swing.JComboBox();
         jLabelSoluciones1 = new javax.swing.JLabel();
         jButtonValidar = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMICargarTablero = new javax.swing.JMenuItem();
@@ -170,7 +172,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonIngenuo);
-        jButtonIngenuo.setBounds(310, 185, 100, 27);
+        jButtonIngenuo.setBounds(310, 185, 100, 31);
 
         jButtonBorrar.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jButtonBorrar.setText("Borrar");
@@ -180,7 +182,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonBorrar);
-        jButtonBorrar.setBounds(310, 110, 100, 27);
+        jButtonBorrar.setBounds(310, 110, 100, 31);
 
         jSliderZoom.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jSliderZoom.setMaximum(50);
@@ -202,7 +204,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonMedioInge);
-        jButtonMedioInge.setBounds(310, 220, 100, 27);
+        jButtonMedioInge.setBounds(310, 220, 100, 31);
 
         jLabelZomm.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jLabelZomm.setText("ZOOM:");
@@ -215,7 +217,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jComboBoxSolucionesIngenuas);
-        jComboBoxSolucionesIngenuas.setBounds(310, 280, 100, 20);
+        jComboBoxSolucionesIngenuas.setBounds(310, 280, 100, 28);
 
         jLabelSoluciones.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jLabelSoluciones.setText("Soluciones");
@@ -230,7 +232,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonGuiado);
-        jButtonGuiado.setBounds(310, 315, 100, 27);
+        jButtonGuiado.setBounds(310, 315, 100, 31);
 
         jComboBoxSolucionesGuiadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +240,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jComboBoxSolucionesGuiadas);
-        jComboBoxSolucionesGuiadas.setBounds(310, 370, 100, 20);
+        jComboBoxSolucionesGuiadas.setBounds(310, 370, 100, 28);
 
         jLabelSoluciones1.setFont(new java.awt.Font("Trebuchet MS", 0, 15)); // NOI18N
         jLabelSoluciones1.setText("Soluciones");
@@ -253,7 +255,17 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jButtonValidar);
-        jButtonValidar.setBounds(310, 150, 100, 27);
+        jButtonValidar.setBounds(310, 150, 100, 31);
+
+        jCheckBox1.setFont(new java.awt.Font("Ubuntu", 0, 12)); // NOI18N
+        jCheckBox1.setText("Todas de Una");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        jPanelPrincipal.add(jCheckBox1);
+        jCheckBox1.setBounds(310, 400, 100, 24);
 
         getContentPane().add(jPanelPrincipal);
         jPanelPrincipal.setBounds(0, 0, 900, 600);
@@ -307,7 +319,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jMISalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMISalirActionPerformed
-
+    
     private void jMIAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAcercaDeActionPerformed
         //<editor-fold defaultstate="collapsed" desc="jMIAcercaDeActionPerformed()">
         String acercaDe = "FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS\n"
@@ -335,77 +347,77 @@ public class MainFrame extends javax.swing.JFrame {
                 + "\n"
                 + "ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION\n"
                 + "UNIVERSIDAD DEL VALLE";
-
-
+        
+        
         JOptionPane.showMessageDialog(this, acercaDe, "Acerda de", JOptionPane.INFORMATION_MESSAGE);
         //</editor-fold>
     }//GEN-LAST:event_jMIAcercaDeActionPerformed
-
+    
     private void jMICargarTableroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICargarTableroActionPerformed
-
+        
         JFileChooser selectorArchivo = new JFileChooser("./tests/");
-
+        
         selectorArchivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int resultado = selectorArchivo.showOpenDialog(this);
-
+        
         if (resultado != JFileChooser.CANCEL_OPTION) {
-
+            
             File selectedFile = selectorArchivo.getSelectedFile();
             akariGame = new AkariGame();
-
+            
             if (akariGame.loadFromFile(selectedFile)) {
                 limpiarTodo();
                 jTextArea.setText(akariGame.getTextoEnArchivo());
                 Graficar();
-
-
+                
+                
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido", JOptionPane.ERROR_MESSAGE);
             }
         }
-
+        
     }//GEN-LAST:event_jMICargarTableroActionPerformed
-
+    
     private void jButtonIngenuoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngenuoActionPerformed
-
+        
         if (generadorIngenuo == null) {
             System.out.print("Construccion de generador Ingenuo");
             generadorIngenuo = new GeneradorIngenuo(akariGame);
         }
+                
         if (generadorIngenuo.solucionIngenua()) {
             Iluminar();
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
-            generadorIngenuo = null;
         }
     }//GEN-LAST:event_jButtonIngenuoActionPerformed
-
+    
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-
+        
         akariGame.quitarBombillosEIluminacion();
         jPanelGraphiclView.removeAll();
         jPanelGraphiclView.repaint();
         Graficar();
-
+        
     }//GEN-LAST:event_jButtonBorrarActionPerformed
-
+    
     private void jSliderZoomStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderZoomStateChanged
-
+        
         if (tableroCargado) {
             widthLabel = jSliderZoom.getValue();
             heightLabel = jSliderZoom.getValue();
-
+            
             anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
             altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
-
+            
             if (anchoTablero < jPanelGraphiclView.getWidth()) {
                 xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
             }
-
+            
             if (altoTablero < jPanelGraphiclView.getHeight()) {
                 yInicial = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
             }
-
+            
             for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
                 for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
                     jLabelTablero[i][j].setBounds(
@@ -416,71 +428,84 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         }
-
+        
     }//GEN-LAST:event_jSliderZoomStateChanged
-
+    
     private void jButtonMedioIngeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMedioIngeActionPerformed
-
+        
         if (generadorNoTanIngenuo == null) {
             System.out.print("Construccion de generador No tan Ingenuo");
             generadorNoTanIngenuo = new GeneradorNoTanIngenuo(akariGame);
         }
-        if (generadorNoTanIngenuo.solucionNoTanIngenua()) {
-            Iluminar();
+        
+        boolean solucion;
+        do {
+            solucion = generadorNoTanIngenuo.solucionNoTanIngenua();
+        } while (solucion && todasDeUna);
+        
+        if (generadorNoTanIngenuo.getNumeroSoluciones() > 0) {
             JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, LO ENCONTRE!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
-
+            
             String[] soluciones = new String[generadorNoTanIngenuo.getNumeroSoluciones()];
-
             for (int i = 0; i < soluciones.length; i++) {
                 soluciones[i] = Integer.toString(i + 1);
             }
             jComboBoxSolucionesIngenuas.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
-
+            generadorNoTanIngenuo.setSolucion(generadorNoTanIngenuo.getNumeroSoluciones() - 1);
+            Iluminar();
+            
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
-            generadorNoTanIngenuo = null;
         }
     }//GEN-LAST:event_jButtonMedioIngeActionPerformed
-
+    
     private void jComboBoxSolucionesIngenuasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSolucionesIngenuasActionPerformed
-
+        
         generadorNoTanIngenuo.setSolucion(jComboBoxSolucionesIngenuas.getSelectedIndex());
         Iluminar();
-
+        
     }//GEN-LAST:event_jComboBoxSolucionesIngenuasActionPerformed
-
+    
     private void jButtonGuiadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuiadoActionPerformed
-
+        
         if (generadorSemiGuiado == null) {
             System.out.print("Construccion de generador Semi Guiado");
             generadorSemiGuiado = new GeneradorSemiGuiado(akariGame);
         }
-        if (generadorSemiGuiado.solucionSemiGuiada()) {
-            Iluminar();
+        
+        boolean solucion;
+        do {
+            solucion = generadorSemiGuiado.solucionSemiGuiada();
+        } while (solucion && todasDeUna);
+        
+        
+        if (generadorSemiGuiado.getNumeroSoluciones() > 0) {
+            
             JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, LO ENCONTRE!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
-
             String[] soluciones = new String[generadorSemiGuiado.getNumeroSoluciones()];
-
+            
             for (int i = 0; i < soluciones.length; i++) {
                 soluciones[i] = Integer.toString(i + 1);
             }
             jComboBoxSolucionesGuiadas.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
+            generadorSemiGuiado.setSolucion(generadorSemiGuiado.getNumeroSoluciones()-1);
+            Iluminar();
+            
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
-            generadorSemiGuiado = null;
         }
-
+        
     }//GEN-LAST:event_jButtonGuiadoActionPerformed
-
+    
     private void jComboBoxSolucionesGuiadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSolucionesGuiadasActionPerformed
-
+        
         generadorSemiGuiado.setSolucion(jComboBoxSolucionesGuiadas.getSelectedIndex());
         Iluminar();
-
+        
     }//GEN-LAST:event_jComboBoxSolucionesGuiadasActionPerformed
-
+    
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
-
+        
         if (akariGame != null) {
             if (akariGame.validation(false)) {
                 JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, SOLUCION CORRECTA!!", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
@@ -488,29 +513,41 @@ public class MainFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "QUE INFELICIDAD TAN GRANDE, SOLUCION INCORRECTA!!", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
-
+        
     }//GEN-LAST:event_jButtonValidarActionPerformed
-
+    
     private void jMenuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGuardarActionPerformed
-
+        
         JFileChooser selectorArchivo = new JFileChooser("./tests/");
-             FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
-    selectorArchivo.setFileFilter(filter);
-
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+        selectorArchivo.setFileFilter(filter);
+        
         selectorArchivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int resultado = selectorArchivo.showSaveDialog(this);
-
+        
         if (resultado != JFileChooser.CANCEL_OPTION) {
-            File selectedFile = new File(selectorArchivo.getSelectedFile().getAbsolutePath()+".txt");
+            File selectedFile = new File(selectorArchivo.getSelectedFile().getAbsolutePath() + ".txt");
             akariGame.saveToFile(selectedFile);
         }
     }//GEN-LAST:event_jMenuGuardarActionPerformed
-
+    
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        
+        if (jCheckBox1.isSelected()) {
+            this.todasDeUna = true;
+        } else {
+            this.todasDeUna = false;
+        }
+        
+        System.out.println("todas de una: " + todasDeUna);
+        
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
         String name = ((JLabel) evt.getSource()).getName();
         int i = Integer.parseInt(name.split(",")[0]);
         int j = Integer.parseInt(name.split(",")[1]);
-
+        
         if (akariGame.ponerBombillo(i, j)) {
             Iluminar();
             if (akariGame.validation(false)) {
@@ -519,48 +556,48 @@ public class MainFrame extends javax.swing.JFrame {
         } else if (akariGame.quitarBombillo(i, j)) {
             Iluminar();
         }
-
-
+        
+        
     }
-
+    
     private void Graficar() {
-
+        
         byte[][] tableroCasillasNegras = akariGame.getTableroCasillasNegras();
         byte[][] tableroBombillos = akariGame.getTableroBombillos();
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         int[][] tableroRestricciones = akariGame.getTalberoRestricciones();
-
+        
         jLabelTablero = new JLabel[akariGame.getNumeroFilas()][akariGame.getNumeroColumnas()];
 
         // Ajuste de dimensiones para centrar tablero
 
         xInicial = 0;
         yInicial = 0;
-
+        
         anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
         altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
-
+        
         if (anchoTablero < jPanelGraphiclView.getWidth()) {
             xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
         }
-
+        
         if (altoTablero < jPanelGraphiclView.getHeight()) {
             yInicial = (jPanelGraphiclView.getHeight() - altoTablero) / 2;
         }
 
         //IMPORTANTE: El error que habia aqui antes se arreglo
         Border border = LineBorder.createGrayLineBorder();
-
+        
         for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
             for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
-
+                
                 jLabelTablero[i][j] = new JLabel();
                 jLabelTablero[i][j].setOpaque(true);
                 jLabelTablero[i][j].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 jLabelTablero[i][j].setBorder(border);
                 jLabelTablero[i][j].setName(i + "," + j);
                 jLabelTablero[i][j].addMouseListener(new java.awt.event.MouseAdapter() {
-
+                    
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         jLabelTableroMouseClicked(evt);
                     }
@@ -609,7 +646,7 @@ public class MainFrame extends javax.swing.JFrame {
                 {
                     jLabelTablero[i][j].setBackground(Color.YELLOW);
                 }
-
+                
                 jPanelGraphiclView.add(jLabelTablero[i][j]);//adiciona los labels al contenedor
                 jLabelTablero[i][j].setBounds(
                         xInicial + ((widthLabel + 1) * j),
@@ -620,16 +657,16 @@ public class MainFrame extends javax.swing.JFrame {
         }
         tableroCargado = true;
     }
-
+    
     public void Iluminar() {
-
+        
         byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
         byte[][] tableroBombillos = akariGame.getTableroBombillos();
         byte[][] tableroCasillasNegras = akariGame.getTableroCasillasNegras();
-
+        
         for (int i = 0; i < jLabelTablero.length; i++) {
             for (int j = 0; j < jLabelTablero[i].length; j++) {
-
+                
                 if (tableroCasillasNegras[i][j] != 1) {
                     jLabelTablero[i][j].setIcon(null);
                     jLabelTablero[i][j].setBackground(Color.white);
@@ -645,15 +682,17 @@ public class MainFrame extends javax.swing.JFrame {
         }
         jTextArea.setText(akariGame.getSolucionActual());
     }
-
+    
     public void limpiarTodo() {
         jTextArea.setText(null);
         jPanelGraphiclView.removeAll();
         jPanelGraphiclView.repaint();
         jComboBoxSolucionesIngenuas.setModel(new javax.swing.DefaultComboBoxModel(new String[]{}));
+        jComboBoxSolucionesGuiadas.setModel(new javax.swing.DefaultComboBoxModel(new String[]{}));
+        jCheckBox1.setSelected(false);
         tableroCargado = false;
     }
-
+    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -676,7 +715,7 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             public void run() {
                 new MainFrame().setVisible(true);
             }
@@ -688,6 +727,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonIngenuo;
     private javax.swing.JButton jButtonMedioInge;
     private javax.swing.JButton jButtonValidar;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBoxSolucionesGuiadas;
     private javax.swing.JComboBox jComboBoxSolucionesIngenuas;
     private javax.swing.JLabel jLabelLogo;
