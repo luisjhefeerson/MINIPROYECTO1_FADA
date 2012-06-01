@@ -38,7 +38,6 @@ package datos;
 public class GeneradorIngenuo {
     AkariGame akari;
     boolean[] cromosoma;
-    int       numeroCromosoma;
     boolean   stop;
     boolean[] sumando;
 
@@ -49,7 +48,6 @@ public class GeneradorIngenuo {
      * @param tablero
      */
     public GeneradorIngenuo(AkariGame tablero) {
-        numeroCromosoma = 0;
         this.akari      = tablero;
         this.stop       = false;
         this.akari      = tablero;

@@ -25,19 +25,14 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
-
-
 package gui;
 
 import datos.AkariGame;
 import datos.GeneradorIngenuo;
 import datos.GeneradorNoTanIngenuo;
 import datos.GeneradorSemiGuiado;
-
 import java.awt.Color;
-
 import java.io.File;
-
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -49,23 +44,24 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * Class description
  *
  *
- * @version    Enter version here..., 01.06.12
- * @author     Enter your name here...    
+ * @version Enter version here..., 01.06.12
+ * @author Enter your name here...
  */
 public class MainFrame extends javax.swing.JFrame {
-    AkariGame             akariGame             = null;
-    GeneradorIngenuo      generadorIngenuo      = null;
+
+    AkariGame akariGame = null;
+    GeneradorIngenuo generadorIngenuo = null;
     GeneradorNoTanIngenuo generadorNoTanIngenuo = null;
-    GeneradorSemiGuiado   generadorSemiGuiado   = null;
-    private JLabel[][]    jLabelTablero;
-    int                   widthLabel;
-    int                   heightLabel;
-    int                   xInicial;
-    int                   anchoTablero;
-    int                   yInicial;
-    int                   altoTablero;
-    boolean               tableroCargado;
-    private boolean       todasDeUna;
+    GeneradorSemiGuiado generadorSemiGuiado = null;
+    private JLabel[][] jLabelTablero;
+    int widthLabel;
+    int heightLabel;
+    int xInicial;
+    int anchoTablero;
+    int yInicial;
+    int altoTablero;
+    boolean tableroCargado;
+    private boolean todasDeUna;
 
     /**
      * Constructs ...
@@ -73,8 +69,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         tableroCargado = false;
-        widthLabel     = 30;
-        heightLabel    = 30;
+        widthLabel = 30;
+        heightLabel = 30;
         initComponents();
     }
 
@@ -83,7 +79,6 @@ public class MainFrame extends javax.swing.JFrame {
      *
      */
     @SuppressWarnings("unchecked")
-
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         jPanelPrincipal             = new javax.swing.JPanel();
@@ -320,14 +315,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         // <editor-fold defaultstate="collapsed" desc="jMIAcercaDeActionPerformed()">
         String acercaDe = "FUNDAMENTOS DE ANÁLISIS Y DISEÑO DE ALGORITMOS\n"
-                          + "MINIPROYECTO 1: SOLUCIÓN PARA UN JUEGO DE LÓGICA: AKARI\n" + "\n"
-                          + "ARCHIVO: MainFrame.java\n" + "\n" + "FECHA:\n" + "\n" + "AUTORES:\n"
-                          + "    Marx Arturo Arias - 0840247-3743\n" + "    marxarturoariasescobar@gmail.com\n" + "\n"
-                          + "    Luis Jeferson Gallardo - \n" + "    luisjhefeerson@gmail.com\n" + "\n"
-                          + "    Fidel Herney Palacios - 0832691-3743\n" + "    herney400@gmail.com\n" + "\n"
-                          + "    James Andrés Payan - 0957150-2711\n" + "    jamespayan@gmail.com\n" + "\n"
-                          + "    Gustavo Adolfo Rodriguez - 0932979-3743\n" + "    gustalibreros@gmail.com\n" + "\n"
-                          + "ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION\n" + "UNIVERSIDAD DEL VALLE";
+                + "MINIPROYECTO 1: SOLUCIÓN PARA UN JUEGO DE LÓGICA: AKARI\n" + "\n"
+                + "ARCHIVO: MainFrame.java\n" + "\n" + "FECHA:\n" + "\n" + "AUTORES:\n"
+                + "    Marx Arturo Arias - 0840247-3743\n" + "    marxarturoariasescobar@gmail.com\n" + "\n"
+                + "    Luis Jeferson Gallardo - \n" + "    luisjhefeerson@gmail.com\n" + "\n"
+                + "    Fidel Herney Palacios - 0832691-3743\n" + "    herney400@gmail.com\n" + "\n"
+                + "    James Andrés Payan - 0957150-2711\n" + "    jamespayan@gmail.com\n" + "\n"
+                + "    Gustavo Adolfo Rodriguez - 0932979-3743\n" + "    gustalibreros@gmail.com\n" + "\n"
+                + "ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION\n" + "UNIVERSIDAD DEL VALLE";
 
         JOptionPane.showMessageDialog(this, acercaDe, "Acerda de", JOptionPane.INFORMATION_MESSAGE);
 
@@ -358,7 +353,7 @@ public class MainFrame extends javax.swing.JFrame {
                 Graficar();
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido",
-                                              JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jMICargarTableroActionPerformed
@@ -403,10 +398,10 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void jSliderZoomStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderZoomStateChanged
         if (tableroCargado) {
-            widthLabel   = jSliderZoom.getValue();
-            heightLabel  = jSliderZoom.getValue();
+            widthLabel = jSliderZoom.getValue();
+            heightLabel = jSliderZoom.getValue();
             anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
-            altoTablero  = akariGame.getNumeroFilas() * (heightLabel + 1);
+            altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
 
             if (anchoTablero < jPanelGraphiclView.getWidth()) {
                 xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
@@ -419,7 +414,7 @@ public class MainFrame extends javax.swing.JFrame {
             for (int i = 0; i < akariGame.getNumeroFilas(); i++) {
                 for (int j = 0; j < akariGame.getNumeroColumnas(); j++) {
                     jLabelTablero[i][j].setBounds(xInicial + ((widthLabel + 1) * j),
-                                                  yInicial + ((heightLabel + 1) * i), widthLabel, heightLabel);
+                            yInicial + ((heightLabel + 1) * i), widthLabel, heightLabel);
                 }
             }
         }
@@ -444,9 +439,6 @@ public class MainFrame extends javax.swing.JFrame {
         } while (solucion && todasDeUna);
 
         if (generadorNoTanIngenuo.getNumeroSoluciones() > 0) {
-            JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, LO ENCONTRE!!", "Juego Terminado",
-                                          JOptionPane.INFORMATION_MESSAGE);
-
             String[] soluciones = new String[generadorNoTanIngenuo.getNumeroSoluciones()];
 
             for (int i = 0; i < soluciones.length; i++) {
@@ -456,6 +448,8 @@ public class MainFrame extends javax.swing.JFrame {
             jComboBoxSolucionesIngenuas.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
             generadorNoTanIngenuo.setSolucion(generadorNoTanIngenuo.getNumeroSoluciones() - 1);
             Iluminar();
+            JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, LO ENCONTRE!!", "Juego Terminado",
+                    JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -491,8 +485,6 @@ public class MainFrame extends javax.swing.JFrame {
         } while (solucion && todasDeUna);
 
         if (generadorSemiGuiado.getNumeroSoluciones() > 0) {
-            JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, LO ENCONTRE!!", "Juego Terminado",
-                                          JOptionPane.INFORMATION_MESSAGE);
 
             String[] soluciones = new String[generadorSemiGuiado.getNumeroSoluciones()];
 
@@ -503,6 +495,9 @@ public class MainFrame extends javax.swing.JFrame {
             jComboBoxSolucionesGuiadas.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
             generadorSemiGuiado.setSolucion(generadorSemiGuiado.getNumeroSoluciones() - 1);
             Iluminar();
+            JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, LO ENCONTRE!!", "Juego Terminado",
+                    JOptionPane.INFORMATION_MESSAGE);
+
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo hallar solución", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -529,10 +524,10 @@ public class MainFrame extends javax.swing.JFrame {
         if (akariGame != null) {
             if (akariGame.validation(false)) {
                 JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, SOLUCION CORRECTA!!", "Juego Terminado",
-                                              JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "QUE INFELICIDAD TAN GRANDE, SOLUCION INCORRECTA!!", "ERROR",
-                                              JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButtonValidarActionPerformed
@@ -544,8 +539,8 @@ public class MainFrame extends javax.swing.JFrame {
      * @param evt
      */
     private void jMenuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGuardarActionPerformed
-        JFileChooser            selectorArchivo = new JFileChooser("./tests/");
-        FileNameExtensionFilter filter          = new FileNameExtensionFilter("Text Files", "txt");
+        JFileChooser selectorArchivo = new JFileChooser("./tests/");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
 
         selectorArchivo.setFileFilter(filter);
         selectorArchivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -583,15 +578,15 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void jLabelTableroMouseClicked(java.awt.event.MouseEvent evt) {
         String name = ((JLabel) evt.getSource()).getName();
-        int    i    = Integer.parseInt(name.split(",")[0]);
-        int    j    = Integer.parseInt(name.split(",")[1]);
+        int i = Integer.parseInt(name.split(",")[0]);
+        int j = Integer.parseInt(name.split(",")[1]);
 
         if (akariGame.ponerBombillo(i, j)) {
             Iluminar();
 
             if (akariGame.validation(false)) {
                 JOptionPane.showMessageDialog(this, "FELICITACIONES GANASTE!!", "Juego Terminado",
-                                              JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.INFORMATION_MESSAGE);
             }
         } else if (akariGame.quitarBombillo(i, j)) {
             Iluminar();
@@ -604,17 +599,17 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void Graficar() {
         byte[][] tableroCasillasNegras = akariGame.getTableroCasillasNegras();
-        byte[][] tableroBombillos      = akariGame.getTableroBombillos();
-        byte[][] tableroIluminacion    = akariGame.getTableroIluminacion();
-        int[][]  tableroRestricciones  = akariGame.getTalberoRestricciones();
+        byte[][] tableroBombillos = akariGame.getTableroBombillos();
+        byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
+        int[][] tableroRestricciones = akariGame.getTalberoRestricciones();
 
         jLabelTablero = new JLabel[akariGame.getNumeroFilas()][akariGame.getNumeroColumnas()];
 
         // Ajuste de dimensiones para centrar tablero
-        xInicial     = 0;
-        yInicial     = 0;
+        xInicial = 0;
+        yInicial = 0;
         anchoTablero = akariGame.getNumeroColumnas() * (widthLabel + 1);
-        altoTablero  = akariGame.getNumeroFilas() * (heightLabel + 1);
+        altoTablero = akariGame.getNumeroFilas() * (heightLabel + 1);
 
         if (anchoTablero < jPanelGraphiclView.getWidth()) {
             xInicial = (jPanelGraphiclView.getWidth() - anchoTablero) / 2;
@@ -635,13 +630,14 @@ public class MainFrame extends javax.swing.JFrame {
                 jLabelTablero[i][j].setBorder(border);
                 jLabelTablero[i][j].setName(i + "," + j);
                 jLabelTablero[i][j].addMouseListener(new java.awt.event.MouseAdapter() {
+
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         jLabelTableroMouseClicked(evt);
                     }
                 });
 
                 // TABLERO CASILLAS BLANCAS Y NEGRAS
-                if (tableroCasillasNegras[i][j] == 0)           // cuando el valor es 0 la casilla es blanca
+                if (tableroCasillasNegras[i][j] == 0) // cuando el valor es 0 la casilla es blanca
                 {
                     jLabelTablero[i][j].setBackground(Color.white);
                 }
@@ -652,27 +648,27 @@ public class MainFrame extends javax.swing.JFrame {
                 }
 
                 // TABLERO DE RESTRICCIONES
-                if (tableroRestricciones[i][j] == 0)            // la casilla tiene el numero 0
+                if (tableroRestricciones[i][j] == 0) // la casilla tiene el numero 0
                 {
                     jLabelTablero[i][j].setText("0");
                 }
 
-                if (tableroRestricciones[i][j] == 1)            // la casilla tiene el numero 1
+                if (tableroRestricciones[i][j] == 1) // la casilla tiene el numero 1
                 {
                     jLabelTablero[i][j].setText("1");
                 }
 
-                if (tableroRestricciones[i][j] == 2)            // la casilla tiene el numero 2
+                if (tableroRestricciones[i][j] == 2) // la casilla tiene el numero 2
                 {
                     jLabelTablero[i][j].setText("2");
                 }
 
-                if (tableroRestricciones[i][j] == 3)            // la casilla tiene el numero 3                {
+                if (tableroRestricciones[i][j] == 3) // la casilla tiene el numero 3                {
                 {
                     jLabelTablero[i][j].setText("3");
                 }
 
-                if (tableroRestricciones[i][j] == 4)            // la casilla tiene el numero 4
+                if (tableroRestricciones[i][j] == 4) // la casilla tiene el numero 4
                 {
                     jLabelTablero[i][j].setText("4");
                 }
@@ -684,14 +680,14 @@ public class MainFrame extends javax.swing.JFrame {
                 }
 
                 // TABLERO ILUMINACION
-                if (tableroIluminacion[i][j] == 1)              // cuando el valor es 1 la casilla se ilumina
+                if (tableroIluminacion[i][j] == 1) // cuando el valor es 1 la casilla se ilumina
                 {
                     jLabelTablero[i][j].setBackground(Color.YELLOW);
                 }
 
                 jPanelGraphiclView.add(jLabelTablero[i][j]);    // adiciona los labels al contenedor
                 jLabelTablero[i][j].setBounds(xInicial + ((widthLabel + 1) * j), yInicial + ((heightLabel + 1) * i),
-                                              widthLabel, heightLabel);    // ubica los labels en forma de cuadricula. Anteriormente habia un error aqui!!
+                        widthLabel, heightLabel);    // ubica los labels en forma de cuadricula. Anteriormente habia un error aqui!!
             }
         }
 
@@ -703,8 +699,8 @@ public class MainFrame extends javax.swing.JFrame {
      *
      */
     public void Iluminar() {
-        byte[][] tableroIluminacion    = akariGame.getTableroIluminacion();
-        byte[][] tableroBombillos      = akariGame.getTableroBombillos();
+        byte[][] tableroIluminacion = akariGame.getTableroIluminacion();
+        byte[][] tableroBombillos = akariGame.getTableroBombillos();
         byte[][] tableroCasillasNegras = akariGame.getTableroCasillasNegras();
 
         for (int i = 0; i < jLabelTablero.length; i++) {
@@ -736,8 +732,8 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea.setText(null);
         jPanelGraphiclView.removeAll();
         jPanelGraphiclView.repaint();
-        jComboBoxSolucionesIngenuas.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
-        jComboBoxSolucionesGuiadas.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
+        jComboBoxSolucionesIngenuas.setModel(new javax.swing.DefaultComboBoxModel(new String[]{}));
+        jComboBoxSolucionesGuiadas.setModel(new javax.swing.DefaultComboBoxModel(new String[]{}));
         jCheckBox1.setSelected(false);
         tableroCargado = false;
     }
@@ -772,12 +768,12 @@ public class MainFrame extends javax.swing.JFrame {
         // </editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new MainFrame().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton     jButtonBorrar;
     private javax.swing.JButton     jButtonGuiado;
