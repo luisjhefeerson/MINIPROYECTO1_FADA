@@ -58,10 +58,10 @@ public class GeneradorIngenuo {
         this.sumando   = new boolean[longitudCromosoma];
 
         // Inicializar el cromosoma y el sumando
-        for (int i = 0; i < sumando.length; i++) {
-            sumando[i]   = false;
-            cromosoma[i] = false;
-        }
+//        for (int i = 0; i < sumando.length; i++) {
+//            sumando[i]   = false;
+//            cromosoma[i] = false;
+//        }
 
         // Terminando de Inicializar el sumando = (1)= 0000....0001
         sumando[sumando.length - 1] = true;

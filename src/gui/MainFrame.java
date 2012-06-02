@@ -365,10 +365,10 @@ public class MainFrame extends javax.swing.JFrame {
      * @param evt
      */
     private void jButtonIngenuoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngenuoActionPerformed
-        if (generadorIngenuo == null) {
+//        if (generadorIngenuo == null) {
             System.out.print("Construccion de generador Ingenuo");
             generadorIngenuo = new GeneradorIngenuo(akariGame);
-        }
+//        }
 
         if (generadorIngenuo.solucionIngenua()) {
             Iluminar();
