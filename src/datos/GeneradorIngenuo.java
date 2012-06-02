@@ -107,8 +107,8 @@ public class GeneradorIngenuo {
 
         // Inicializar Cromosoma Salida
         boolean[] salida  = new boolean[cromosoma.length];
-        boolean   acarreo = false;
-
+        boolean   acarreo = false;      
+        
         for (int i = salida.length - 1; i >= 0; i--) {
             if (cromosoma[i] && sumando[i]) {
                 if (acarreo) {
