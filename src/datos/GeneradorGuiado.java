@@ -772,8 +772,4 @@ public class GeneradorGuiado {
         applicarCromosoma(casillasTenidasEnCuenta, respuesta.getCromosoma(), true);
         applicarCromosoma(respuesta.getCasillasNoIluminadas(), respuesta.getCromosomaNoIluminadas(), false);
     }
-
-    private boolean xnor(boolean a, boolean b) {
-        return a == b;
-    }
 }
