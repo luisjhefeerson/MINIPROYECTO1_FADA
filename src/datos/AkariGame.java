@@ -246,11 +246,7 @@ public class AkariGame {
                     if (valor > 7) {
                         return false;
                     }
-
-                    System.out.print(tableroCasillasNegras[i][j] + " ");
                 }
-
-                System.out.print("\n");
             }
 
             casillasBlancas = (numeroFilas * numeroColumnas) - casillasNegras;
