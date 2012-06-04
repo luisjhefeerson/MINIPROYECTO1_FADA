@@ -351,6 +351,9 @@ public class MainFrame extends javax.swing.JFrame {
                 limpiarTodo();
                 jTextArea.setText(akariGame.getTextoEnArchivo());
                 Graficar();
+                generadorGuiado=null;
+                generadorIngenuo=null;
+                generadorNoTanIngenuo=null;
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido",
                         JOptionPane.ERROR_MESSAGE);
