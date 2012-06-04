@@ -39,8 +39,8 @@ import java.util.ArrayList;
  *
  * @version 12/05/28
  */
-public class GeneradorSemiGuiado {
-    ArrayList<RespuestaNoTanIngenua> Soluciones;
+public class GeneradorGuiado {
+    ArrayList<RespuestaGuiada> Soluciones;
     AkariGame                        akari;
     private boolean[][]              casillasNoIluminadas;
     private boolean[][]              casillasTenidasEnCuenta;
@@ -58,11 +58,11 @@ public class GeneradorSemiGuiado {
      *
      * @param tablero
      */
-    public GeneradorSemiGuiado(AkariGame tablero) {
+    public GeneradorGuiado(AkariGame tablero) {
         System.out.println("\n\nGenerador SemiGuiado\n\n");
         this.stop  = false;
         this.akari = tablero;
-        Soluciones = new ArrayList<RespuestaNoTanIngenua>();
+        Soluciones = new ArrayList<RespuestaGuiada>();
         procesamientoDeUnoACuatro();
         getTablerosBase();
 
@@ -376,7 +376,7 @@ public class GeneradorSemiGuiado {
      */
     private void guardarSolucion(boolean[] cromosoma, boolean[] cromosomaNoIluminadas,
                                  boolean[][] casillasNoIluminadas) {
-        Soluciones.add(new RespuestaNoTanIngenua(cromosoma, cromosomaNoIluminadas, casillasNoIluminadas));
+        Soluciones.add(new RespuestaGuiada(cromosoma, cromosomaNoIluminadas, casillasNoIluminadas));
     }
 
     /**
@@ -763,7 +763,7 @@ public class GeneradorSemiGuiado {
      * @param i
      */
     public void setSolucion(int i) {
-        RespuestaNoTanIngenua respuesta = Soluciones.get(i);
+        RespuestaGuiada respuesta = Soluciones.get(i);
 
         akari.quitarBombillosEIluminacion();
         akari.setTableroBombillos(tableroBombillosBase);

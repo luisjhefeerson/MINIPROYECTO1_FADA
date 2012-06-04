@@ -38,7 +38,7 @@ import java.util.ArrayList;
  */
 public class GeneradorNoTanIngenuo {
 
-    ArrayList<RespuestaNoTanIngenua> Soluciones;
+    ArrayList<RespuestaGuiada> Soluciones;
     AkariGame akari;
     private boolean[][] casillasNoIluminadas;
     private boolean[][] casillasTenidasEnCuenta;
@@ -57,7 +57,7 @@ public class GeneradorNoTanIngenuo {
     public GeneradorNoTanIngenuo(AkariGame tablero) {
         this.stop = false;
         this.akari = tablero;
-        Soluciones = new ArrayList<RespuestaNoTanIngenua>();
+        Soluciones = new ArrayList<RespuestaGuiada>();
 
         int longitudCromosoma = findCasillasATenerEnCuenta();
 
@@ -345,7 +345,7 @@ public class GeneradorNoTanIngenuo {
      */
     private void guardarSolucion(boolean[] cromosoma, boolean[] cromosomaNoIluminadas,
             boolean[][] casillasNoIluminadas) {
-        Soluciones.add(new RespuestaNoTanIngenua(cromosoma, cromosomaNoIluminadas, casillasNoIluminadas));
+        Soluciones.add(new RespuestaGuiada(cromosoma, cromosomaNoIluminadas, casillasNoIluminadas));
     }
 
     /**
@@ -448,7 +448,7 @@ public class GeneradorNoTanIngenuo {
      * @param i
      */
     public void setSolucion(int i) {
-        RespuestaNoTanIngenua respuesta = Soluciones.get(i);
+        RespuestaGuiada respuesta = Soluciones.get(i);
 
         akari.quitarBombillosEIluminacion();
         applicarCromosoma(casillasTenidasEnCuenta, respuesta.getCromosoma(), true);
