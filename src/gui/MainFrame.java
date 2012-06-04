@@ -30,7 +30,7 @@ package gui;
 import datos.AkariGame;
 import datos.GeneradorIngenuo;
 import datos.GeneradorNoTanIngenuo;
-import datos.GeneradorSemiGuiado;
+import datos.GeneradorGuiado;
 import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -52,7 +52,7 @@ public class MainFrame extends javax.swing.JFrame {
     AkariGame akariGame = null;
     GeneradorIngenuo generadorIngenuo = null;
     GeneradorNoTanIngenuo generadorNoTanIngenuo = null;
-    GeneradorSemiGuiado generadorSemiGuiado = null;
+    GeneradorGuiado generadorGuiado = null;
     private JLabel[][] jLabelTablero;
     int widthLabel;
     int heightLabel;
@@ -351,6 +351,9 @@ public class MainFrame extends javax.swing.JFrame {
                 limpiarTodo();
                 jTextArea.setText(akariGame.getTextoEnArchivo());
                 Graficar();
+                generadorGuiado=null;
+                generadorIngenuo=null;
+                generadorNoTanIngenuo=null;
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no pudo ser procesado", "Formato no Valido",
                         JOptionPane.ERROR_MESSAGE);
@@ -365,10 +368,10 @@ public class MainFrame extends javax.swing.JFrame {
      * @param evt
      */
     private void jButtonIngenuoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngenuoActionPerformed
-//        if (generadorIngenuo == null) {
+        if (generadorIngenuo == null) {
             System.out.print("Construccion de generador Ingenuo");
             generadorIngenuo = new GeneradorIngenuo(akariGame);
-//        }
+        }
 
         if (generadorIngenuo.solucionIngenua()) {
             Iluminar();
@@ -473,27 +476,27 @@ public class MainFrame extends javax.swing.JFrame {
      * @param evt
      */
     private void jButtonGuiadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuiadoActionPerformed
-        if (generadorSemiGuiado == null) {
+        if (generadorGuiado == null) {
             System.out.print("Construccion de generador Semi Guiado");
-            generadorSemiGuiado = new GeneradorSemiGuiado(akariGame);
+            generadorGuiado = new GeneradorGuiado(akariGame);
         }
 
         boolean solucion;
 
         do {
-            solucion = generadorSemiGuiado.solucionSemiGuiada();
+            solucion = generadorGuiado.solucionSemiGuiada();
         } while (solucion && todasDeUna);
 
-        if (generadorSemiGuiado.getNumeroSoluciones() > 0) {
+        if (generadorGuiado.getNumeroSoluciones() > 0) {
 
-            String[] soluciones = new String[generadorSemiGuiado.getNumeroSoluciones()];
+            String[] soluciones = new String[generadorGuiado.getNumeroSoluciones()];
 
             for (int i = 0; i < soluciones.length; i++) {
                 soluciones[i] = Integer.toString(i + 1);
             }
 
             jComboBoxSolucionesGuiadas.setModel(new javax.swing.DefaultComboBoxModel(soluciones));
-            generadorSemiGuiado.setSolucion(generadorSemiGuiado.getNumeroSoluciones() - 1);
+            generadorGuiado.setSolucion(generadorGuiado.getNumeroSoluciones() - 1);
             Iluminar();
             JOptionPane.showMessageDialog(this, "QUE DICHA TAN GRANDE, LO ENCONTRE!!", "Juego Terminado",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -510,7 +513,7 @@ public class MainFrame extends javax.swing.JFrame {
      * @param evt
      */
     private void jComboBoxSolucionesGuiadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSolucionesGuiadasActionPerformed
-        generadorSemiGuiado.setSolucion(jComboBoxSolucionesGuiadas.getSelectedIndex());
+        generadorGuiado.setSolucion(jComboBoxSolucionesGuiadas.getSelectedIndex());
         Iluminar();
     }//GEN-LAST:event_jComboBoxSolucionesGuiadasActionPerformed
 

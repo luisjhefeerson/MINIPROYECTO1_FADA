@@ -25,12 +25,9 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
-
-
 package datos;
 
 //~--- JDK imports ------------------------------------------------------------
-
 import java.util.ArrayList;
 
 /**
@@ -39,18 +36,19 @@ import java.util.ArrayList;
  *
  * @version 12/05/28
  */
-public class GeneradorSemiGuiado {
-    ArrayList<RespuestaNoTanIngenua> Soluciones;
-    AkariGame                        akari;
-    private boolean[][]              casillasNoIluminadas;
-    private boolean[][]              casillasTenidasEnCuenta;
-    boolean[]                        cromosoma;
-    boolean[]                        cromosomaNoIluminadas;
-    boolean                          stop;
-    boolean[]                        sumando;
-    boolean[]                        sumandoNoIluminadas;
-    byte[][]                         tableroBombillosBase;
-    byte[][]                         tableroIluminacionBase;
+public class GeneradorGuiado {
+
+    ArrayList<RespuestaGuiada> Soluciones;
+    AkariGame akari;
+    private boolean[][] casillasNoIluminadas;
+    private boolean[][] casillasTenidasEnCuenta;
+    boolean[] cromosoma;
+    boolean[] cromosomaNoIluminadas;
+    boolean stop;
+    boolean[] sumando;
+    boolean[] sumandoNoIluminadas;
+    byte[][] tableroBombillosBase;
+    byte[][] tableroIluminacionBase;
 
     /**
      * Constructs ...
@@ -58,22 +56,22 @@ public class GeneradorSemiGuiado {
      *
      * @param tablero
      */
-    public GeneradorSemiGuiado(AkariGame tablero) {
+    public GeneradorGuiado(AkariGame tablero) {
         System.out.println("\n\nGenerador SemiGuiado\n\n");
-        this.stop  = false;
+        this.stop = false;
         this.akari = tablero;
-        Soluciones = new ArrayList<RespuestaNoTanIngenua>();
-        procesamientoDeUnoACuatro();
+        Soluciones = new ArrayList<RespuestaGuiada>();
+        detectarAcorralamientos();
         getTablerosBase();
 
         int longitudCromosoma = findCasillasATenerEnCuenta();
 
         this.cromosoma = new boolean[longitudCromosoma];
-        this.sumando   = new boolean[longitudCromosoma];
+        this.sumando = new boolean[longitudCromosoma];
 
         // Inicializar el cromosoma y el sumando
         for (int i = 0; i < sumando.length; i++) {
-            sumando[i]   = false;
+            sumando[i] = false;
             cromosoma[i] = false;
         }
 
@@ -143,8 +141,8 @@ public class GeneradorSemiGuiado {
                                 && (akari.getTableroIluminacion()[i][j + 1] == 0)) {
                             casillasTenidasEnCuenta[i][j + 1] = true;    // Derecha
                         }
-                    }                                                    // 2. Esquina superior derecha
-                            else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
+                    } // 2. Esquina superior derecha
+                    else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
                         if ((akari.getTableroCasillasNegras()[i + 1][j] == 0)
                                 && (akari.getTableroIluminacion()[i + 1][j] == 0)) {
                             casillasTenidasEnCuenta[i + 1][j] = true;    // Abajo
@@ -154,8 +152,8 @@ public class GeneradorSemiGuiado {
                                 && (akari.getTableroIluminacion()[i][j - 1] == 0)) {
                             casillasTenidasEnCuenta[i][j - 1] = true;    // Izquierda
                         }
-                    }                                                    // 3. Esquina inferior izquierda
-                            else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
+                    } // 3. Esquina inferior izquierda
+                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
                         if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)
                                 && (akari.getTableroIluminacion()[i - 1][j] == 0)) {
                             casillasTenidasEnCuenta[i - 1][j] = true;    // Arriba
@@ -165,8 +163,8 @@ public class GeneradorSemiGuiado {
                                 && (akari.getTableroIluminacion()[i][j + 1] == 0)) {
                             casillasTenidasEnCuenta[i][j + 1] = true;    // Derecha
                         }
-                    }                                                    // 4. Esquina inferior derecha
-                            else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
+                    } // 4. Esquina inferior derecha
+                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
                         if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)
                                 && (akari.getTableroIluminacion()[i - 1][j] == 0)) {
                             casillasTenidasEnCuenta[i - 1][j] = true;    // Arriba
@@ -194,8 +192,8 @@ public class GeneradorSemiGuiado {
                                     && (akari.getTableroIluminacion()[i][j - 1] == 0)) {
                                 casillasTenidasEnCuenta[i][j - 1] = true;    // Izquierda
                             }
-                        }                                                    // 6. Ultima Fila, pero no esquina inferior
-                                else if (i == (akari.getNumeroFilas() - 1)) {
+                        } // 6. Ultima Fila, pero no esquina inferior
+                        else if (i == (akari.getNumeroFilas() - 1)) {
                             if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)
                                     && (akari.getTableroIluminacion()[i - 1][j] == 0)) {
                                 casillasTenidasEnCuenta[i - 1][j] = true;    // Arriba
@@ -210,8 +208,8 @@ public class GeneradorSemiGuiado {
                                     && (akari.getTableroIluminacion()[i][j - 1] == 0)) {
                                 casillasTenidasEnCuenta[i][j - 1] = true;    // Izquierda
                             }
-                        }                                                    // 7. Primera columna, pero no esquina izquierda
-                                else if (j == 0) {
+                        } // 7. Primera columna, pero no esquina izquierda
+                        else if (j == 0) {
                             if ((akari.getTableroCasillasNegras()[i + 1][j] == 0)
                                     && (akari.getTableroIluminacion()[i + 1][j] == 0)) {
                                 casillasTenidasEnCuenta[i + 1][j] = true;    // Abajo
@@ -226,8 +224,8 @@ public class GeneradorSemiGuiado {
                                     && (akari.getTableroIluminacion()[i][j + 1] == 0)) {
                                 casillasTenidasEnCuenta[i][j + 1] = true;    // Derecha
                             }
-                        }                                                    // 8. Ultima columna, pero no esquina derecha
-                                else if (j == (akari.getNumeroColumnas() - 1)) {
+                        } // 8. Ultima columna, pero no esquina derecha
+                        else if (j == (akari.getNumeroColumnas() - 1)) {
                             if ((akari.getTableroCasillasNegras()[i + 1][j] == 0)
                                     && (akari.getTableroIluminacion()[i + 1][j] == 0)) {
                                 casillasTenidasEnCuenta[i + 1][j] = true;    // Abajo
@@ -242,8 +240,8 @@ public class GeneradorSemiGuiado {
                                     && (akari.getTableroIluminacion()[i][j - 1] == 0)) {
                                 casillasTenidasEnCuenta[i][j - 1] = true;    // Izquierda
                             }
-                        }                                                    // Para todos los demas casos
-                                else {
+                        } // Para todos los demas casos
+                        else {
                             if ((akari.getTableroCasillasNegras()[i + 1][j] == 0)
                                     && (akari.getTableroIluminacion()[i + 1][j] == 0)) {
                                 casillasTenidasEnCuenta[i + 1][j] = true;    // Abajo
@@ -269,7 +267,7 @@ public class GeneradorSemiGuiado {
             }
         }
 
-        System.out.print("\n\nMatriz Casillas Tenidas en Cuenta\n\n");
+        System.out.print("\n\nMatriz Casillas Tenidas en Cuenta\n");
 
         int numeroDeCasillas = 0;
 
@@ -295,20 +293,23 @@ public class GeneradorSemiGuiado {
      *
      * @return
      */
-    private int findCasillasNoIluminadas() {
+    private int detectarCasillasNoIluminadas() {
         int nCasillasNoIluminadas = 0;
 
         this.casillasNoIluminadas = new boolean[akari.getNumeroFilas()][akari.getNumeroColumnas()];
 
         for (int i = 0; i < akari.getNumeroFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
+
                 if (akari.getTableroIluminacion()[i][j] + akari.getTableroCasillasNegras()[i][j] == 1) {
                     casillasNoIluminadas[i][j] = false;
                 } else {
                     casillasNoIluminadas[i][j] = true;
                 }
 
-                if (casillasNoIluminadas[i][j]) {}
+                if (casillasTenidasEnCuenta[i][j]) {
+                    casillasNoIluminadas[i][j] = false;
+                }
             }
         }
 
@@ -327,33 +328,33 @@ public class GeneradorSemiGuiado {
     public boolean[] generarSiguiteCromosoma(boolean[] cromosoma, boolean[] sumando) {
 
         // Inicializar Cromosoma Salida
-        boolean[] salida  = new boolean[cromosoma.length];
-        boolean   acarreo = false;
+        boolean[] salida = new boolean[cromosoma.length];
+        boolean acarreo = false;
 
         for (int i = salida.length - 1; i >= 0; i--) {
             if (cromosoma[i] && sumando[i]) {
                 if (acarreo) {
                     salida[i] = true;
-                    acarreo   = true;
+                    acarreo = true;
                 } else {
                     salida[i] = false;
-                    acarreo   = true;
+                    acarreo = true;
                 }
             } else if (cromosoma[i] || sumando[i]) {
                 if (acarreo) {
                     salida[i] = false;
-                    acarreo   = true;
+                    acarreo = true;
                 } else {
                     salida[i] = true;
-                    acarreo   = false;
+                    acarreo = false;
                 }
             } else {
                 if (acarreo) {
                     salida[i] = true;
-                    acarreo   = false;
+                    acarreo = false;
                 } else {
                     salida[i] = false;
-                    acarreo   = false;
+                    acarreo = false;
                 }
             }
         }
@@ -375,8 +376,8 @@ public class GeneradorSemiGuiado {
      * @param casillasNoIluminadas
      */
     private void guardarSolucion(boolean[] cromosoma, boolean[] cromosomaNoIluminadas,
-                                 boolean[][] casillasNoIluminadas) {
-        Soluciones.add(new RespuestaNoTanIngenua(cromosoma, cromosomaNoIluminadas, casillasNoIluminadas));
+            boolean[][] casillasNoIluminadas) {
+        Soluciones.add(new RespuestaGuiada(cromosoma, cromosomaNoIluminadas, casillasNoIluminadas));
     }
 
     /**
@@ -386,27 +387,27 @@ public class GeneradorSemiGuiado {
      * @return
      */
     public boolean intentarIluminar() {
-        int longitudCromosoma = findCasillasNoIluminadas();
+        int longitudCromosoma = detectarCasillasNoIluminadas();
 
         if (longitudCromosoma > 0) {
             this.cromosomaNoIluminadas = new boolean[longitudCromosoma];
-            this.sumandoNoIluminadas   = new boolean[longitudCromosoma];
+            this.sumandoNoIluminadas = new boolean[longitudCromosoma];
 
             // Inicializar el cromosoma y el sumando
             for (int i = 0; i < cromosomaNoIluminadas.length; i++) {
-                sumandoNoIluminadas[i]   = false;
+                sumandoNoIluminadas[i] = false;
                 cromosomaNoIluminadas[i] = false;
             }
 
             // Terminando de Inicializar el sumando = (1)= 0000....0001
             sumandoNoIluminadas[sumandoNoIluminadas.length - 1] = true;
 
-            byte[][] tableroBombillos   = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
+            byte[][] tableroBombillos = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
             byte[][] tableroIluminacion = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
 
             for (int i = 0; i < akari.getNumeroFilas(); i++) {
                 for (int j = 0; j < akari.getNumeroColumnas(); j++) {
-                    tableroBombillos[i][j]   = akari.getTableroBombillos()[i][j];
+                    tableroBombillos[i][j] = akari.getTableroBombillos()[i][j];
                     tableroIluminacion[i][j] = akari.getTableroIluminacion()[i][j];
                 }
             }
@@ -415,13 +416,13 @@ public class GeneradorSemiGuiado {
 
             do {
                 cromosomaNoIluminadas = generarSiguiteCromosoma(cromosomaNoIluminadas, sumandoNoIluminadas);
-                exito                 = applicarCromosoma(casillasNoIluminadas, cromosomaNoIluminadas, false);
+                exito = applicarCromosoma(casillasNoIluminadas, cromosomaNoIluminadas, false);
 
                 if (!exito) {
                     akari.setTableroBombillos(tableroBombillos);
                     akari.setTableroIluminacion(tableroIluminacion);
                 }
-            } while (!exito &&!stop);
+            } while (!exito && !stop);
 
             if (stop) {
                 stop = false;
@@ -452,16 +453,16 @@ public class GeneradorSemiGuiado {
                     if ((i == 0) && (j == 0)) {
                         casillasNoIluminadas[i + 1][j] = false;        // Abajo
                         casillasNoIluminadas[i][j + 1] = false;        // Derecha
-                    }                                                  // 2. Esquina superior derecha
-                            else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
+                    } // 2. Esquina superior derecha
+                    else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
                         casillasNoIluminadas[i + 1][j] = false;        // Abajo
                         casillasNoIluminadas[i][j - 1] = false;        // Izquierda
-                    }                                                  // 3. Esquina inferior izquierda
-                            else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
+                    } // 3. Esquina inferior izquierda
+                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
                         casillasNoIluminadas[i - 1][j] = false;        // Arriba
                         casillasNoIluminadas[i][j + 1] = false;        // Derecha
-                    }                                                  // 4. Esquina inferior derecha
-                            else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
+                    } // 4. Esquina inferior derecha
+                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
                         casillasNoIluminadas[i - 1][j] = false;        // Arriba
                         casillasNoIluminadas[i][j - 1] = false;        // Izquierda
                     } else {
@@ -471,23 +472,23 @@ public class GeneradorSemiGuiado {
                             casillasNoIluminadas[i + 1][j] = false;    // Abajo
                             casillasNoIluminadas[i][j + 1] = false;    // Derecha
                             casillasNoIluminadas[i][j - 1] = false;    // Izquierda
-                        }                                              // 6. Ultima Fila, pero no esquina inferior
-                                else if (i == (akari.getNumeroFilas() - 1)) {
+                        } // 6. Ultima Fila, pero no esquina inferior
+                        else if (i == (akari.getNumeroFilas() - 1)) {
                             casillasNoIluminadas[i - 1][j] = false;    // Arriba
                             casillasNoIluminadas[i][j + 1] = false;    // Derecha
                             casillasNoIluminadas[i][j - 1] = false;    // Izquierda
-                        }                                              // 7. Primera columna, pero no esquina izquierda
-                                else if (j == 0) {
+                        } // 7. Primera columna, pero no esquina izquierda
+                        else if (j == 0) {
                             casillasNoIluminadas[i + 1][j] = false;    // Abajo
                             casillasNoIluminadas[i - 1][j] = false;    // Arriba
                             casillasNoIluminadas[i][j + 1] = false;    // Derecha
-                        }                                              // 8. Ultima columna, pero no esquina derecha
-                                else if (j == (akari.getNumeroColumnas() - 1)) {
+                        } // 8. Ultima columna, pero no esquina derecha
+                        else if (j == (akari.getNumeroColumnas() - 1)) {
                             casillasNoIluminadas[i + 1][j] = false;    // Abajo
                             casillasNoIluminadas[i - 1][j] = false;    // Arriba
                             casillasNoIluminadas[i][j - 1] = false;    // Izquierda
-                        }                                              // Para todos los demas casos
-                                else {
+                        } // Para todos los demas casos
+                        else {
                             casillasNoIluminadas[i + 1][j] = false;    // Abajo
                             casillasNoIluminadas[i - 1][j] = false;    // Arriba
                             casillasNoIluminadas[i][j + 1] = false;    // Derecha
@@ -524,7 +525,7 @@ public class GeneradorSemiGuiado {
      * Method description
      *
      */
-    private void procesamientoDeUnoACuatro() {
+    private void detectarAcorralamientos() {
         for (int i = 0; i < akari.getNumeroFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
                 if (akari.getTalberoRestricciones()[i][j] == 4) {
@@ -554,8 +555,8 @@ public class GeneradorSemiGuiado {
                             akari.ponerBombillo(i + 1, j);
                             akari.ponerBombillo(i, j + 1);
                         }
-                    }                      // 2. Esquina superior derecha
-                            else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
+                    } // 2. Esquina superior derecha
+                    else if ((i == 0) && (j == (akari.getNumeroColumnas() - 1))) {
                         if (akari.getTableroCasillasNegras()[i + 1][j] == 0) {
                             suma++;        // Abajo
                         }
@@ -568,8 +569,8 @@ public class GeneradorSemiGuiado {
                             akari.ponerBombillo(i + 1, j);
                             akari.ponerBombillo(i, j - 1);
                         }
-                    }                      // 3. Esquina inferior izquierda
-                            else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
+                    } // 3. Esquina inferior izquierda
+                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == 0)) {
                         if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)) {
                             suma++;;       // Arriba
                         }
@@ -582,8 +583,8 @@ public class GeneradorSemiGuiado {
                             akari.ponerBombillo(i - 1, j);
                             akari.ponerBombillo(i, j + 1);
                         }
-                    }                      // 4. Esquina inferior derecha
-                            else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
+                    } // 4. Esquina inferior derecha
+                    else if ((i == (akari.getNumeroFilas() - 1)) && (j == (akari.getNumeroColumnas() - 1))) {
                         if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)) {
                             suma++;        // Arriba
                         }
@@ -617,8 +618,8 @@ public class GeneradorSemiGuiado {
                                 akari.ponerBombillo(i, j + 1);
                                 akari.ponerBombillo(i, j - 1);
                             }
-                        }                  // 6. Ultima Fila, pero no esquina inferior
-                                else if (i == (akari.getNumeroFilas() - 1)) {
+                        } // 6. Ultima Fila, pero no esquina inferior
+                        else if (i == (akari.getNumeroFilas() - 1)) {
                             if ((akari.getTableroCasillasNegras()[i - 1][j] == 0)) {
                                 suma++;    // Arriba
                             }
@@ -636,8 +637,8 @@ public class GeneradorSemiGuiado {
                                 akari.ponerBombillo(i, j + 1);
                                 akari.ponerBombillo(i, j - 1);
                             }
-                        }                  // 7. Primera columna, pero no esquina izquierda
-                                else if (j == 0) {
+                        } // 7. Primera columna, pero no esquina izquierda
+                        else if (j == 0) {
                             if ((akari.getTableroCasillasNegras()[i + 1][j] == 0)) {
                                 suma++;    // Abajo
                             }
@@ -655,8 +656,8 @@ public class GeneradorSemiGuiado {
                                 akari.ponerBombillo(i - 1, j);
                                 akari.ponerBombillo(i, j + 1);
                             }
-                        }                  // 8. Ultima columna, pero no esquina derecha
-                                else if (j == (akari.getNumeroColumnas() - 1)) {
+                        } // 8. Ultima columna, pero no esquina derecha
+                        else if (j == (akari.getNumeroColumnas() - 1)) {
                             if ((akari.getTableroCasillasNegras()[i + 1][j] == 0)) {
                                 suma++;    // Abajo
                             }
@@ -674,8 +675,8 @@ public class GeneradorSemiGuiado {
                                 akari.ponerBombillo(i - 1, j);
                                 akari.ponerBombillo(i, j - 1);
                             }
-                        }                  // Para todos los demas casos
-                                else {
+                        } // Para todos los demas casos
+                        else {
                             if ((akari.getTableroCasillasNegras()[i + 1][j] == 0)) {
                                 suma++;    // Abajo
                             }
@@ -714,7 +715,7 @@ public class GeneradorSemiGuiado {
     public boolean solucionSemiGuiada() {
         boolean exito = false;
 
-        while (!exito &&!stop) {
+        while (!exito && !stop) {
             cromosoma = generarSiguiteCromosoma(cromosoma, sumando);
             akari.quitarBombillosEIluminacion();
             akari.setTableroIluminacion(tableroIluminacionBase);
@@ -744,12 +745,12 @@ public class GeneradorSemiGuiado {
      *
      */
     private void getTablerosBase() {
-        tableroBombillosBase   = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
+        tableroBombillosBase = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
         tableroIluminacionBase = new byte[akari.getNumeroFilas()][akari.getNumeroColumnas()];
 
         for (int i = 0; i < akari.getNumeroFilas(); i++) {
             for (int j = 0; j < akari.getNumeroColumnas(); j++) {
-                tableroBombillosBase[i][j]   = akari.getTableroBombillos()[i][j];
+                tableroBombillosBase[i][j] = akari.getTableroBombillos()[i][j];
                 tableroIluminacionBase[i][j] = akari.getTableroIluminacion()[i][j];
             }
         }
@@ -763,7 +764,7 @@ public class GeneradorSemiGuiado {
      * @param i
      */
     public void setSolucion(int i) {
-        RespuestaNoTanIngenua respuesta = Soluciones.get(i);
+        RespuestaGuiada respuesta = Soluciones.get(i);
 
         akari.quitarBombillosEIluminacion();
         akari.setTableroBombillos(tableroBombillosBase);

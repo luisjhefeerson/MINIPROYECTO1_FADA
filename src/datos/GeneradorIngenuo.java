@@ -25,8 +25,6 @@
 // ESCUELA DE INGENIERIA DE SISTEMAS Y COMPUTACION
 // UNIVERSIDAD DEL VALLE
 //**********************************************************
-
-
 package datos;
 
 /**
@@ -36,9 +34,10 @@ package datos;
  * @version 12/05/28
  */
 public class GeneradorIngenuo {
+
     AkariGame akari;
     boolean[] cromosoma;
-    boolean   stop;
+    boolean stop;
     boolean[] sumando;
 
     /**
@@ -48,20 +47,14 @@ public class GeneradorIngenuo {
      * @param tablero
      */
     public GeneradorIngenuo(AkariGame tablero) {
-        this.akari      = tablero;
-        this.stop       = false;
-        this.akari      = tablero;
+        this.akari = tablero;
+        this.stop = false;
+        this.akari = tablero;
 
         int longitudCromosoma = tablero.getCasillasBlancas();
 
         this.cromosoma = new boolean[longitudCromosoma];
-        this.sumando   = new boolean[longitudCromosoma];
-
-        // Inicializar el cromosoma y el sumando
-//        for (int i = 0; i < sumando.length; i++) {
-//            sumando[i]   = false;
-//            cromosoma[i] = false;
-//        }
+        this.sumando = new boolean[longitudCromosoma];
 
         // Terminando de Inicializar el sumando = (1)= 0000....0001
         sumando[sumando.length - 1] = true;
@@ -106,33 +99,33 @@ public class GeneradorIngenuo {
     public boolean[] generarSiguiteCromosoma(boolean[] cromosoma, boolean[] sumando) {
 
         // Inicializar Cromosoma Salida
-        boolean[] salida  = new boolean[cromosoma.length];
-        boolean   acarreo = false;      
-        
+        boolean[] salida = new boolean[cromosoma.length];
+        boolean acarreo = false;
+
         for (int i = salida.length - 1; i >= 0; i--) {
             if (cromosoma[i] && sumando[i]) {
                 if (acarreo) {
                     salida[i] = true;
-                    acarreo   = true;
+                    acarreo = true;
                 } else {
                     salida[i] = false;
-                    acarreo   = true;
+                    acarreo = true;
                 }
             } else if (cromosoma[i] || sumando[i]) {
                 if (acarreo) {
                     salida[i] = false;
-                    acarreo   = true;
+                    acarreo = true;
                 } else {
                     salida[i] = true;
-                    acarreo   = false;
+                    acarreo = false;
                 }
             } else {
                 if (acarreo) {
                     salida[i] = true;
-                    acarreo   = false;
+                    acarreo = false;
                 } else {
                     salida[i] = false;
-                    acarreo   = false;
+                    acarreo = false;
                 }
             }
         }
@@ -158,7 +151,7 @@ public class GeneradorIngenuo {
             cromosoma = generarSiguiteCromosoma(cromosoma, sumando);
             akari.quitarBombillosEIluminacion();
             exito = applicarCromosoma();
-        } while (!exito &&!stop);
+        } while (!exito && !stop);
 
         return exito;
     }

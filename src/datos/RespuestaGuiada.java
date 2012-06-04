@@ -35,7 +35,7 @@ package datos;
  *
  * @version        12/05/30
  */
-public class RespuestaNoTanIngenua {
+public class RespuestaGuiada {
     private boolean[][] casillasNoIluminadas;
     boolean[]           cromosoma;
     boolean[]           cromosomaNoIluminadas;
@@ -48,7 +48,7 @@ public class RespuestaNoTanIngenua {
      * @param cromosomaNoIluminadas
      * @param casillasNoIluminadas
      */
-    public RespuestaNoTanIngenua(boolean[] cromosoma, boolean[] cromosomaNoIluminadas,
+    public RespuestaGuiada(boolean[] cromosoma, boolean[] cromosomaNoIluminadas,
                                  boolean[][] casillasNoIluminadas) {
         this.cromosoma             = cromosoma;
         this.cromosomaNoIluminadas = cromosomaNoIluminadas;
