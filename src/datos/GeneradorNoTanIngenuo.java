@@ -361,11 +361,11 @@ public class GeneradorNoTanIngenuo {
             this.cromosomaNoIluminadas = new boolean[longitudCromosoma];
             this.sumandoNoIluminadas = new boolean[longitudCromosoma];
 
-            // Inicializar el cromosoma y el sumando
-            for (int i = 0; i < cromosomaNoIluminadas.length; i++) {
-                sumandoNoIluminadas[i] = false;
-                cromosomaNoIluminadas[i] = false;
-            }
+//            // Inicializar el cromosoma y el sumando
+//            for (int i = 0; i < cromosomaNoIluminadas.length; i++) {
+//                sumandoNoIluminadas[i] = false;
+//                cromosomaNoIluminadas[i] = false;
+//            }
 
             // Terminando de Inicializar el sumando = (1)= 0000....0001
             sumandoNoIluminadas[sumandoNoIluminadas.length - 1] = true;
