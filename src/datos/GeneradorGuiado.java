@@ -434,9 +434,13 @@ public class GeneradorGuiado {
                 return exito;
             }
         } else {
-            guardarSolucion(cromosoma, cromosomaNoIluminadas, casillasNoIluminadas);
+            if (akari.validation(false)) {
+                guardarSolucion(cromosoma, cromosomaNoIluminadas, casillasNoIluminadas);
+                return true;
+            } else {
+                return solucionSemiGuiada();
+            }
 
-            return true;
         }
     }
 
